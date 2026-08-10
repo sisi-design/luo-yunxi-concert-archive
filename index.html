@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>熙界无限剧场 — 라운희 콘서트 곡 아카이브 (YouTube)</title>
+<meta name="description" content="라운희(罗云熙) 2026 난징·광저우 콘서트 세트리스트와 확인된 YouTube 영상을 한곳에서 찾아보세요.">
+<meta name="theme-color" content="#0E0A16">
+<meta property="og:type" content="website">
+<meta property="og:title" content="熙界无限剧场 — 라운희 콘서트 곡 아카이브">
+<meta property="og:description" content="2026 난징·광저우 콘서트 세트리스트와 확인된 YouTube 영상 아카이브">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;900&family=Pretendard:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+  :root{
+    --void:#0E0A16;
+    --panel:#1B1428;
+    --line: rgba(183,156,255,0.14);
+    --purple-deep:#5B3F94;
+    --purple:#8B6FD9;
+    --purple-glow:#B79CFF;
+    --gold:#E3B655;
+    --red:#E64B4B;
+    --red-glow:#FF6B6B;
+    --ivory:#F4EFFB;
+    --mute:#9C90B5;
+    --mute-2:#6E6285;
+    --radius: 14px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:
+      radial-gradient(ellipse 900px 500px at 15% -10%, rgba(139,111,217,0.25), transparent 60%),
+      radial-gradient(ellipse 700px 500px at 100% 10%, rgba(227,182,85,0.08), transparent 55%),
+      var(--void);
+    color:var(--ivory);
+    font-family:'Pretendard', -apple-system, sans-serif;
+    -webkit-font-smoothing:antialiased;
+    min-height:100vh;
+  }
+
+  ::selection{ background:var(--purple-deep); color:var(--ivory); }
+  a{ color:inherit; }
+
+  .filmstrip{
+    position:fixed; left:0; top:0; bottom:0; width:26px;
+    background:repeating-linear-gradient(180deg, #000 0px, #000 10px, transparent 10px, transparent 22px);
+    background-color:#050308; z-index:5; opacity:0.9;
+  }
+  .filmstrip::before, .filmstrip::after{
+    content:''; position:absolute; left:6px; top:0; bottom:0; width:14px;
+    background-image: radial-gradient(circle, #050308 40%, transparent 41%);
+    background-size: 14px 22px;
+  }
+  @media (max-width: 720px){ .filmstrip{ display:none; } }
+
+  .wrap{ max-width:980px; margin:0 auto; padding: 64px 28px 120px; }
+  @media (min-width: 721px){ .wrap{ padding-left: 62px; } }
+
+  .hero{ margin-bottom:44px; }
+  .eyebrow{
+    font-family:'JetBrains Mono', monospace; font-size:12px; letter-spacing:0.22em;
+    color:var(--gold); text-transform:uppercase; margin-bottom:18px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow::before{ content:''; width:22px; height:1px; background:var(--gold); display:inline-block; }
+  h1{
+    font-family:'Noto Serif KR', serif; font-weight:900;
+    font-size:clamp(30px, 5.6vw, 52px); line-height:1.12; margin:0 0 14px; letter-spacing:-0.01em;
+  }
+  h1 .cn{ display:block; font-size:0.4em; font-weight:600; color:var(--purple-glow); letter-spacing:0.06em; margin-bottom:10px; }
+  .hero p{ color:var(--mute); font-size:16px; line-height:1.7; max-width:600px; margin:0; }
+  .hero p b{ color:var(--ivory); font-weight:600; }
+
+  /* honesty banner */
+  .honesty-box{
+    margin-top:26px;
+    padding:18px 20px;
+    border-radius:12px;
+    background: linear-gradient(135deg, rgba(139,111,217,0.12), rgba(227,182,85,0.06));
+    border:1px solid var(--line);
+    font-size:13.5px;
+    line-height:1.75;
+    color:var(--mute);
+  }
+  .honesty-box .title{
+    display:flex; align-items:center; gap:8px;
+    color:var(--gold);
+    font-family:'JetBrains Mono', monospace;
+    font-size:11.5px;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    margin-bottom:8px;
+  }
+  .legend{
+    display:flex; gap:18px; flex-wrap:wrap; margin-top:12px;
+    font-size:12px;
+  }
+  .legend-item{ display:flex; align-items:center; gap:7px; color:var(--mute); }
+  .dot{ width:8px; height:8px; border-radius:50%; flex-shrink:0; }
+  .dot.found{ background:var(--red-glow); box-shadow:0 0 8px var(--red-glow); }
+  .dot.missing{ background:var(--mute-2); }
+
+  .tabs{ display:flex; gap:6px; margin:44px 0 6px; border-bottom:1px solid var(--line); }
+  .tab{
+    appearance:none; background:none; border:none; color:var(--mute);
+    font-family:'Noto Serif KR', serif; font-weight:600; font-size:16px;
+    padding:14px 6px; margin-right:26px; cursor:pointer; position:relative; transition: color 0.2s ease;
+  }
+  .tab .num{ font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--mute-2); margin-right:8px; }
+  .tab[aria-selected="true"]{ color:var(--ivory); }
+  .tab[aria-selected="true"] .num{ color:var(--gold); }
+  .tab::after{
+    content:''; position:absolute; left:0; right:0; bottom:-1px; height:2px;
+    background:linear-gradient(90deg, var(--purple), var(--gold));
+    transform:scaleX(0); transform-origin:left; transition:transform 0.25s ease;
+  }
+  .tab[aria-selected="true"]::after{ transform:scaleX(1); }
+  .tab:focus-visible{ outline:2px solid var(--purple-glow); outline-offset:4px; }
+
+  .meta-row{
+    display:flex; flex-wrap:wrap; gap:10px 22px; margin:22px 0 6px;
+    font-family:'JetBrains Mono', monospace; font-size:12.5px; color:var(--mute);
+  }
+  .meta-row span b{ color:var(--purple-glow); font-weight:500; }
+
+  .notice{
+    margin:18px 0 8px; padding:14px 16px; border:1px dashed var(--line); border-radius:10px;
+    font-size:13.5px; color:var(--mute); line-height:1.6;
+  }
+  .notice b{ color:var(--gold); font-weight:600; }
+
+  .toolbar{ display:flex; gap:10px; margin:28px 0 18px; }
+  .search-input{
+    flex:1; background:var(--panel); border:1px solid var(--line); border-radius:10px;
+    padding:12px 16px; color:var(--ivory); font-family:'Pretendard', sans-serif; font-size:14px;
+  }
+  .search-input::placeholder{ color:var(--mute-2); }
+  .search-input:focus{ outline:2px solid var(--purple-glow); outline-offset:1px; border-color:transparent; }
+  .count-pill{
+    font-family:'JetBrains Mono', monospace; font-size:12px; color:var(--mute);
+    display:flex; align-items:center; padding:0 14px; white-space:nowrap;
+  }
+
+  .tracklist{ margin-top:8px; }
+  .track{
+    display:grid; grid-template-columns: 64px 1fr auto; gap:16px; align-items:center;
+    padding:14px; border-radius:var(--radius); border:1px solid transparent;
+    transition: background 0.16s ease, border-color 0.16s ease, transform 0.16s ease;
+    text-decoration:none;
+  }
+  a.track{ cursor:pointer; }
+  a.track:hover, a.track:focus-visible{ background:var(--panel); border-color:var(--line); transform:translateX(2px); }
+  a.track:focus-visible{ outline:2px solid var(--purple-glow); outline-offset:2px; }
+  .track + .track{ border-top:1px solid var(--line); }
+
+  .thumb{
+    width:64px; height:44px; border-radius:8px; overflow:hidden; position:relative;
+    background:var(--panel); flex-shrink:0; border:1px solid var(--line);
+  }
+  .thumb img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .thumb .play-badge{
+    position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+    background:rgba(0,0,0,0.25);
+  }
+  .thumb .play-badge svg{ width:18px; height:18px; }
+  .thumb.no-video{ display:flex; align-items:center; justify-content:center; }
+  .thumb.no-video .track-num{ border:none; width:auto; height:auto; }
+
+  .track-num{
+    font-family:'JetBrains Mono', monospace; font-size:12px; color:var(--mute-2);
+    width:30px; height:30px; border:1px solid var(--line); border-radius:50%;
+    display:flex; align-items:center; justify-content:center; flex-shrink:0;
+  }
+
+  .track-main{ min-width:0; }
+  .track-titles{ display:flex; align-items:baseline; gap:10px; flex-wrap:wrap; margin-bottom:4px; }
+  .track-cn{ font-family:'Noto Serif KR', serif; font-weight:600; font-size:17px; color:var(--ivory); }
+  .track-py{ font-family:'JetBrains Mono', monospace; font-size:11.5px; color:var(--purple-glow); letter-spacing:0.02em; }
+  .track-kr{ font-size:12.5px; color:var(--mute); font-weight:500; }
+  .track-meaning{ font-size:13px; color:var(--mute); line-height:1.5; }
+  .track-info{ font-size:11.5px; color:var(--mute-2); margin-top:3px; }
+  .track-source{ font-size:10.5px; color:var(--mute-2); margin-top:2px; font-style:italic; }
+
+  .badge{
+    display:inline-block; font-family:'JetBrains Mono', monospace; font-size:10px; letter-spacing:0.04em;
+    padding:2px 7px; border-radius:20px; border:1px solid var(--purple); color:var(--purple-glow);
+    margin-right:6px; vertical-align:middle;
+  }
+  .badge.gold{ border-color:var(--gold); color:var(--gold); }
+
+  .track-listen{ display:flex; flex-direction:column; align-items:flex-end; gap:4px; flex-shrink:0; }
+  .listen-label{
+    font-family:'JetBrains Mono', monospace; font-size:10.5px; color:var(--red-glow);
+    display:flex; align-items:center; gap:5px; white-space:nowrap;
+  }
+  .listen-label svg{ width:12px; height:12px; }
+  .listen-label.missing{ color:var(--mute-2); }
+
+  @media (max-width: 620px){
+    .track{ grid-template-columns: 52px 1fr; }
+    .track-listen{ grid-column: 2 / 3; align-items:flex-start; margin-top:6px; }
+    .thumb{ width:52px; height:36px; }
+  }
+
+  .empty-state{ padding:40px 10px; text-align:center; color:var(--mute-2); font-size:14px; }
+
+  footer{
+    margin-top:60px; padding-top:26px; border-top:1px solid var(--line);
+    font-size:12px; color:var(--mute-2); line-height:1.8;
+  }
+  footer b{ color:var(--mute); }
+  footer a{ color:var(--purple-glow); text-decoration:underline; }
+
+  @media (prefers-reduced-motion: reduce){ *{ transition:none !important; scroll-behavior:auto !important; } }
+</style>
+</head>
+<body>
+
+<div class="filmstrip" aria-hidden="true"></div>
+
+<div class="wrap">
+
+  <div class="hero">
+    <div class="eyebrow">Luo Yunxi · 罗云熙 Tour Archive · YouTube ver.</div>
+    <h1><span class="cn">熙界无限剧场</span>라운희 콘서트 곡 아카이브</h1>
+    <p>난징(7.25)·광저우(8.8) 세트리스트를 유튜브 영상과 함께 정리했습니다.</p>
+
+    <div class="honesty-box">
+      <div class="title">⚠ 솔직한 안내</div>
+      이 두 콘서트의 전체 직캠은 유튜브에서 확인하기 어렵습니다. 대신 곡마다 실제로 검색해서 확인한 <b style="color:var(--ivory)">공식 음원·MV / 다른 무대 라이브 영상</b>을 연결했어요. 확인 안 된 곡은 링크를 지어내지 않고 솔직히 "영상 미확인"으로 표시했습니다.
+      <div class="legend">
+        <div class="legend-item"><span class="dot found"></span> 실제 유튜브 영상 확인됨 (클릭 시 바로 재생 페이지)</div>
+        <div class="legend-item"><span class="dot missing"></span> 유튜브에서 확인 안 됨</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tabs" role="tablist" aria-label="콘서트 선택">
+    <button class="tab" role="tab" id="tab-nj" aria-selected="true" aria-controls="panel-nj"><span class="num">01</span>난징 南京站</button>
+    <button class="tab" role="tab" id="tab-gz" aria-selected="false" aria-controls="panel-gz" tabindex="-1"><span class="num">02</span>광저우 广州站</button>
+  </div>
+
+  <section id="panel-nj" role="tabpanel" aria-labelledby="tab-nj">
+    <div class="meta-row">
+      <span><b>2026.07.25</b> 南京青奥体育公园体育馆</span>
+      <span><b>1.4만</b> 관객 · 전석 매진</span>
+      <span><b>33곡</b> · 약 3시간</span>
+    </div>
+    <div class="toolbar">
+      <input type="text" class="search-input" id="search-nj" placeholder="곡명(한글/중문)으로 검색…" aria-label="난징 세트리스트 검색">
+      <div class="count-pill" id="count-nj"></div>
+    </div>
+    <div class="tracklist" id="list-nj"></div>
+  </section>
+
+  <section id="panel-gz" role="tabpanel" aria-labelledby="tab-gz" hidden>
+    <div class="meta-row">
+      <span><b>2026.08.08</b> 广州宝能国际体育演艺中心</span>
+      <span><b>전석</b> 매진 · 대기표 발생</span>
+      <span>은발 스타일링 · 게스트 江奇霖</span>
+    </div>
+    <div class="notice">
+      광저우 공연은 최근(8.8) 진행되어 <b>전체 세트리스트가 아직 공식 통합 공개되지 않았습니다.</b> 아래는 확실히 보도·확인된 <b>난징 대비 변경/신규곡</b>입니다.
+    </div>
+    <div class="toolbar">
+      <input type="text" class="search-input" id="search-gz" placeholder="곡명(한글/중문)으로 검색…" aria-label="광저우 변경사항 검색">
+      <div class="count-pill" id="count-gz"></div>
+    </div>
+    <div class="tracklist" id="list-gz"></div>
+  </section>
+
+  <footer>
+    <b>보는 법</b> — 붉은 점이 있는 곡은 실제 유튜브 영상(공식 MV 또는 다른 무대 라이브)으로 바로 연결됩니다. 이 콘서트 자체의 직캠이 아닌 경우 "동일 곡 다른 무대" 등으로 출처를 표시해뒀어요. 회색 점 곡은 유튜브에서 확인되지 않아 링크를 넣지 않았습니다.<br>
+    더 찾고 싶다면 라운희 공식 유튜브 뮤직 채널: <a href="https://music.youtube.com/channel/UCaVxiNWhf2qEjlInTdj3lUA" target="_blank" rel="noopener noreferrer">music.youtube.com/@罗云熙</a><br>
+    데이터 출처: 南方娱乐网, 新浪新闻(sina.cn), 中华网 현장 보도 종합 · 2026.08.10 기준 정리
+  </footer>
+
+</div>
+
+<script>
+// yt: confirmed real YouTube video ID (verified via search). source: what kind of video it is.
+const NANJING = [
+  {n:1, cn:"电影人生", py:"Diànyǐng Rénshēng", kr:"뎬잉 런셩", mean:"영화 같은 인생", info:"오프닝곡 · 필름보트 고공 등장", tag:"오프닝", yt:"kF3kguIfi8c", source:"팬 제작 MV(음원: 라운희)"},
+  {n:2, cn:"逆流而上", py:"Nìliú Ér Shàng", kr:"니리우 얼샹", mean:"역류를 거슬러 오르다", info:"응원가 성격의 곡", yt:"NK6GCEH388I", source:"공식 MV"},
+  {n:3, cn:"白色舞鞋", py:"Báisè Wǔxié", kr:"바이써 우시에", mean:"하얀 무용화", info:"발레 무용수 출신 이력 반영 추정"},
+  {n:4, cn:"旅人", py:"Lǚrén", kr:"뤼런", mean:"여행자", info:"", yt:"kSYPotyHrhA", source:"공식 MV/가사영상"},
+  {n:5, cn:"不渝梦", py:"Bùyú Mèng", kr:"뿌위 멍", mean:"변치 않는 꿈", info:""},
+  {n:6, cn:"爱的回归线", py:"Ài de Huíguīxiàn", kr:"아이더 후이꾸이시엔", mean:"사랑의 회귀선", info:""},
+  {n:7, cn:"与你", py:"Yǔ Nǐ", kr:"위 니", mean:"너와 함께", info:"《水龙吟》OST, 음악제에서 첫 공개"},
+  {n:8, cn:"开到荼靡", py:"Kāi Dào Túmí", kr:"카이따오 투미", mean:"꽃이 만개해 지는 순간까지", info:"사랑이 절정을 지나 끝을 향한다는 중국 관용구"},
+  {n:9, cn:"最好", py:"Zuìhǎo", kr:"쭈이하오", mean:"가장 좋은 것", info:""},
+  {n:10, cn:"致不存在的恋人", py:"Zhì Bù Cúnzài de Liànrén", kr:"즈 뿌춘짜이더 리엔런", mean:"존재하지 않는 연인에게", info:"", yt:"liUVCKWmnwI", source:"2025 타이후베이 음악제 라이브"},
+  {n:11, cn:"Because of You", py:"Because of You", kr:"비커즈 오브 유", mean:"너 때문에", info:"《良言写意》 OST", yt:"TQYv2ZgPQTA", source:"Tencent Video 공식 OST"},
+  {n:12, cn:"圣塔里奥酒馆", py:"Shèngtǎlǐ'ào Jiǔguǎn", kr:"셩타리아오 지우관", mean:"산탈리오 술집", info:"세계관형 스토리텔링 곡 추정"},
+  {n:13, cn:"只对你有感觉", py:"Zhǐ Duì Nǐ Yǒu Gǎnjué", kr:"즈뚜이니 여우간줴", mean:"오직 너에게만 느낌이 있어", info:"게스트 청샤오(程潇)와 합창", tag:"합창"},
+  {n:14, cn:"一往", py:"Yīwǎng", kr:"이 왕", mean:"한결같이, 줄곧", info:"《水龙吟》당려사 캐릭터곡", yt:"MqqNbOGQUsQ", source:"공식 MV"},
+  {n:15, cn:"骊龙吟", py:"Lílóng Yín", kr:"리롱 인", mean:"여룡음", info:"드라마 《水龙吟》 오프닝곡(원곡 황자홍범), 팬 신청", tag:"팬신청"},
+  {n:16, cn:"今年勇", py:"Jīnnián Yǒng", kr:"진니엔 용", mean:"올해의 용기(제목 그대로)", info:"许嵩 원곡 커버, 팬 신청", tag:"팬신청", yt:"-v6wRVSgtvI", source:"쓰촨위성TV 라이브(동일 곡 다른 무대)"},
+  {n:17, cn:"挚友", py:"Zhìyǒu", kr:"즈 여우", mean:"절친한 친구", info:"", tag:"팬신청"},
+  {n:18, cn:"天龙八部之宿敌", py:"Tiānlóng Bābù Zhī Sùdí", kr:"티엔롱빠뿌 즈 쑤디", mean:"천룡팔부: 숙적", info:"드라마 《천룡팔부》 삽입곡", tag:"팬신청", yt:"Iv2ODAJkQ3U", source:"원곡자 许嵩 공식 음원"},
+  {n:19, cn:"宇宙第一响", py:"Yǔzhòu Dì Yī Xiǎng", kr:"위저우 띠이 시앙", mean:"우주 최초의 울림", info:"신곡"},
+  {n:20, cn:"小小的我", py:"Xiǎoxiǎo de Wǒ", kr:"시아오시아오더 워", mean:"작은 나", info:"신보 타이틀곡 · 라운희 작사·작곡"},
+  {n:21, cn:"热铁皮房顶的夏天", py:"Rè Tiěpí Fángdǐng de Xiàtiān", kr:"러 티에피 팡딩더 시아티엔", mean:"뜨거운 양철 지붕 위의 여름", info:"록 넘버, 밴드 세션", yt:"_xRknz4B8F8", source:"2025 타이후베이 음악제 라이브"},
+  {n:22, cn:"等风停", py:"Děng Fēng Tíng", kr:"덩 펑 팅", mean:"바람이 멎기를 기다리며", info:"", yt:"Q_JGwDPaGRg", source:"라운희 음원·중영 자막 영상"},
+  {n:23, cn:"遇见", py:"Yùjiàn", kr:"위 지엔", mean:"만남", info:"피아노 자작 연주+노래", tag:"피아노"},
+  {n:24, cn:"事隔多年", py:"Shìgé Duōnián", kr:"스거 뚜오니엔", mean:"많은 세월이 지난 후", info:""},
+  {n:25, cn:"小雀", py:"Xiǎoquè", kr:"시아오 췌", mean:"작은 참새", info:"환경 보호를 주제로 한 자작곡", yt:"4lbzmKNMxcE", source:"라운희 해외 팬클럽 영상(라운희 음원)"},
+  {n:26, cn:"心上悬", py:"Xīnshàng Xuán", kr:"신샹 쉬엔", mean:"마음에 걸려 있는 것", info:"《颜心记》OST · 무반주 팬서비스", tag:"무반주", yt:"UYoEuuzGBk0", source:"《颜心记》 OST 공식 배급 음원"},
+  {n:27, cn:"晨星", py:"Chénxīng", kr:"천 싱", mean:"샛별", info:"신보 수록곡"},
+  {n:28, cn:"钢铁人", py:"Gāngtiěrén", kr:"강 티에런", mean:"강철 인간(아이언맨)", info:"록 넘버"},
+  {n:29, cn:"静思所有事物的伟大", py:"Jìngsī Suǒyǒu Shìwù de Wěidà", kr:"징쓰 쑤어여우 스우더 웨이따", mean:"모든 것의 위대함을 고요히 생각하다", info:"東方风云榜 1위곡 · 자작곡"},
+  {n:30, cn:"新一天", py:"Xīn Yī Tiān", kr:"신 이티엔", mean:"새로운 하루", info:"자작곡"},
+  {n:31, cn:"星星之火", py:"Xīngxīng Zhī Huǒ", kr:"싱싱 즈훠", mean:"작은 불씨", info:"팬 헌정곡 · 앙코르", tag:"앙코르", yt:"F-S68QiENAo", source:"공식 음원+한글 병음 자막"},
+  {n:32, cn:"팬 신청곡 A", py:"—", kr:"—", mean:"현장 즉석 신청, 곡목 미공개", info:"", tag:"미공개"},
+  {n:33, cn:"팬 신청곡 B", py:"—", kr:"—", mean:"현장 즉석 신청, 곡목 미공개", info:"", tag:"미공개"},
+];
+
+const GUANGZHOU = [
+  {n:1, cn:"相思赋予谁", py:"Xiāngsī Fùyǔ Shéi", kr:"시앙쓰 푸위 셰이", mean:"그리움은 누구에게 주나", info:"희곡 창법(戏腔) 편곡 · 난징에는 없던 신규곡", tag:"광저우 신규"},
+  {n:2, cn:"要不然我们就这样一万年", py:"Yàoburán Wǒmen Jiù Zhèyàng Yīwànnián", kr:"야오뿌란 워먼 지우쩌양 이완니엔", mean:"아니면 우리 이대로 만년을", info:"드라마 《长月烬明》 OST · 만 명 관객 합창", tag:"광저우 신규", yt:"Vnn0qT-vvOQ", source:"YOUKU 공식 OST 영상"},
+  {n:3, cn:"夜梦春游", py:"Yèmèng Chūnyóu", kr:"예멍 춘여우", mean:"봄밤의 꿈나들이", info:"팬 반응 기준 광저우 등장 확인", tag:"광저우 신규"},
+  {n:4, cn:"天后", py:"Tiānhòu", kr:"티엔허우", mean:"천후(디바)", info:"광저우 한정 직캠 언급됨", tag:"광저우 신규", yt:"HYS6AhViG8s", source:"국악무쌍 EP4 광둥어 라이브(동일 곡 다른 무대)"},
+  {n:5, cn:"新一天", py:"Xīn Yī Tiān", kr:"신 이티엔", mean:"새로운 하루", info:"난징은 《星星之火》였으나 광저우는 이 곡으로 앙코르 변경", tag:"앙코르 변경"},
+];
+
+function ytWatchURL(id){ return "https://www.youtube.com/watch?v=" + id; }
+function ytThumbURL(id){ return "https://img.youtube.com/vi/" + id + "/hqdefault.jpg"; }
+function ytChannelURL(){ return "https://music.youtube.com/channel/UCaVxiNWhf2qEjlInTdj3lUA"; }
+
+function renderList(container, data){
+  container.innerHTML = "";
+  if(data.length === 0){
+    container.innerHTML = '<div class="empty-state">검색 결과가 없어요.</div>';
+    return;
+  }
+  data.forEach(t => {
+    const hasVideo = !!t.yt;
+    const el = document.createElement(hasVideo ? "a" : "div");
+    el.className = "track";
+    if(hasVideo){
+      el.href = ytWatchURL(t.yt);
+      el.target = "_blank";
+      el.rel = "noopener noreferrer";
+    }
+
+    const thumbHTML = hasVideo
+      ? `<div class="thumb"><img src="${ytThumbURL(t.yt)}" alt="" loading="lazy"><div class="play-badge"><svg viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></div></div>`
+      : `<div class="thumb no-video"><div class="track-num">${String(t.n).padStart(2,"0")}</div></div>`;
+
+    const listenHTML = hasVideo
+      ? `<span class="listen-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 5v14l11-7z"/></svg>YouTube 재생</span>`
+      : `<span class="listen-label missing">영상 미확인</span>`;
+
+    el.innerHTML = `
+      ${thumbHTML}
+      <div class="track-main">
+        <div class="track-titles">
+          ${t.tag ? `<span class="badge ${t.tag.includes('신규')||t.tag.includes('변경')?'gold':''}">${t.tag}</span>` : ""}
+          <span class="track-cn">${t.cn}</span>
+          <span class="track-py">${t.py}</span>
+          <span class="track-kr">· ${t.kr}</span>
+        </div>
+        <div class="track-meaning">${t.mean}</div>
+        ${t.info ? `<div class="track-info">${t.info}</div>` : ""}
+        ${t.source ? `<div class="track-source">출처: ${t.source}</div>` : ""}
+      </div>
+      <div class="track-listen">${listenHTML}</div>
+    `;
+    container.appendChild(el);
+  });
+}
+
+function setupSearch(inputId, countId, data, listEl){
+  const input = document.getElementById(inputId);
+  const count = document.getElementById(countId);
+  function update(){
+    const q = input.value.trim().toLowerCase();
+    const filtered = q ? data.filter(t =>
+      t.cn.toLowerCase().includes(q) || t.kr.toLowerCase().includes(q) ||
+      t.py.toLowerCase().includes(q) || t.mean.toLowerCase().includes(q)
+    ) : data;
+    renderList(listEl, filtered);
+    const withVideo = filtered.filter(t => t.yt).length;
+    count.textContent = `${filtered.length}곡 (영상 확인 ${withVideo}개)`;
+  }
+  input.addEventListener("input", update);
+  update();
+}
+
+setupSearch("search-nj", "count-nj", NANJING, document.getElementById("list-nj"));
+setupSearch("search-gz", "count-gz", GUANGZHOU, document.getElementById("list-gz"));
+
+const tabNj = document.getElementById("tab-nj");
+const tabGz = document.getElementById("tab-gz");
+const panelNj = document.getElementById("panel-nj");
+const panelGz = document.getElementById("panel-gz");
+
+function selectTab(which){
+  const njActive = which === "nj";
+  tabNj.setAttribute("aria-selected", njActive);
+  tabGz.setAttribute("aria-selected", !njActive);
+  tabNj.tabIndex = njActive ? 0 : -1;
+  tabGz.tabIndex = njActive ? -1 : 0;
+  panelNj.hidden = !njActive;
+  panelGz.hidden = njActive;
+}
+tabNj.addEventListener("click", () => selectTab("nj"));
+tabGz.addEventListener("click", () => selectTab("gz"));
+[tabNj, tabGz].forEach(tab => {
+  tab.addEventListener("keydown", e => {
+    if(e.key === "ArrowRight" || e.key === "ArrowLeft"){
+      selectTab(tab === tabNj ? "gz" : "nj");
+      (tab === tabNj ? tabGz : tabNj).focus();
+    }
+  });
+});
+</script>
+
+</body>
+</html>
