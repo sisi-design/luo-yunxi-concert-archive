@@ -238,7 +238,7 @@
   <div class="hero">
     <div class="eyebrow">Luo Yunxi · 罗云熙 Tour Archive · YouTube ver.</div>
     <h1><span class="cn">熙界无限剧场</span>라운희 콘서트 곡 아카이브</h1>
-    <p>난징(7.25)·광저우(8.8) 세트리스트를 유튜브 영상과 함께 정리했습니다.</p>
+    <p>난징(7.25)·광저우(8.8) 전체 세트리스트를 유튜브 영상과 함께 정리했습니다.</p>
 
     <div class="honesty-box">
       <div class="title">⚠ 솔직한 안내</div>
@@ -272,13 +272,13 @@
     <div class="meta-row">
       <span><b>2026.08.08</b> 广州宝能国际体育演艺中心</span>
       <span><b>전석</b> 매진 · 대기표 발생</span>
-      <span>은발 스타일링 · 게스트 江奇霖</span>
+      <span><b>31곡</b> · Part 1–4 + Encore</span>
     </div>
     <div class="notice">
-      광저우 공연은 최근(8.8) 진행되어 <b>전체 세트리스트가 아직 공식 통합 공개되지 않았습니다.</b> 아래는 확실히 보도·확인된 <b>난징 대비 변경/신규곡</b>입니다.
+      첨부된 광저우 공연 세트리스트를 기준으로 전체 순서를 정리했습니다. <b>‘광둥어’</b>는 원자료의 ★, <b>‘난징 미공연’</b>은 원자료의 ☆ 표시를 옮긴 것입니다.
     </div>
     <div class="toolbar">
-      <input type="text" class="search-input" id="search-gz" placeholder="곡명(한글/중문)으로 검색…" aria-label="광저우 변경사항 검색">
+      <input type="text" class="search-input" id="search-gz" placeholder="곡명·한자음·가사 주제로 검색…" aria-label="광저우 세트리스트 검색">
       <div class="count-pill" id="count-gz"></div>
     </div>
     <div class="tracklist" id="list-gz"></div>
@@ -287,7 +287,7 @@
   <footer>
     <b>보는 법</b> — 제목 옆의 ‘한자음’은 중국어 발음이 아니라 한자를 한국식으로 읽은 값입니다. 그 아래에 중국어 병음과 한글 발음을 따로 적었습니다. 붉은 점이 있는 곡은 실제 유튜브 영상으로 바로 연결되며, 라운희 영상이 아닌 원곡 MV는 출처에 명시했습니다. 회색 점 곡은 유튜브에서 확인되지 않아 링크를 넣지 않았습니다.<br>
     더 찾고 싶다면 라운희 공식 유튜브 뮤직 채널: <a href="https://music.youtube.com/channel/UCaVxiNWhf2qEjlInTdj3lUA" target="_blank" rel="noopener noreferrer">music.youtube.com/@罗云熙</a><br>
-    데이터 출처: 공식 YouTube/Youku 영상, Apple Music·Shazam 곡 정보, 南方娱乐网·新浪新闻·中华网 현장 보도 종합 · 2026.08.10 보강
+    데이터 출처: 공식 YouTube/Youku 영상, Apple Music·Shazam 곡 정보, 사용자 제공 광저우 세트리스트 이미지, 南方娱乐网·新浪新闻·中华网 현장 보도 종합 · 2026.08.11 보강
   </footer>
 
 </div>
@@ -330,12 +330,46 @@ const NANJING = [
   {n:33, cn:"팬 신청곡 B", hanja:"—", py:"—", kr:"—", mean:"현장 즉석 신청, 곡목 미공개", info:"공개 기사와 영상만으로 곡명을 확정할 수 없어 임의로 매핑하지 않았다.", lyrics:"곡명 미확인으로 가사 내용을 제공하지 않는다.", tag:"미공개"},
 ];
 
+function gzSong(cn, n, part, kind, extra = {}){
+  const base = NANJING.find(song => song.cn === cn);
+  return {...base, n, tag:undefined, part, kind, ...extra};
+}
+
 const GUANGZHOU = [
-  {n:1, cn:"相思赋予谁", hanja:"상사부여수", py:"Xiāngsī Fùyǔ Shéi", kr:"샹쓰 푸위 쉐이", mean:"그리움은 누구에게 주나", info:"호메이메이(好妹妹)의 첫 앨범 《春生》 수록 원곡을 희곡 창법(戏腔)으로 편곡했다. 황매희 《女驸马》의 음악 어법도 떠올리게 한다.", lyrics:"꽃과 계절 같은 고전적 이미지 속에서 갈 곳 없는 그리움을 누구에게 맡길지 묻는, 전통미 짙은 사랑 노래다.", tag:"광저우 신규"},
-  {n:2, cn:"要不然我们就这样一万年", hanja:"요불연아문취저양일만년", py:"Yàoburán Wǒmen Jiù Zhèyàng Yīwànnián", kr:"야오부란 워먼 지우 저양 이완녠", mean:"아니면 우리 이대로 만년을", info:"드라마 《长月烬明》의 대표 OST. 광저우에서 약 만 명의 관객이 함께 부른 장면으로 소개됐다.", lyrics:"운명과 시간이 두 사람을 갈라놓아도, 차라리 지금의 마음 그대로 만 년을 함께하자고 붙드는 절절한 약속이다.", tag:"광저우 신규", yt:"Vnn0qT-vvOQ", source:"YOUKU 공식 OST 영상"},
-  {n:3, cn:"夜梦春游", hanja:"야몽춘유", py:"Yèmèng Chūnyóu", kr:"예멍 춘여우", mean:"밤꿈 속 봄나들이", info:"2026년 앨범 《小小的我》 계열의 신곡. 광저우에서 추가된 곡으로 확인됐다.", lyrics:"봄날의 색과 바람을 꿈속 나들이처럼 펼쳐, 잠시 현실을 벗어나는 따뜻하고 장난스러운 설렘을 그린다.", tag:"광저우 신규"},
-  {n:4, cn:"天后", hanja:"천후", py:"Tiānhòu", kr:"톈허우", mean:"천후, 최고의 디바", info:"천스안(陈势安)의 대표 발라드를 라운희가 광둥어로 소화한 커버. 광저우 변경곡으로 언급됐다.", lyrics:"사랑하는 이를 여왕처럼 떠받들다 자신을 잃어버린 화자가, 불균형한 관계의 상처와 미련을 돌아본다.", tag:"광저우 신규", yt:"HYS6AhViG8s", source:"《国乐无双》 EP4 라운희 광둥어 라이브 · 동일 곡 다른 무대"},
-  {n:5, cn:"新一天", hanja:"신일천", py:"Xīn Yī Tiān", kr:"신 이 톈", mean:"새로운 하루", info:"난징의 《星星之火》 대신 광저우 앙코르에 배치된 희망적인 신곡이다.", lyrics:"지나간 날의 무게를 털고 새 아침을 맞으며, 오늘의 작은 시작이 내일을 바꿀 수 있다고 격려한다.", tag:"앙코르 변경"},
+  gzSong("电影人生", 1, "Part 1", "Original", {info:"광저우 공연의 오프닝곡. 초기 앨범 《12人生》 계열의 자전적 곡이다."}),
+  gzSong("逆流而上", 2, "Part 1", "Original"),
+  gzSong("白色舞鞋", 3, "Part 1", "Original"),
+  gzSong("旅人", 4, "Part 1", "Original"),
+  gzSong("不渝梦", 5, "Part 1", "Original"),
+  gzSong("与你", 6, "Part 1", "OST"),
+  {n:7, cn:"夜梦春游", hanja:"야몽춘유", py:"Yèmèng Chūnyóu", kr:"예멍 춘여우", mean:"밤꿈 속 봄나들이", info:"2026년 앨범 《小小的我》 계열의 신곡으로 광저우 Part 1에 배치됐다.", lyrics:"봄날의 색과 바람을 꿈속 나들이처럼 펼쳐, 잠시 현실을 벗어나는 따뜻하고 장난스러운 설렘을 그린다.", part:"Part 1", kind:"Original", notNanjing:true},
+
+  gzSong("开到荼靡", 8, "Part 2", "Cover"),
+  gzSong("最好", 9, "Part 2", "Original"),
+  gzSong("致不存在的恋人", 10, "Part 2", "Original"),
+  gzSong("Because of You", 11, "Part 2", "OST / Original"),
+  gzSong("圣塔利奥酒馆", 12, "Part 2", "Original"),
+  {n:13, cn:"此生不换", hanja:"차생불환", py:"Cǐshēng Bù Huàn", kr:"츠셩 부환", mean:"이 생에서는 변치 않으리", info:"칭냐오페이위(青鸟飞鱼)가 부른 드라마 《仙剑奇侠传三》 OST를 커버했다.", lyrics:"여러 생과 긴 이별을 지나더라도 이번 생의 사랑만은 바꾸지 않겠다는 운명적인 약속을 노래한다.", part:"Part 2", kind:"OST", notNanjing:true, yt:"Iq58hNrJ_wo", source:"《仙剑奇侠传三》 원곡 드라마 MV · 라운희 영상 아님"},
+
+  gzSong("一往", 14, "Part 3", "OST / Original"),
+  {n:15, cn:"要不然我们就这样一万年", hanja:"요불연아문취저양일만년", py:"Yàoburán Wǒmen Jiù Zhèyàng Yīwànnián", kr:"야오부란 워먼 지우 저양 이완녠", mean:"아니면 우리 이대로 만년을", info:"드라마 《长月烬明》의 대표 OST. 광저우에서 관객 합창으로 이어진 곡이다.", lyrics:"운명과 시간이 두 사람을 갈라놓아도, 차라리 지금의 마음 그대로 만 년을 함께하자고 붙드는 절절한 약속이다.", part:"Part 3", kind:"OST", notNanjing:true, yt:"Vnn0qT-vvOQ", source:"YOUKU 공식 OST 영상"},
+  {n:16, cn:"相思赋予谁", hanja:"상사부여수", py:"Xiāngsī Fùyǔ Shéi", kr:"샹쓰 푸위 쉐이", mean:"그리움은 누구에게 주나", info:"호메이메이(好妹妹)의 앨범 《春生》 수록 원곡을 희곡 창법(戏腔)으로 편곡했다.", lyrics:"꽃과 계절 같은 고전적 이미지 속에서 갈 곳 없는 그리움을 누구에게 맡길지 묻는, 전통미 짙은 사랑 노래다.", part:"Part 3", kind:"Cover", notNanjing:true},
+  gzSong("心上悬", 17, "Part 3", "OST / Original", {info:"라운희 주연 드라마 《颜心记》 OST. 광저우 원자료에서 난징 미공연곡으로 표시됐다.", notNanjing:true}),
+  {n:18, cn:"天下", hanja:"천하", py:"Tiānxià", kr:"톈샤", mean:"천하, 온 세상", info:"장제(张杰)의 대표 고풍(古风) 곡을 커버했다. 작곡 류지닝(刘吉宁)의 웅장한 록 발라드다.", lyrics:"천하와 영웅의 명예보다 사랑하는 한 사람을 택하겠다는 결단을 강호 서사로 풀어낸다.", part:"Part 3", kind:"Cover", notNanjing:true, yt:"Z5k4tyBjSk8", source:"장제 공식 아티스트 음원 · 라운희 영상 아님"},
+  {n:19, cn:"男女关系科", hanja:"남녀관계과", py:"Nánnǚ Guānxì Kē", kr:"난뉘 관시 커", mean:"남녀관계과", info:"양첸화(杨千嬅)의 영화 《新扎师妹》 수록곡을 광둥어로 커버했다.", lyrics:"연애를 하나의 수업과 직무에 빗대어, 실수와 이별을 겪으며 사랑을 배우는 화자를 유쾌하게 그린다.", part:"Part 3", kind:"Cover", cantonese:true, notNanjing:true},
+  gzSong("宇宙第一响", 20, "Part 3", "Original"),
+
+  gzSong("小小的我", 21, "Part 4", "Original"),
+  {n:22, cn:"叱咤红人", hanja:"질타홍인", py:"Chìzhà Hóngrén", kr:"츠자 훙런", mean:"세상을 휘어잡는 유명인", info:"천샤오춘(陈小春)이 부른 1998년 TVB 드라마 《鹿鼎记》 주제곡을 광둥어로 커버했다.", lyrics:"위소보의 재치와 생존력처럼 규칙에 얽매이지 않고 세상을 누비는 장난기 많은 영웅상을 노래한다.", part:"Part 4", kind:"Cover", cantonese:true, notNanjing:true},
+  gzSong("等风停", 23, "Part 4", "Original"),
+  gzSong("遇见", 24, "Part 4", "Piano Cover", {info:"쑨옌쯔의 2003년 영화 《向左走，向右走》 주제곡을 피아노 연주와 함께 불렀다."}),
+  {n:25, cn:"天后", hanja:"천후", py:"Tiānhòu", kr:"톈허우", mean:"천후, 최고의 디바", info:"천스안(陈势安)의 대표 발라드를 라운희가 광둥어로 소화한 커버다.", lyrics:"사랑하는 이를 여왕처럼 떠받들다 자신을 잃어버린 화자가, 불균형한 관계의 상처와 미련을 돌아본다.", part:"Part 4", kind:"Cover", cantonese:true, notNanjing:true, yt:"HYS6AhViG8s", source:"《国乐无双》 EP4 라운희 광둥어 라이브 · 동일 곡 다른 무대"},
+  gzSong("晨星", 26, "Part 4", "Original"),
+  {n:27, cn:"陀飞轮", hanja:"타비륜", py:"Tuófēilún", kr:"퉈페이룬", mean:"투르비용 시계", info:"천이쉰(陈奕迅)의 2010년 광둥어 EP 《Time Flies》 수록곡. 작사 황웨이원, 작곡 Vincent Chow.", lyrics:"고급 시계와 물질을 얻느라 정작 한정된 시간을 소진하는 삶을 돌아보며, 무엇이 진짜 가치인지 묻는다.", part:"Part 4", kind:"Cover", cantonese:true, notNanjing:true, yt:"DOgI7qUduP8", source:"천이쉰 공식 아티스트 음원 · 라운희 영상 아님"},
+  gzSong("钢铁人", 28, "Part 4", "Original"),
+  {n:29, cn:"天使的礼物", hanja:"천사적예물", py:"Tiānshǐ de Lǐwù", kr:"톈스 더 리우", mean:"천사의 선물", info:"천이쉰(陈奕迅)의 광둥어 곡을 커버했다. 원자료에서 광둥어·난징 미공연곡으로 표시됐다.", lyrics:"눈에 잘 띄지 않는 평범한 사람의 친절과 묵묵한 배려가 누군가에게는 천사의 선물이 된다고 말한다.", part:"Part 4", kind:"Cover", cantonese:true, notNanjing:true, yt:"ykl0syHi0Ao", source:"천이쉰 공식 아티스트 음원 · 라운희 영상 아님"},
+  gzSong("星星之火", 30, "Part 4", "Original", {info:"2020년 앨범 《X》의 팬 헌정곡. 광저우에서는 앙코르 직전 Part 4의 마지막 곡이다."}),
+  gzSong("新一天", 31, "Encore", "Original", {info:"광저우 공연의 앙코르곡. 새 아침과 다시 시작하는 용기를 노래하는 신곡이다."}),
 ];
 
 function ytWatchURL(id){ return "https://www.youtube.com/watch?v=" + id; }
@@ -371,6 +405,9 @@ function renderList(container, data){
       <div class="track-main">
         <div class="track-titles">
           ${t.tag ? `<span class="badge ${t.tag.includes('신규')||t.tag.includes('변경')?'gold':''}">${t.tag}</span>` : ""}
+          ${t.part ? `<span class="badge">${t.part} · ${t.kind}</span>` : ""}
+          ${t.cantonese ? `<span class="badge gold">광둥어</span>` : ""}
+          ${t.notNanjing ? `<span class="badge gold">난징 미공연</span>` : ""}
           <span class="track-cn">${t.cn}</span>
           <span class="track-hanja">한자음 ${t.hanja}</span>
         </div>
