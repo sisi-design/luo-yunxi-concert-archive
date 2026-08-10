@@ -179,10 +179,21 @@
   .track-main{ min-width:0; }
   .track-titles{ display:flex; align-items:baseline; gap:10px; flex-wrap:wrap; margin-bottom:4px; }
   .track-cn{ font-family:'Noto Serif KR', serif; font-weight:600; font-size:17px; color:var(--ivory); }
+  .track-hanja{
+    font-size:10.5px; color:var(--gold); border:1px solid rgba(227,182,85,0.35);
+    border-radius:20px; padding:2px 7px; white-space:nowrap;
+  }
+  .track-pronunciation{ display:flex; gap:8px; align-items:baseline; flex-wrap:wrap; margin:2px 0 5px; }
   .track-py{ font-family:'JetBrains Mono', monospace; font-size:11.5px; color:var(--purple-glow); letter-spacing:0.02em; }
-  .track-kr{ font-size:12.5px; color:var(--mute); font-weight:500; }
+  .track-kr{ font-size:12px; color:var(--mute); font-weight:500; }
   .track-meaning{ font-size:13px; color:var(--mute); line-height:1.5; }
-  .track-info{ font-size:11.5px; color:var(--mute-2); margin-top:3px; }
+  .track-info{ font-size:12px; color:var(--mute); margin-top:6px; line-height:1.55; }
+  .track-lyrics{
+    font-size:12px; color:var(--mute); margin-top:7px; line-height:1.6;
+    padding:7px 9px; border-left:2px solid rgba(183,156,255,0.35);
+    background:rgba(139,111,217,0.05); border-radius:0 7px 7px 0;
+  }
+  .track-lyrics b{ color:var(--purple-glow); font-weight:600; margin-right:6px; }
   .track-source{ font-size:10.5px; color:var(--mute-2); margin-top:2px; font-style:italic; }
 
   .badge{
@@ -231,7 +242,7 @@
 
     <div class="honesty-box">
       <div class="title">⚠ 솔직한 안내</div>
-      이 두 콘서트의 전체 직캠은 유튜브에서 확인하기 어렵습니다. 대신 곡마다 실제로 검색해서 확인한 <b style="color:var(--ivory)">공식 음원·MV / 다른 무대 라이브 영상</b>을 연결했어요. 확인 안 된 곡은 링크를 지어내지 않고 솔직히 "영상 미확인"으로 표시했습니다.
+      이 두 콘서트의 전체 직캠은 유튜브에서 확인하기 어렵습니다. 대신 곡마다 실제로 검색해서 확인한 <b style="color:var(--ivory)">라운희 공연·공식 음원/MV·원곡 영상</b>을 연결했어요. 가사는 원문을 옮기지 않고 주제와 서사를 한국어로 요약했으며, 확인 안 된 곡은 링크를 지어내지 않고 "영상 미확인"으로 표시했습니다.
       <div class="legend">
         <div class="legend-item"><span class="dot found"></span> 실제 유튜브 영상 확인됨 (클릭 시 바로 재생 페이지)</div>
         <div class="legend-item"><span class="dot missing"></span> 유튜브에서 확인 안 됨</div>
@@ -274,9 +285,9 @@
   </section>
 
   <footer>
-    <b>보는 법</b> — 붉은 점이 있는 곡은 실제 유튜브 영상(공식 MV 또는 다른 무대 라이브)으로 바로 연결됩니다. 이 콘서트 자체의 직캠이 아닌 경우 "동일 곡 다른 무대" 등으로 출처를 표시해뒀어요. 회색 점 곡은 유튜브에서 확인되지 않아 링크를 넣지 않았습니다.<br>
+    <b>보는 법</b> — 제목 옆의 ‘한자음’은 중국어 발음이 아니라 한자를 한국식으로 읽은 값입니다. 그 아래에 중국어 병음과 한글 발음을 따로 적었습니다. 붉은 점이 있는 곡은 실제 유튜브 영상으로 바로 연결되며, 라운희 영상이 아닌 원곡 MV는 출처에 명시했습니다. 회색 점 곡은 유튜브에서 확인되지 않아 링크를 넣지 않았습니다.<br>
     더 찾고 싶다면 라운희 공식 유튜브 뮤직 채널: <a href="https://music.youtube.com/channel/UCaVxiNWhf2qEjlInTdj3lUA" target="_blank" rel="noopener noreferrer">music.youtube.com/@罗云熙</a><br>
-    데이터 출처: 南方娱乐网, 新浪新闻(sina.cn), 中华网 현장 보도 종합 · 2026.08.10 기준 정리
+    데이터 출처: 공식 YouTube/Youku 영상, Apple Music·Shazam 곡 정보, 南方娱乐网·新浪新闻·中华网 현장 보도 종합 · 2026.08.10 보강
   </footer>
 
 </div>
@@ -284,47 +295,47 @@
 <script>
 // yt: confirmed real YouTube video ID (verified via search). source: what kind of video it is.
 const NANJING = [
-  {n:1, cn:"电影人生", py:"Diànyǐng Rénshēng", kr:"뎬잉 런셩", mean:"영화 같은 인생", info:"오프닝곡 · 필름보트 고공 등장", tag:"오프닝", yt:"kF3kguIfi8c", source:"팬 제작 MV(음원: 라운희)"},
-  {n:2, cn:"逆流而上", py:"Nìliú Ér Shàng", kr:"니리우 얼샹", mean:"역류를 거슬러 오르다", info:"응원가 성격의 곡", yt:"NK6GCEH388I", source:"공식 MV"},
-  {n:3, cn:"白色舞鞋", py:"Báisè Wǔxié", kr:"바이써 우시에", mean:"하얀 무용화", info:"발레 무용수 출신 이력 반영 추정"},
-  {n:4, cn:"旅人", py:"Lǚrén", kr:"뤼런", mean:"여행자", info:"", yt:"kSYPotyHrhA", source:"공식 MV/가사영상"},
-  {n:5, cn:"不渝梦", py:"Bùyú Mèng", kr:"뿌위 멍", mean:"변치 않는 꿈", info:""},
-  {n:6, cn:"爱的回归线", py:"Ài de Huíguīxiàn", kr:"아이더 후이꾸이시엔", mean:"사랑의 회귀선", info:""},
-  {n:7, cn:"与你", py:"Yǔ Nǐ", kr:"위 니", mean:"너와 함께", info:"《水龙吟》OST, 음악제에서 첫 공개"},
-  {n:8, cn:"开到荼靡", py:"Kāi Dào Túmí", kr:"카이따오 투미", mean:"꽃이 만개해 지는 순간까지", info:"사랑이 절정을 지나 끝을 향한다는 중국 관용구"},
-  {n:9, cn:"最好", py:"Zuìhǎo", kr:"쭈이하오", mean:"가장 좋은 것", info:""},
-  {n:10, cn:"致不存在的恋人", py:"Zhì Bù Cúnzài de Liànrén", kr:"즈 뿌춘짜이더 리엔런", mean:"존재하지 않는 연인에게", info:"", yt:"liUVCKWmnwI", source:"2025 타이후베이 음악제 라이브"},
-  {n:11, cn:"Because of You", py:"Because of You", kr:"비커즈 오브 유", mean:"너 때문에", info:"《良言写意》 OST", yt:"TQYv2ZgPQTA", source:"Tencent Video 공식 OST"},
-  {n:12, cn:"圣塔里奥酒馆", py:"Shèngtǎlǐ'ào Jiǔguǎn", kr:"셩타리아오 지우관", mean:"산탈리오 술집", info:"세계관형 스토리텔링 곡 추정"},
-  {n:13, cn:"只对你有感觉", py:"Zhǐ Duì Nǐ Yǒu Gǎnjué", kr:"즈뚜이니 여우간줴", mean:"오직 너에게만 느낌이 있어", info:"게스트 청샤오(程潇)와 합창", tag:"합창"},
-  {n:14, cn:"一往", py:"Yīwǎng", kr:"이 왕", mean:"한결같이, 줄곧", info:"《水龙吟》당려사 캐릭터곡", yt:"MqqNbOGQUsQ", source:"공식 MV"},
-  {n:15, cn:"骊龙吟", py:"Lílóng Yín", kr:"리롱 인", mean:"여룡음", info:"드라마 《水龙吟》 오프닝곡(원곡 황자홍범), 팬 신청", tag:"팬신청"},
-  {n:16, cn:"今年勇", py:"Jīnnián Yǒng", kr:"진니엔 용", mean:"올해의 용기(제목 그대로)", info:"许嵩 원곡 커버, 팬 신청", tag:"팬신청", yt:"-v6wRVSgtvI", source:"쓰촨위성TV 라이브(동일 곡 다른 무대)"},
-  {n:17, cn:"挚友", py:"Zhìyǒu", kr:"즈 여우", mean:"절친한 친구", info:"", tag:"팬신청"},
-  {n:18, cn:"天龙八部之宿敌", py:"Tiānlóng Bābù Zhī Sùdí", kr:"티엔롱빠뿌 즈 쑤디", mean:"천룡팔부: 숙적", info:"드라마 《천룡팔부》 삽입곡", tag:"팬신청", yt:"Iv2ODAJkQ3U", source:"원곡자 许嵩 공식 음원"},
-  {n:19, cn:"宇宙第一响", py:"Yǔzhòu Dì Yī Xiǎng", kr:"위저우 띠이 시앙", mean:"우주 최초의 울림", info:"신곡"},
-  {n:20, cn:"小小的我", py:"Xiǎoxiǎo de Wǒ", kr:"시아오시아오더 워", mean:"작은 나", info:"신보 타이틀곡 · 라운희 작사·작곡"},
-  {n:21, cn:"热铁皮房顶的夏天", py:"Rè Tiěpí Fángdǐng de Xiàtiān", kr:"러 티에피 팡딩더 시아티엔", mean:"뜨거운 양철 지붕 위의 여름", info:"록 넘버, 밴드 세션", yt:"_xRknz4B8F8", source:"2025 타이후베이 음악제 라이브"},
-  {n:22, cn:"等风停", py:"Děng Fēng Tíng", kr:"덩 펑 팅", mean:"바람이 멎기를 기다리며", info:"", yt:"Q_JGwDPaGRg", source:"라운희 음원·중영 자막 영상"},
-  {n:23, cn:"遇见", py:"Yùjiàn", kr:"위 지엔", mean:"만남", info:"피아노 자작 연주+노래", tag:"피아노"},
-  {n:24, cn:"事隔多年", py:"Shìgé Duōnián", kr:"스거 뚜오니엔", mean:"많은 세월이 지난 후", info:""},
-  {n:25, cn:"小雀", py:"Xiǎoquè", kr:"시아오 췌", mean:"작은 참새", info:"환경 보호를 주제로 한 자작곡", yt:"4lbzmKNMxcE", source:"라운희 해외 팬클럽 영상(라운희 음원)"},
-  {n:26, cn:"心上悬", py:"Xīnshàng Xuán", kr:"신샹 쉬엔", mean:"마음에 걸려 있는 것", info:"《颜心记》OST · 무반주 팬서비스", tag:"무반주", yt:"UYoEuuzGBk0", source:"《颜心记》 OST 공식 배급 음원"},
-  {n:27, cn:"晨星", py:"Chénxīng", kr:"천 싱", mean:"샛별", info:"신보 수록곡"},
-  {n:28, cn:"钢铁人", py:"Gāngtiěrén", kr:"강 티에런", mean:"강철 인간(아이언맨)", info:"록 넘버"},
-  {n:29, cn:"静思所有事物的伟大", py:"Jìngsī Suǒyǒu Shìwù de Wěidà", kr:"징쓰 쑤어여우 스우더 웨이따", mean:"모든 것의 위대함을 고요히 생각하다", info:"東方风云榜 1위곡 · 자작곡"},
-  {n:30, cn:"新一天", py:"Xīn Yī Tiān", kr:"신 이티엔", mean:"새로운 하루", info:"자작곡"},
-  {n:31, cn:"星星之火", py:"Xīngxīng Zhī Huǒ", kr:"싱싱 즈훠", mean:"작은 불씨", info:"팬 헌정곡 · 앙코르", tag:"앙코르", yt:"F-S68QiENAo", source:"공식 음원+한글 병음 자막"},
-  {n:32, cn:"팬 신청곡 A", py:"—", kr:"—", mean:"현장 즉석 신청, 곡목 미공개", info:"", tag:"미공개"},
-  {n:33, cn:"팬 신청곡 B", py:"—", kr:"—", mean:"현장 즉석 신청, 곡목 미공개", info:"", tag:"미공개"},
+  {n:1, cn:"电影人生", hanja:"전영인생", py:"Diànyǐng Rénshēng", kr:"뎬잉 런셩", mean:"영화 같은 인생", info:"초기 앨범 《12人生》 계열의 자전적 곡. 난징에서는 필름보트를 타고 고공 등장하는 오프닝 연출과 연결됐다.", lyrics:"삶을 한 편의 영화에 빗대어 장면마다 흔들리고 성장하는 자신을 돌아본다.", tag:"오프닝", yt:"kF3kguIfi8c", source:"팬 제작 MV · 음원 라운희"},
+  {n:2, cn:"逆流而上", hanja:"역류이상", py:"Nìliú Ér Shàng", kr:"니리우 얼샹", mean:"흐름을 거슬러 오르다", info:"라운희의 도전과 전진을 앞세운 록 성향의 응원가. 《12人生》 수록곡이다.", lyrics:"세상의 흐름과 역경에 밀리지 않고 자기 방향으로 끝까지 나아가겠다는 의지를 노래한다.", yt:"NK6GCEH388I", source:"라운희 공식 MV"},
+  {n:3, cn:"白色舞鞋", hanja:"백색무혜", py:"Báisè Wǔxié", kr:"바이써 우시에", mean:"하얀 무용화", info:"라운희의 발레 수련 경험을 떠올리게 하는 무대곡. 공개된 세부 크레딧은 추가 확인 중이다.", lyrics:"하얀 무용화를 꿈과 청춘의 상징으로 삼아, 무대에 오르기까지의 시간과 마음을 그린다."},
+  {n:4, cn:"旅人", hanja:"여인", py:"Lǚrén", kr:"뤼런", mean:"여행자", info:"2023년 발표한 솔로 싱글. 고독한 이동과 내면의 성장을 담은 서정적인 곡이다.", lyrics:"정해진 답 없이 길을 걷는 여행자가 만남과 이별을 지나 자기 자신에게 가까워지는 이야기다.", yt:"kSYPotyHrhA", source:"라운희 공식 MV/가사 영상"},
+  {n:5, cn:"不渝梦", hanja:"불투몽", py:"Bùyú Mèng", kr:"뿌위 멍", mean:"변치 않는 꿈", info:"공연 세트리스트에서 확인된 곡으로, 공식 음원 정보와 독립 영상은 아직 확인하지 못했다.", lyrics:"시간과 환경이 달라져도 처음 품었던 꿈을 바꾸지 않겠다는 다짐을 중심에 둔다."},
+  {n:6, cn:"爱的回归线", hanja:"애적회귀선", py:"Ài de Huíguīxiàn", kr:"아이더 후이꾸이시엔", mean:"사랑의 회귀선", info:"천윈뤄·천메이원의 듀엣곡으로 알려진 《爱情公寓3》 OST를 라운희가 커버했다.", lyrics:"멀어져 버린 두 사람이 사랑이 되돌아오는 지점에서 다시 만나기를 기다리는 재회의 노래다.", yt:"q_EGWQbb1nU", source:"2025 은행 음악제 라운희 직캠 · 동일 곡 다른 무대"},
+  {n:7, cn:"与你", hanja:"여니", py:"Yǔ Nǐ", kr:"위 니", mean:"너와 함께", info:"드라마 《水龙吟》 관련 OST로 소개된 곡이며 음악제에서 먼저 공개됐다.", lyrics:"험한 운명 속에서도 ‘너’와 같은 길을 선택하겠다는 동행과 신뢰를 담는다."},
+  {n:8, cn:"开到荼靡", hanja:"개도도미", py:"Kāi Dào Túmí", kr:"카이따오 투미", mean:"도미꽃이 마지막까지 피다", info:"왕페이의 1999년 앨범 《只爱陌生人》 수록곡. 작사 린시, 작곡 C. Y. Kong의 곡을 커버했다.", lyrics:"꽃이 절정 뒤에 지듯 욕망과 환상이 끝까지 피어난 뒤 남는 공허와 자기 성찰을 날카롭게 비춘다.", yt:"TbWFwTUK7qc", source:"왕페이 원곡 음원 영상 · 라운희 영상 아님"},
+  {n:9, cn:"最好", hanja:"최호", py:"Zuìhǎo", kr:"쭈이하오", mean:"가장 좋은 것", info:"라운희의 2020년 앨범 《X》 수록곡으로 알려진 솔로곡이다.", lyrics:"완벽한 답보다 서로에게 가장 좋은 기억과 선택으로 남고 싶은 마음을 담담하게 말한다."},
+  {n:10, cn:"致不存在的恋人", hanja:"치부존재적연인", py:"Zhì Bù Cúnzài de Liànrén", kr:"즈 뿌춘짜이더 리엔런", mean:"존재하지 않는 연인에게", info:"2020년 앨범 《X》의 수록곡. 아직 만나지 못했거나 상상 속에만 있는 상대에게 보내는 편지 형식이다.", lyrics:"외로움 속에서도 언젠가 나타날 사랑을 상상하며, 미리 건네는 고백과 기다림을 노래한다.", yt:"liUVCKWmnwI", source:"2025 타이후베이 음악제 라운희 라이브"},
+  {n:11, cn:"Because of You", hanja:"—", py:"Because of You", kr:"비커즈 오브 유", mean:"너 때문에", info:"라운희 주연 드라마 《良言写意》의 OST. 인물의 감정선과 사랑의 회복을 잇는 곡이다.", lyrics:"상처 입은 삶이 한 사람을 만난 뒤 다시 움직이기 시작하고, 그 존재가 변화의 이유가 됐다고 고백한다.", yt:"TQYv2ZgPQTA", source:"Tencent Video 공식 OST"},
+  {n:12, cn:"圣塔利奥酒馆", hanja:"성탑리아오 주관", py:"Shèngtǎlì'ào Jiǔguǎn", kr:"셩타리야오 지우관", mean:"산탈리아오 술집", info:"자료에 따라 잘못 적히던 ‘圣塔里奥’를 공식 소개 표기 ‘圣塔利奥’로 바로잡았다. 현악·피아노와 탱고 분위기의 신보 수록곡이다.", lyrics:"낯선 술집의 밤을 배경으로 장난스럽고 나른한 유혹, 스쳐 가는 인연의 긴장을 한 편의 장면처럼 펼친다."},
+  {n:13, cn:"只对你有感觉", hanja:"지대니유감각", py:"Zhǐ Duì Nǐ Yǒu Gǎnjué", kr:"즈 뚜이 니 여우 간줴", mean:"오직 너에게만 느낌이 있어", info:"비륜해와 허베의 대표 듀엣곡. 난징에서는 게스트 청샤오(程潇)와 밝은 합창 무대로 꾸몄다.", lyrics:"다른 사람 앞에서는 태연하지만 유독 한 사람 앞에서만 설레고 솔직해지는 풋풋한 사랑을 노래한다.", tag:"합창", yt:"jS7zzyoixf8", source:"비륜해 feat. 허베 공식 MV · 라운희 영상 아님"},
+  {n:14, cn:"一往", hanja:"일왕", py:"Yīwǎng", kr:"이왕", mean:"한결같이, 줄곧", info:"드라마 《水龙吟》에서 라운희가 연기한 당려사(唐俪辞)의 캐릭터곡이다.", lyrics:"운명과 오해 속에서도 한 번 정한 길과 마음을 거두지 않는 인물의 집념과 고독을 담는다.", yt:"MqqNbOGQUsQ", source:"드라마 공식 MV"},
+  {n:15, cn:"骊龙吟", hanja:"여룡음", py:"Lílóng Yín", kr:"리룽 인", mean:"검은 용의 노래", info:"드라마 《水龙吟》 오프닝곡으로 원가창은 황쯔훙판(黄子弘凡). 난징 팬 신청 코너에서 불렀다.", lyrics:"강호의 거대한 운명과 용처럼 잠든 힘, 혼란 속에서 자신의 길을 깨우는 영웅 서사를 그린다.", tag:"팬신청", yt:"Wn9_a762jU8", source:"《水龙吟》 공식 오프닝 MV · 원가창 황쯔훙판"},
+  {n:16, cn:"今年勇", hanja:"금년용", py:"Jīnnián Yǒng", kr:"진녠 융", mean:"올해의 용기", info:"쉬쑹(许嵩) 원곡을 팬 신청으로 부른 곡. 라운희가 방송 무대에서도 선보였다.", lyrics:"지난 망설임을 뒤로하고 지금 이 해에는 두려움을 넘어 행동하자는 담백한 자기 격려다.", tag:"팬신청", yt:"-v6wRVSgtvI", source:"쓰촨위성TV 라운희 라이브 · 동일 곡 다른 무대"},
+  {n:17, cn:"挚友", hanja:"지우", py:"Zhìyǒu", kr:"즈여우", mean:"마음을 다하는 친구", info:"우정과 오래된 인연을 다룬 곡. 난징 팬 신청 코너에 포함됐고 음악제 라이브도 확인됐다.", lyrics:"가까워서 더 말하지 못했던 고마움과, 시간이 흘러도 곁을 지켜 줄 벗에 대한 믿음을 담는다.", tag:"팬신청", yt:"RFyR0Yhj3bM", source:"후루궈 음악제 라운희 라이브 · 동일 곡 다른 무대"},
+  {n:18, cn:"天龙八部之宿敌", hanja:"천룡팔부지숙적", py:"Tiānlóng Bābù Zhī Sùdí", kr:"톈룽 바부 즈 쑤디", mean:"천룡팔부의 숙적", info:"쉬쑹이 만든 온라인게임 《天龙八部3》 주제곡을 팬 신청으로 커버했다.", lyrics:"강호에서 사랑과 원한이 되풀이되고, 서로를 피할 수 없는 숙적으로 마주하는 비극적 인연을 노래한다.", tag:"팬신청", yt:"Iv2ODAJkQ3U", source:"원곡자 쉬쑹 공식 음원"},
+  {n:19, cn:"宇宙第一响", hanja:"우주제일향", py:"Yǔzhòu Dì Yī Xiǎng", kr:"위저우 띠이 샹", mean:"우주 최초의 울림", info:"2026년 앨범 《小小的我》 수록 신곡. 라운희가 창작에 참여한 곡으로 소개됐다.", lyrics:"아주 작은 존재의 첫 목소리가 우주에 번지는 이미지로, 자기 선언과 새로운 출발의 에너지를 표현한다."},
+  {n:20, cn:"小小的我", hanja:"소소적아", py:"Xiǎoxiǎo de Wǒ", kr:"샤오샤오 더 워", mean:"작디작은 나", info:"2026년 7월 발표한 동명 앨범의 타이틀곡. 라운희가 작사·작곡한 자전적 신곡이다.", lyrics:"광대한 세상 속 작은 자신도 고유한 빛과 생명력을 지녔으며, 천천히 성장할 수 있다고 말한다."},
+  {n:21, cn:"热铁皮房顶的夏天", hanja:"열철피방정적하천", py:"Rè Tiěpí Fángdǐng de Xiàtiān", kr:"러 톄피 팡딩 더 샤톈", mean:"뜨거운 양철 지붕 위의 여름", info:"강한 밴드 사운드가 중심인 록 넘버. 공연에서 관객의 에너지를 끌어올리는 구간에 배치됐다.", lyrics:"달아오른 지붕과 여름의 열기를 청춘의 충동에 겹쳐, 답답한 현실을 뚫고 뛰쳐나가려는 순간을 그린다.", yt:"_xRknz4B8F8", source:"2025 타이후베이 음악제 라운희 라이브"},
+  {n:22, cn:"等风停", hanja:"등풍정", py:"Děng Fēng Tíng", kr:"덩 펑 팅", mean:"바람이 멎기를 기다리며", info:"2020년 발표된 라운희 솔로 싱글. 따뜻한 귀환과 기다림의 정서를 담은 발라드다.", lyrics:"거센 바람 같은 세상에서 지친 사람에게, 바람이 잦아들 때까지 같은 자리에서 기다리겠다고 위로한다.", yt:"Q_JGwDPaGRg", source:"라운희 음원 · 중영 자막 영상"},
+  {n:23, cn:"遇见", hanja:"우견", py:"Yùjiàn", kr:"위젠", mean:"만남", info:"쑨옌쯔의 2003년 영화 《向左走，向右走》 주제곡. 난징에서는 라운희가 피아노를 치며 불렀다.", lyrics:"도시와 시간의 흐름 속에서 아직 모르는 누군가를 기다리다, 사랑을 가장 아름다운 우연으로 만나게 되는 이야기다.", tag:"피아노", yt:"WObbdwgB41c", source:"쑨옌쯔 공식 4K MV · 라운희 영상 아님"},
+  {n:24, cn:"事隔多年", hanja:"사격다년", py:"Shìgé Duōnián", kr:"스거 둬녠", mean:"많은 세월이 지난 뒤", info:"오랜 이별 뒤의 재회를 다루는 서정적인 신곡으로 공연 기사에서 소개됐다.", lyrics:"시간이 많이 흐른 뒤 다시 마주한 두 사람이 쌓였던 거리와 후회를 천천히 내려놓는 장면을 그린다."},
+  {n:25, cn:"小雀", hanja:"소작", py:"Xiǎoquè", kr:"샤오췌", mean:"작은 참새", info:"2020년 앨범 《X》의 환경 보호 주제곡. 작은 새의 시선으로 인간과 자연의 관계를 바라본다.", lyrics:"살 곳을 잃어 가는 작은 새를 통해 생명의 취약함을 보여 주고, 함께 살아갈 공간을 지켜 달라고 말한다.", yt:"4lbzmKNMxcE", source:"라운희 해외 팬클럽 영상 · 음원 라운희"},
+  {n:26, cn:"心上悬", hanja:"심상현", py:"Xīnshàng Xuán", kr:"신상 쉬안", mean:"마음이 매달리다", info:"라운희 주연 드라마 《颜心记》 OST. 난징에서는 무반주로 짧게 들려주는 팬서비스가 있었다.", lyrics:"마음이 허공에 매달린 듯 상대를 걱정하고 그리워하며, 사랑의 답을 기다리는 불안과 간절함을 담는다.", tag:"무반주", yt:"UYoEuuzGBk0", source:"《颜心记》 공식 배급 OST"},
+  {n:27, cn:"晨星", hanja:"신성", py:"Chénxīng", kr:"천싱", mean:"새벽별", info:"2026년 앨범 《小小的我》 수록곡. 작곡 리웨이쑹(李伟菘), 작사 야오뤄룽(姚若龙)의 협업곡이다.", lyrics:"어둠이 끝나기 전 먼저 빛나는 새벽별처럼, 흔들리는 사람에게 새로운 날과 성장의 방향을 보여 준다."},
+  {n:28, cn:"钢铁人", hanja:"강철인", py:"Gāngtiěrén", kr:"강톄런", mean:"강철 인간", info:"초기 앨범 《12人生》의 록 넘버. 단단해 보여야 하는 성인의 내면을 힘 있는 사운드로 풀어낸다.", lyrics:"세상 앞에서는 강철처럼 버티지만 안에는 상처와 두려움이 있는 사람에게, 약함도 자신의 일부라고 말한다.", yt:"WtEmWp97Zm8", source:"《此刻×以光》 콘서트 라운희 라이브"},
+  {n:29, cn:"静思所有事物的伟大", hanja:"정사소유사물적위대", py:"Jìngsī Suǒyǒu Shìwù de Wěidà", kr:"징쓰 쒀여우 스우 더 웨이다", mean:"모든 것의 위대함을 고요히 생각하다", info:"2026년 5월 공개된 싱글. 보컬 라운희, 작곡 탄쉬안(谭旋), 작사 펑탕(冯唐), 편곡 저우궈이(周国仪).", lyrics:"자연과 일상의 작은 생명들을 천천히 바라보며, 연약함 속의 끈기와 존재 자체의 위대함을 사색한다."},
+  {n:30, cn:"新一天", hanja:"신일천", py:"Xīn Yī Tiān", kr:"신 이 톈", mean:"새로운 하루", info:"2026년 신보 공연 구간에 배치된 밝은 분위기의 곡. 광저우에서는 앙코르 변경곡으로 다시 등장했다.", lyrics:"어제의 피로와 후회를 내려놓고 아침을 맞으며, 작은 한 걸음으로 다시 시작하자는 희망을 전한다."},
+  {n:31, cn:"星星之火", hanja:"성성지화", py:"Xīngxīng Zhī Huǒ", kr:"싱싱 즈 훠", mean:"작은 불씨", info:"2020년 앨범 《X》 수록곡이자 팬들에게 보내는 헌정곡. 난징 앙코르를 장식했다.", lyrics:"한 사람의 작은 빛들이 모이면 넓은 밤을 밝힐 수 있다는 이미지로, 가수와 팬의 동행과 응원을 노래한다.", tag:"앙코르", yt:"F-S68QiENAo", source:"라운희 음원 · 한글 병음 자막"},
+  {n:32, cn:"팬 신청곡 A", hanja:"—", py:"—", kr:"—", mean:"현장 즉석 신청, 곡목 미공개", info:"공개 기사와 영상만으로 곡명을 확정할 수 없어 임의로 매핑하지 않았다.", lyrics:"곡명 미확인으로 가사 내용을 제공하지 않는다.", tag:"미공개"},
+  {n:33, cn:"팬 신청곡 B", hanja:"—", py:"—", kr:"—", mean:"현장 즉석 신청, 곡목 미공개", info:"공개 기사와 영상만으로 곡명을 확정할 수 없어 임의로 매핑하지 않았다.", lyrics:"곡명 미확인으로 가사 내용을 제공하지 않는다.", tag:"미공개"},
 ];
 
 const GUANGZHOU = [
-  {n:1, cn:"相思赋予谁", py:"Xiāngsī Fùyǔ Shéi", kr:"시앙쓰 푸위 셰이", mean:"그리움은 누구에게 주나", info:"희곡 창법(戏腔) 편곡 · 난징에는 없던 신규곡", tag:"광저우 신규"},
-  {n:2, cn:"要不然我们就这样一万年", py:"Yàoburán Wǒmen Jiù Zhèyàng Yīwànnián", kr:"야오뿌란 워먼 지우쩌양 이완니엔", mean:"아니면 우리 이대로 만년을", info:"드라마 《长月烬明》 OST · 만 명 관객 합창", tag:"광저우 신규", yt:"Vnn0qT-vvOQ", source:"YOUKU 공식 OST 영상"},
-  {n:3, cn:"夜梦春游", py:"Yèmèng Chūnyóu", kr:"예멍 춘여우", mean:"봄밤의 꿈나들이", info:"팬 반응 기준 광저우 등장 확인", tag:"광저우 신규"},
-  {n:4, cn:"天后", py:"Tiānhòu", kr:"티엔허우", mean:"천후(디바)", info:"광저우 한정 직캠 언급됨", tag:"광저우 신규", yt:"HYS6AhViG8s", source:"국악무쌍 EP4 광둥어 라이브(동일 곡 다른 무대)"},
-  {n:5, cn:"新一天", py:"Xīn Yī Tiān", kr:"신 이티엔", mean:"새로운 하루", info:"난징은 《星星之火》였으나 광저우는 이 곡으로 앙코르 변경", tag:"앙코르 변경"},
+  {n:1, cn:"相思赋予谁", hanja:"상사부여수", py:"Xiāngsī Fùyǔ Shéi", kr:"샹쓰 푸위 쉐이", mean:"그리움은 누구에게 주나", info:"호메이메이(好妹妹)의 첫 앨범 《春生》 수록 원곡을 희곡 창법(戏腔)으로 편곡했다. 황매희 《女驸马》의 음악 어법도 떠올리게 한다.", lyrics:"꽃과 계절 같은 고전적 이미지 속에서 갈 곳 없는 그리움을 누구에게 맡길지 묻는, 전통미 짙은 사랑 노래다.", tag:"광저우 신규"},
+  {n:2, cn:"要不然我们就这样一万年", hanja:"요불연아문취저양일만년", py:"Yàoburán Wǒmen Jiù Zhèyàng Yīwànnián", kr:"야오부란 워먼 지우 저양 이완녠", mean:"아니면 우리 이대로 만년을", info:"드라마 《长月烬明》의 대표 OST. 광저우에서 약 만 명의 관객이 함께 부른 장면으로 소개됐다.", lyrics:"운명과 시간이 두 사람을 갈라놓아도, 차라리 지금의 마음 그대로 만 년을 함께하자고 붙드는 절절한 약속이다.", tag:"광저우 신규", yt:"Vnn0qT-vvOQ", source:"YOUKU 공식 OST 영상"},
+  {n:3, cn:"夜梦春游", hanja:"야몽춘유", py:"Yèmèng Chūnyóu", kr:"예멍 춘여우", mean:"밤꿈 속 봄나들이", info:"2026년 앨범 《小小的我》 계열의 신곡. 광저우에서 추가된 곡으로 확인됐다.", lyrics:"봄날의 색과 바람을 꿈속 나들이처럼 펼쳐, 잠시 현실을 벗어나는 따뜻하고 장난스러운 설렘을 그린다.", tag:"광저우 신규"},
+  {n:4, cn:"天后", hanja:"천후", py:"Tiānhòu", kr:"톈허우", mean:"천후, 최고의 디바", info:"천스안(陈势安)의 대표 발라드를 라운희가 광둥어로 소화한 커버. 광저우 변경곡으로 언급됐다.", lyrics:"사랑하는 이를 여왕처럼 떠받들다 자신을 잃어버린 화자가, 불균형한 관계의 상처와 미련을 돌아본다.", tag:"광저우 신규", yt:"HYS6AhViG8s", source:"《国乐无双》 EP4 라운희 광둥어 라이브 · 동일 곡 다른 무대"},
+  {n:5, cn:"新一天", hanja:"신일천", py:"Xīn Yī Tiān", kr:"신 이 톈", mean:"새로운 하루", info:"난징의 《星星之火》 대신 광저우 앙코르에 배치된 희망적인 신곡이다.", lyrics:"지나간 날의 무게를 털고 새 아침을 맞으며, 오늘의 작은 시작이 내일을 바꿀 수 있다고 격려한다.", tag:"앙코르 변경"},
 ];
 
 function ytWatchURL(id){ return "https://www.youtube.com/watch?v=" + id; }
@@ -361,11 +372,15 @@ function renderList(container, data){
         <div class="track-titles">
           ${t.tag ? `<span class="badge ${t.tag.includes('신규')||t.tag.includes('변경')?'gold':''}">${t.tag}</span>` : ""}
           <span class="track-cn">${t.cn}</span>
-          <span class="track-py">${t.py}</span>
-          <span class="track-kr">· ${t.kr}</span>
+          <span class="track-hanja">한자음 ${t.hanja}</span>
         </div>
-        <div class="track-meaning">${t.mean}</div>
+        <div class="track-pronunciation">
+          <span class="track-py">병음 ${t.py}</span>
+          <span class="track-kr">· 중국어 발음 ${t.kr}</span>
+        </div>
+        <div class="track-meaning">뜻 · ${t.mean}</div>
         ${t.info ? `<div class="track-info">${t.info}</div>` : ""}
+        ${t.lyrics ? `<div class="track-lyrics"><b>가사 이야기</b>${t.lyrics}</div>` : ""}
         ${t.source ? `<div class="track-source">출처: ${t.source}</div>` : ""}
       </div>
       <div class="track-listen">${listenHTML}</div>
@@ -381,7 +396,9 @@ function setupSearch(inputId, countId, data, listEl){
     const q = input.value.trim().toLowerCase();
     const filtered = q ? data.filter(t =>
       t.cn.toLowerCase().includes(q) || t.kr.toLowerCase().includes(q) ||
-      t.py.toLowerCase().includes(q) || t.mean.toLowerCase().includes(q)
+      t.py.toLowerCase().includes(q) || t.hanja.toLowerCase().includes(q) ||
+      t.mean.toLowerCase().includes(q) || t.info.toLowerCase().includes(q) ||
+      t.lyrics.toLowerCase().includes(q)
     ) : data;
     renderList(listEl, filtered);
     const withVideo = filtered.filter(t => t.yt).length;
