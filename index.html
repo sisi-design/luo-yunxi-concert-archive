@@ -265,16 +265,17 @@
   .track-info{ font-size:12px; color:var(--mute); margin-top:6px; line-height:1.55; }
   .track-lyrics{
     font-size:12px; color:var(--mute); margin-top:7px; line-height:1.6;
-    padding:7px 9px; border-left:2px solid rgba(183,156,255,0.35);
+    padding:9px 10px; border-left:2px solid rgba(183,156,255,0.35);
     background:rgba(139,111,217,0.05); border-radius:0 7px 7px 0;
   }
-  .track-lyrics b{ color:var(--purple-glow); font-weight:600; margin-right:6px; }
-  .lyric-highlight{
-    display:block; margin-top:5px; color:var(--ivory); font-family:'Noto Serif KR',serif;
-    font-size:12.5px; line-height:1.55;
+  .track-lyrics > b{ display:block; margin-bottom:5px; color:var(--purple-glow); font-weight:600; }
+  .lyric-line{
+    display:block; color:var(--mute); font-size:12px; line-height:1.6;
   }
-  .lyric-highlight em{
-    margin-right:7px; color:var(--gold); font-family:'Pretendard',sans-serif;
+  .lyric-line + .lyric-line{ margin-top:3px; }
+  .lyric-line.highlight{ color:var(--ivory); font-family:'Noto Serif KR',serif; font-size:12.5px; }
+  .lyric-line em{
+    display:inline-block; min-width:58px; margin-right:7px; color:var(--gold); font-family:'Pretendard',sans-serif;
     font-size:10px; font-style:normal; font-weight:600;
   }
   .track-source{ font-size:10.5px; color:var(--mute-2); margin-top:2px; font-style:italic; }
@@ -739,6 +740,21 @@ function lyricHighlightFor(track){
   return LYRIC_HIGHLIGHTS[track.cn] || "곡의 핵심 정서 한줄 정리 준비 중";
 }
 
+function lyricInsightFor(track){
+  const text = `${track.mean || ""} ${track.lyrics || ""}`;
+  if(/미확인|미공개/.test(text)) return "곡명과 전체 무대 확인 뒤 해설 보완 예정";
+  if(/이별|그리움|후회|잃|빈자리|외로움/.test(text)) return "상실 뒤에도 지워지지 않는 기억과 감정의 잔향";
+  if(/재회|다시 만나|되돌아|귀환/.test(text)) return "멀어진 시간 끝에서 다시 이어지는 관계의 가능성";
+  if(/꿈|용기|성장|시작|나아가|전진/.test(text)) return "흔들림을 지나 자기 방향을 선택하는 성장의 서사";
+  if(/운명|생을|만 년|영원|약속/.test(text)) return "시간과 운명보다 오래 남는 선택과 약속";
+  if(/자연|생명|새|고래|별|우주|하늘/.test(text)) return "자연의 이미지에 투영한 존재의 외로움과 생명력";
+  if(/청춘|여름|여행|길|바람/.test(text)) return "이동하는 풍경을 따라 변화하는 청춘의 내면";
+  if(/친구|벗|동행|곁|함께/.test(text)) return "말보다 오래 이어지는 신뢰와 동행의 의미";
+  if(/사랑|연인|설렘|관계|마음/.test(text)) return "가까워짐과 멀어짐 사이에서 드러나는 관계의 진심";
+  if(/고향|도시|가족|명절/.test(text)) return "장소와 기억을 통해 되살아나는 소속감과 온기";
+  return "제목의 상징과 화자의 감정 변화를 함께 읽는 곡";
+}
+
 function cleanerVideoFor(track){
   const video = CLEANER_VIDEOS[track.cn];
   return video && video.yt !== track.yt ? video : null;
@@ -833,7 +849,7 @@ function renderList(container, data){
         <div class="track-meaning">뜻 · ${t.mean}</div>
         ${t.program ? `<div class="stage-meta"><span><b>방송</b> ${t.date} · ${t.program}</span><span><b>채널</b> ${t.network}</span><span><b>함께 부른 사람</b> ${t.with}</span></div>` : ""}
         ${t.info ? `<div class="track-info">${conciseText(t.info)}</div>` : ""}
-        ${t.lyrics ? `<div class="track-lyrics"><b>가사 이야기</b>${conciseText(t.lyrics)}<span class="lyric-highlight"><em>한줄 하이라이트</em>${lyricHighlightFor(t)}</span></div>` : ""}
+        ${t.lyrics ? `<div class="track-lyrics"><b>가사 이야기</b><span class="lyric-line"><em>내용</em>${conciseText(t.lyrics)}</span><span class="lyric-line highlight"><em>핵심 한줄</em>${lyricHighlightFor(t)}</span><span class="lyric-line"><em>해석 포인트</em>${lyricInsightFor(t)}</span></div>` : ""}
         ${t.review ? `<div class="stage-review"><b>무대 평가 ${t.rating}</b>${conciseText(t.review)}</div>` : ""}
         ${t.source ? `<div class="track-source">출처: ${t.source}</div>` : ""}
       </div>
