@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>熙界无限剧场 — 라운희 콘서트 곡 아카이브 (YouTube)</title>
-<meta name="description" content="라운희(罗云熙) 2024 《此刻 X 以光》과 2026 난징·광저우 콘서트 세트리스트, 확인된 YouTube 영상을 한곳에서 찾아보세요.">
+<title>라운희 무대 아카이브 — 콘서트·TV 라이브 (YouTube)</title>
+<meta name="description" content="라운희(罗云熙)의 2024·2026 콘서트와 최근 1년 TV 라이브 무대, 확인된 YouTube 영상을 한곳에서 찾아보세요.">
 <meta name="theme-color" content="#0E0A16">
 <meta property="og:type" content="website">
 <meta property="og:title" content="熙界无限剧场 — 라운희 콘서트 곡 아카이브">
@@ -133,6 +133,10 @@
     font-size:13.5px; color:var(--mute); line-height:1.6;
   }
   .notice b{ color:var(--gold); font-weight:600; }
+  .stage-meta{ display:flex; flex-wrap:wrap; gap:5px 14px; margin:7px 0 2px; font-size:11.5px; color:var(--mute); }
+  .stage-meta b{ color:var(--purple-glow); font-weight:600; }
+  .stage-review{ margin-top:8px; padding:9px 10px; border-radius:8px; background:rgba(227,182,85,.055); color:var(--mute); font-size:12px; line-height:1.55; }
+  .stage-review b{ color:var(--gold); margin-right:7px; }
 
   .full-concert{
     display:flex; align-items:center; justify-content:space-between; gap:20px;
@@ -252,13 +256,13 @@
 <div class="wrap">
 
   <div class="hero">
-    <div class="eyebrow">Luo Yunxi · 罗云熙 Tour Archive · YouTube ver.</div>
-    <h1><span class="cn">熙界无限剧场</span>라운희 콘서트 곡 아카이브</h1>
-    <p>2024년 <b>《此刻 X 以光》</b>과 2026년 난징·광저우 전체 세트리스트를 유튜브 영상과 함께 정리했습니다.</p>
+    <div class="eyebrow">Luo Yunxi · 罗云熙 Stage Archive · YouTube ver.</div>
+    <h1><span class="cn">熙界无限剧场</span>라운희 무대 아카이브</h1>
+    <p>2024·2026 콘서트 세트리스트와 <b>최근 1년 TV 라이브</b>를 유튜브 영상과 함께 정리했습니다.</p>
 
     <div class="honesty-box">
       <div class="title">⚠ 솔직한 안내</div>
-      2026 난징·광저우의 전체 직캠은 유튜브에서 확인하기 어렵지만, 2024 《此刻 X 以光》은 2시간 20분 전체 공연 영상을 확인했습니다. 곡마다 실제로 검색한 <b style="color:var(--ivory)">라운희 공연·공식 음원/MV·원곡 영상</b>을 연결했어요. 가사는 원문을 옮기지 않고 주제와 서사를 한국어로 요약했으며, 확인 안 된 곡은 링크를 지어내지 않고 "영상 미확인"으로 표시했습니다.
+      2026 난징·광저우의 전체 직캠은 유튜브에서 확인하기 어렵지만, 2024 《此刻 X 以光》은 2시간 20분 전체 공연 영상을 확인했습니다. TV 페이지는 방송사 편성과 공식·확인 가능한 무대를 교차 확인했습니다. 곡마다 실제로 검색한 <b style="color:var(--ivory)">라운희 공연·공식 음원/MV·원곡 영상</b>을 연결했으며, 확인 안 된 곡은 링크를 지어내지 않고 "영상 미확인"으로 표시했습니다.
       <div class="legend">
         <div class="legend-item"><span class="dot found"></span> 실제 유튜브 영상 확인됨 (클릭 시 바로 재생 페이지)</div>
         <div class="legend-item"><span class="dot missing"></span> 유튜브에서 확인 안 됨</div>
@@ -270,6 +274,7 @@
     <button class="tab" role="tab" id="tab-nj" aria-selected="true" aria-controls="panel-nj"><span class="num">01</span>난징 南京站</button>
     <button class="tab" role="tab" id="tab-gz" aria-selected="false" aria-controls="panel-gz" tabindex="-1"><span class="num">02</span>광저우 广州站</button>
     <button class="tab" role="tab" id="tab-x" aria-selected="false" aria-controls="panel-x" tabindex="-1"><span class="num">03</span>이전 콘서트 X</button>
+    <button class="tab" role="tab" id="tab-tv" aria-selected="false" aria-controls="panel-tv" tabindex="-1"><span class="num">04</span>최근 1년 TV 무대</button>
   </div>
 
   <section id="panel-nj" role="tabpanel" aria-labelledby="tab-nj">
@@ -325,10 +330,26 @@
     <div class="tracklist" id="list-gz"></div>
   </section>
 
+  <section id="panel-tv" role="tabpanel" aria-labelledby="tab-tv" hidden>
+    <div class="meta-row">
+      <span><b>2025.08.11–2026.08.11</b> 최근 1년</span>
+      <span><b>8개</b> TV 프로그램·갈라</span>
+      <span><b>10곡</b> 방송 무대</span>
+    </div>
+    <div class="notice">
+      방송사 공식 편성·TV 생방송 무대를 기준으로 정리했습니다. 콘서트·음악제·온라인 전용 행사·출연 예고는 제외했습니다. <b>무대 평가는 아카이브 편집 평가</b>이며, 음색·편곡·협연·무대 연출을 함께 본 주관적 감상입니다.
+    </div>
+    <div class="toolbar">
+      <input type="text" class="search-input" id="search-tv" placeholder="곡명·프로그램·협연자·평가로 검색…" aria-label="최근 1년 TV 무대 검색">
+      <div class="count-pill" id="count-tv"></div>
+    </div>
+    <div class="tracklist" id="list-tv"></div>
+  </section>
+
   <footer>
     <b>보는 법</b> — 제목 옆에는 한자를 한국식으로 읽은 발음을 간단히 표시하고, 그 아래에 중국어 병음과 한글 발음을 따로 적었습니다. 붉은 점이 있는 곡은 실제 유튜브 영상으로 바로 연결되며, 라운희 영상이 아닌 원곡 MV는 출처에 명시했습니다. 회색 점 곡은 유튜브에서 확인되지 않아 링크를 넣지 않았습니다.<br>
     더 찾고 싶다면 라운희 공식 유튜브 뮤직 채널: <a href="https://music.youtube.com/channel/UCaVxiNWhf2qEjlInTdj3lUA" target="_blank" rel="noopener noreferrer">music.youtube.com/@罗云熙</a><br>
-    데이터 출처: 《此刻 X 以光》 전체 공연 영상·공식 라이브 합집, 공식 YouTube/Youku 영상, Apple Music·Shazam 곡 정보, 사용자 제공 광저우 세트리스트 이미지, 현장 보도 종합 · 2026.08.11 보강
+    데이터 출처: 《此刻 X 以光》 전체 공연 영상·공식 라이브 합집, CCTV·湖南卫视·浙江卫视·江苏卫视·四川卫视·Mediacorp 공식 편성 및 YouTube 영상, Apple Music·Shazam 곡 정보, 사용자 제공 광저우 세트리스트 이미지, 현장 보도 종합 · 2026.08.11 보강
   </footer>
 
 </div>
@@ -444,6 +465,19 @@ const X_CONCERT = [
   xSong("星星之火", 21, "Original", {info:"2020년 앨범 《X》의 팬 헌정곡. 첫 단독 콘서트의 마지막을 가수와 팬이 서로의 빛이 되는 장면으로 맺었다.", tag:"피날레", yt:"1SPxfD9Ggzg", source:"《此刻 X 以光》 콘서트 직캠 · 6:18"}),
 ];
 
+const TV_STAGES = [
+  {n:1, date:"2025.12.31", program:"《启航2026—中央广播电视总台跨年晚会》", network:"CCTV 종합 채널", cn:"冬雪至", hanja:"동설지", py:"Dōngxuě Zhì", kr:"둥쉐 즈", mean:"겨울눈이 이르다", info:"새해로 넘어가는 계절을 겨울눈 이미지로 그린 서정적인 솔로 무대. CCTV의 지역 연결형 송년 갈라에서 방송됐다.", lyrics:"차가운 계절 끝에도 사람과 사람의 온기가 남고, 흰 눈 뒤에 올 새로운 시작을 기다리는 마음을 전한다.", role:"TV Solo", with:"단독", rating:"4.0/5", review:"맑고 가벼운 음색이 겨울 풍경과 잘 맞는다. 큰 기교보다 안정적인 호흡과 잔잔한 여운에 강점이 있는 무대.", yt:"mBAf0huiL_8", source:"CCTV 공식 YouTube · 2025.12.31"},
+  {n:2, date:"2025.12.31", program:"《更好2026 江苏卫视跨年演唱会》", network:"江苏卫视", cn:"最后一页", hanja:"최후일엽", py:"Zuìhòu Yī Yè", kr:"쭈이허우 이 예", mean:"마지막 페이지", info:"장위천(江语晨)의 2010년 발라드를 야오샤오탕과 듀엣했다. 끝난 사랑을 책의 마지막 장에 비유하는 곡이다.", lyrics:"관계가 끝났다는 사실을 알면서도 마지막 페이지를 넘기지 못한 채 추억과 미련을 붙드는 마음을 노래한다.", role:"TV Duet", with:"姚晓棠(야오샤오탕)", rating:"4.5/5", review:"라운희의 차분한 중저음과 야오샤오탕의 선명한 고음이 대비되며, 서로 밀어내지 않는 균형 좋은 감성 듀엣.", yt:"E4WC9yPqkvw", source:"江苏卫视 송년 무대 팬클럽 아카이브 · 4:06"},
+  {n:3, date:"2026.01.01", program:"《花开天下·国韵新年演唱会》", network:"四川卫视", cn:"今年勇", hanja:"금년용", py:"Jīnnián Yǒng", kr:"진녠 융", mean:"올해의 용기", info:"쉬쑹(许嵩)의 곡을 새해 응원가로 재해석했다. 고향 쓰촨의 신년 특집에서 무대에 올랐다.", lyrics:"지난해의 망설임을 뒤로하고 새해에는 두려움보다 먼저 움직이자고 자신과 듣는 이를 격려한다.", role:"TV Solo", with:"단독", rating:"4.0/5", review:"밴드 사운드 위에서 밝고 곧은 발성이 살아난다. 새해 특집의 메시지와 곡의 추진력이 자연스럽게 맞물린다.", yt:"C30HJVQ3iUk", source:"四川卫视 신년 무대 아카이브"},
+  {n:4, date:"2026.01.01", program:"《花开天下·国韵新年演唱会》", network:"四川卫视", cn:"一往", hanja:"일왕", py:"Yīwǎng", kr:"이왕", mean:"한결같이, 줄곧", info:"라운희가 작사에 참여한 드라마 《水龙吟》 당려사(唐俪辞) 캐릭터곡. 국풍 중심 신년 갈라에 맞춰 무대화했다.", lyrics:"운명과 오해 속에서도 한 번 정한 길과 마음을 거두지 않는 인물의 고독과 집념을 담는다.", role:"OST / TV Solo", with:"단독", rating:"4.5/5", review:"본인이 만든 인물의 서사를 알고 부르는 장점이 크다. 절제된 표정과 고풍 편곡이 이야기 전달력을 높인다.", yt:"NPqKMzL3hMM", source:"四川卫视 신년 무대·인터뷰 아카이브"},
+  {n:5, date:"2026.02.16", program:"《2026年中央广播电视总台春节联欢晚会》", network:"CCTV-1 · 宜宾 분회장", cn:"立上游", hanja:"입상유", py:"Lì Shàngyóu", kr:"리 샹여우", mean:"상류에 서다", info:"쓰촨 이빈 분회장을 위해 구성된 춘완 합동곡. 창장 상류의 활력과 지역의 새해 풍경을 밝은 군무로 표현했다.", lyrics:"강의 상류에서 출발한 물길처럼 힘차게 앞으로 나아가며, 사람과 도시가 함께 새해를 열자는 메시지를 전한다.", role:"Spring Gala", with:"魏翔·张歆艺·张靓颖·张含韵·谭松韵", rating:"4.0/5", review:"개인 파트는 짧지만 대형 생방송의 군무와 지역색을 안정적으로 소화한다. 개인 보컬보다 축제성과 합동 호흡이 중심.", yt:"N5EbxsGecsI", source:"CCTV春晚 공식 YouTube"},
+  {n:6, date:"2026.03.03", program:"《2026湖南卫视芒果TV元宵喜乐会》", network:"湖南卫视 · 芒果TV", cn:"壁上观", hanja:"벽상관", py:"Bì Shàng Guān", kr:"비 샹관", mean:"벽 위의 그림을 바라보다", info:"이커샤오충(一棵小葱)·장시윈(张曦匀)의 국풍곡을 커버했다. 둔황·영락궁 벽화 이미지를 디지털 무대와 결합했다.", lyrics:"천년 벽화 속 비천과 춤, 사라진 시간의 찬란함을 바라보며 과거와 현재가 맞닿는 순간을 그린다.", role:"TV Solo", with:"단독", rating:"5.0/5", review:"가창·신체선·무대 미술의 결합이 가장 선명한 대표 방송 무대. 유려한 음색과 벽화형 영상 연출이 서로를 강화한다.", yt:"Zx12z6SyNp0", source:"湖南卫视 원소절 무대 직캠 · 2026.03.03"},
+  {n:7, date:"2026.04.19", program:"《红星大奖2026 Star Awards》", network:"싱가포르 Mediacorp Channel 8", cn:"与你", hanja:"여니", py:"Yǔ Nǐ", kr:"위 니", mean:"너와 함께", info:"드라마 《水龙吟》 삽입곡을 싱가포르 TV 시상식의 초청 공연으로 선보였다. 중국 본토 밖 TV 생방송 무대다.", lyrics:"험한 운명 속에서도 한 사람과 같은 길을 선택하고 끝까지 동행하겠다는 믿음을 노래한다.", role:"Awards Solo", with:"단독", rating:"4.5/5", review:"화려한 경쟁형 무대보다 OST의 서사를 정면으로 전달한다. 해외 방송에서도 발음과 감정선이 안정적인 무대.", yt:"gOztOwXvkl0", source:"Star Awards 2026 방송 무대 아카이브"},
+  {n:8, date:"2026.06.13", program:"《国乐无双》第4期", network:"CCTV-6 · 浙江卫视", cn:"天后", hanja:"천후", py:"Tiānhòu", kr:"톈허우", mean:"천후, 최고의 디바", info:"천스안(陈势安)의 대표 발라드를 광둥어와 국악 색채가 더해진 편곡으로 재해석한 첫 음악 예능 솔로 무대다.", lyrics:"상대를 여왕처럼 떠받들다 자신을 잃은 화자가 불균형한 사랑의 상처와 미련을 돌아본다.", role:"Music Show Solo", with:"단독", rating:"4.5/5", review:"섬세한 약성에서 감정을 쌓아 후반으로 밀어 올리는 구성이 좋다. 광둥어 발음과 절제된 비감이 무대의 핵심.", yt:"HYS6AhViG8s", source:"浙江卫视音乐频道 공식 순수 무대 · 4:32"},
+  {n:9, date:"2026.07.03", program:"《天赐的声音》第7季 第4期", network:"浙江卫视", cn:"桃花诺", hanja:"도화낙", py:"Táohuā Nuò", kr:"타오화 눠", mean:"복사꽃의 약속", info:"G.E.M. 덩쯔치의 《上古情歌》 엔딩곡을 황샤오윈과 듀엣했다. 라운희도 해당 드라마에 출연했다.", lyrics:"여러 계절과 생을 건너도 서로를 잊지 않겠다는 운명적인 사랑의 약속을 복사꽃 이미지로 그린다.", role:"Music Show Duet", with:"黄霄雲(황샤오윈)", rating:"5.0/5", review:"라운희의 서사적인 중음과 황샤오윈의 폭발적인 고음이 명확히 역할을 나눈다. 감정 대비와 후반 상승감이 뛰어나다.", yt:"NVbhA9glLi4", source:"《天赐的声音》 공식 순수 무대 · 4:24"},
+  {n:10, date:"2026.07.10", program:"《天赐的声音》第7季 第5期", network:"浙江卫视", cn:"无人之岛", hanja:"무인지도", py:"Wúrén Zhī Dǎo", kr:"우런 즈 다오", mean:"아무도 없는 섬", info:"런란(任然)의 대표곡을 야오샤오탕과 듀엣했다. 가까워질 수 없는 관계를 고립된 섬의 이미지로 확장한 편곡이다.", lyrics:"서로를 바라보지만 닿지 못하는 두 사람이 각자의 외딴섬에 남은 듯한 거리와 미련을 노래한다.", role:"Music Show Duet", with:"姚晓棠(야오샤오탕)", rating:"5.0/5", review:"두 음색이 공기처럼 겹치며 곡의 공허함을 살린다. 섬세한 약음, 화음의 투명도, 감정의 점층이 고르게 완성됐다.", yt:"O4B9YOoY158", source:"《天赐的声音》 공식 순수 무대 · 4:54"},
+];
+
 function ytWatchURL(id){ return "https://www.youtube.com/watch?v=" + id; }
 function ytThumbURL(id){ return "https://img.youtube.com/vi/" + id + "/hqdefault.jpg"; }
 function ytChannelURL(){ return "https://music.youtube.com/channel/UCaVxiNWhf2qEjlInTdj3lUA"; }
@@ -490,8 +524,10 @@ function renderList(container, data){
           <span class="track-kr">· 중국어 발음 ${t.kr}</span>
         </div>
         <div class="track-meaning">뜻 · ${t.mean}</div>
+        ${t.program ? `<div class="stage-meta"><span><b>방송</b> ${t.date} · ${t.program}</span><span><b>채널</b> ${t.network}</span><span><b>함께 부른 사람</b> ${t.with}</span></div>` : ""}
         ${t.info ? `<div class="track-info">${t.info}</div>` : ""}
         ${t.lyrics ? `<div class="track-lyrics"><b>가사 이야기</b>${t.lyrics}</div>` : ""}
+        ${t.review ? `<div class="stage-review"><b>무대 평가 ${t.rating}</b>${t.review}</div>` : ""}
         ${t.source ? `<div class="track-source">출처: ${t.source}</div>` : ""}
       </div>
       <div class="track-listen">${listenHTML}</div>
@@ -509,7 +545,9 @@ function setupSearch(inputId, countId, data, listEl){
       t.cn.toLowerCase().includes(q) || t.kr.toLowerCase().includes(q) ||
       t.py.toLowerCase().includes(q) || t.hanja.toLowerCase().includes(q) ||
       t.mean.toLowerCase().includes(q) || (t.info || "").toLowerCase().includes(q) ||
-      (t.lyrics || "").toLowerCase().includes(q)
+      (t.lyrics || "").toLowerCase().includes(q) ||
+      (t.program || "").toLowerCase().includes(q) || (t.network || "").toLowerCase().includes(q) ||
+      (t.with || "").toLowerCase().includes(q) || (t.review || "").toLowerCase().includes(q)
     ) : data;
     renderList(listEl, filtered);
     const withVideo = filtered.filter(t => t.yt).length;
@@ -522,6 +560,7 @@ function setupSearch(inputId, countId, data, listEl){
 setupSearch("search-nj", "count-nj", NANJING, document.getElementById("list-nj"));
 setupSearch("search-gz", "count-gz", GUANGZHOU, document.getElementById("list-gz"));
 setupSearch("search-x", "count-x", X_CONCERT, document.getElementById("list-x"));
+setupSearch("search-tv", "count-tv", TV_STAGES, document.getElementById("list-tv"));
 
 const tabs = [...document.querySelectorAll('[role="tab"]')];
 function selectTab(selected){
