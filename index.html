@@ -31,9 +31,13 @@
   *{box-sizing:border-box;}
   img, svg{ max-width:100%; }
   section, article, button, input{ min-width:0; }
-  html{scroll-behavior:smooth; width:100%; max-width:100%; overflow-x:hidden; overflow-x:clip;}
+  html{
+    scroll-behavior:smooth; width:100%; max-width:100%; overflow-x:hidden; overflow-x:clip;
+    -webkit-text-size-adjust:100%; text-size-adjust:100%; overscroll-behavior-x:none;
+  }
   body{
     margin:0; width:100%; max-width:100%; min-height:100svh; overflow-x:hidden; overflow-x:clip;
+    overscroll-behavior-x:none; touch-action:pan-y;
     background:
       radial-gradient(ellipse 900px 500px at 15% -10%, rgba(139,111,217,0.25), transparent 60%),
       radial-gradient(ellipse 700px 500px at 100% 10%, rgba(227,182,85,0.08), transparent 55%),
@@ -59,10 +63,10 @@
   }
   @media (max-width: 720px){ .filmstrip{ display:none; } }
 
-  .wrap{ width:100%; max-width:980px; margin:0 auto; padding:64px 28px 120px; }
+  .wrap{ width:100%; max-width:980px; margin:0 auto; padding:64px 28px 120px; overflow:hidden; }
   @media (min-width: 721px){ .wrap{ padding-left: 62px; } }
 
-  .hero{ margin-bottom:44px; }
+  .hero{ width:100%; max-width:100%; min-width:0; margin-bottom:44px; }
   .eyebrow{
     font-family:'JetBrains Mono', monospace; font-size:12px; letter-spacing:0.22em;
     color:var(--gold); text-transform:uppercase; margin-bottom:18px;
@@ -78,15 +82,17 @@
   .hero p b{ color:var(--ivory); font-weight:600; }
 
   .artist-feature{
-    margin-top:30px; overflow:hidden; border-radius:20px;
+    width:100%; max-width:100%; min-width:0; margin-top:30px; overflow:hidden; contain:inline-size; border-radius:20px;
     background:linear-gradient(145deg, rgba(27,20,40,.98), rgba(16,11,25,.98));
     border:1px solid rgba(183,156,255,.2); box-shadow:0 28px 70px rgba(0,0,0,.28);
   }
   .artist-story{
-    display:grid; grid-template-columns:180px minmax(0,1fr) minmax(250px,.82fr);
+    width:100%; max-width:100%; min-width:0; display:grid; grid-template-columns:180px minmax(0,1fr) minmax(250px,.82fr);
     gap:24px; align-items:start; padding:27px 28px 24px;
   }
-  .artist-copy, .concert-chapters, .chapter, .archive-key, .legend{ min-width:0; max-width:100%; }
+  .artist-copy, .concert-chapters, .chapter, .archive-key, .legend{
+    width:100%; min-width:0; max-width:100%; overflow-wrap:anywhere;
+  }
   .concert-thumb{
     margin:0; overflow:hidden; border-radius:14px;
     background:#171020; border:1px solid rgba(183,156,255,.24);
@@ -145,7 +151,7 @@
   }
 
   .tabs{
-    display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:4px;
+    width:100%; max-width:100%; min-width:0; display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:4px;
     margin:44px 0 6px; border-bottom:1px solid var(--line);
   }
   .tab{
@@ -168,6 +174,8 @@
   }
   .tab[aria-selected="true"]::after{ transform:scaleX(1); }
   .tab:focus-visible{ outline:2px solid var(--purple-glow); outline-offset:4px; }
+
+  [role="tabpanel"], footer{ width:100%; max-width:100%; min-width:0; }
 
   @media (max-width:620px){
     .tabs{ gap:1px; margin-top:34px; }
