@@ -574,6 +574,7 @@ function setupSearch(inputId, countId, data, listEl){
       t.py.toLowerCase().includes(q) || t.hanja.toLowerCase().includes(q) ||
       t.mean.toLowerCase().includes(q) || (t.info || "").toLowerCase().includes(q) ||
       (t.lyrics || "").toLowerCase().includes(q) ||
+      (t.date || "").toLowerCase().includes(q) ||
       (t.program || "").toLowerCase().includes(q) || (t.network || "").toLowerCase().includes(q) ||
       (t.with || "").toLowerCase().includes(q) || (t.review || "").toLowerCase().includes(q)
     ) : data;
