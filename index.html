@@ -343,7 +343,8 @@
     <button class="tab" role="tab" id="tab-nj" aria-selected="true" aria-controls="panel-nj"><span class="num">01 · 2026.07.25</span>난징 南京站</button>
     <button class="tab" role="tab" id="tab-gz" aria-selected="false" aria-controls="panel-gz" tabindex="-1"><span class="num">02 · 2026.08.08</span>광저우 广州站</button>
     <button class="tab" role="tab" id="tab-x" aria-selected="false" aria-controls="panel-x" tabindex="-1"><span class="num">03 · 2024.06.01</span>라운희 [此刻X以光] 첫 솔로 콘서트</button>
-    <button class="tab" role="tab" id="tab-tv" aria-selected="false" aria-controls="panel-tv" tabindex="-1"><span class="num">04</span>2019년 이후 TV 무대</button>
+    <button class="tab" role="tab" id="tab-festival" aria-selected="false" aria-controls="panel-festival" tabindex="-1"><span class="num">04 · 2024.09.21</span>후루궈 음악제 葫芦果音乐节</button>
+    <button class="tab" role="tab" id="tab-tv" aria-selected="false" aria-controls="panel-tv" tabindex="-1"><span class="num">05</span>2019년 이후 TV 무대</button>
   </div>
 
   <section id="panel-nj" role="tabpanel" aria-labelledby="tab-nj">
@@ -402,6 +403,31 @@
     <div class="tracklist" id="list-gz"></div>
   </section>
 
+  <section id="panel-festival" role="tabpanel" aria-labelledby="tab-festival" hidden>
+    <h2 class="concert-heading"><span class="date">2024.09.21</span>라운희 · 2024 마안산 후루궈 음악제</h2>
+    <div class="meta-row">
+      <span><b>2024.09.21</b> 2024葫芦果音乐节·马鞍山站</span>
+      <span><b>장소</b> 长江采石矶文化生态旅游区·芳草地</span>
+      <span><b>6곡</b> 라운희 음악제 첫 무대</span>
+    </div>
+    <div class="notice">
+      후루궈 음악제는 2024년 9월 21–22일 안후이성 마안산의 장강변에서 열린 대형 야외 음악제입니다. 라운희는 <b>9월 21일 라인업</b>으로 출연해 자신의 곡 2곡과 발라드 커버 4곡을 불렀습니다. 아래 순서는 제공해 주신 전체 직캠의 영상 설명을 기준으로 정리했습니다.
+    </div>
+    <a class="full-concert" href="https://www.youtube.com/watch?v=K7HzmauZJjw" target="_blank" rel="noopener noreferrer">
+      <span class="full-copy">
+        <span class="full-kicker">FULL FESTIVAL STAGE · YOUTUBE</span>
+        <span class="full-title">罗云熙 · 马鞍山葫芦果音乐节 전체 직캠</span>
+        <span class="full-meta">2024.09.21 · 6곡 연속 무대 · 罗云熙海外粉丝俱乐部</span>
+      </span>
+      <span class="full-play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></span>
+    </a>
+    <div class="toolbar">
+      <input type="text" class="search-input" id="search-festival" placeholder="곡명·발음·원곡 가수로 검색…" aria-label="후루궈 음악제 세트리스트 검색">
+      <div class="count-pill" id="count-festival"></div>
+    </div>
+    <div class="tracklist" id="list-festival"></div>
+  </section>
+
   <section id="panel-tv" role="tabpanel" aria-labelledby="tab-tv" hidden>
     <div class="meta-row">
       <span><b>2019.02.19–2026.07.10</b> 최신순</span>
@@ -421,7 +447,7 @@
   <footer>
     <b>보는 법</b> — 제목 옆에는 한자를 한국식으로 읽은 발음을 간단히 표시하고, 그 아래에 중국어 병음과 한글 발음을 따로 적었습니다. 붉은 점이 있는 곡은 실제 유튜브 영상으로 바로 연결되며, 라운희 영상이 아닌 원곡 MV는 출처에 명시했습니다. 회색 점 곡은 유튜브에서 확인되지 않아 링크를 넣지 않았습니다.<br>
     더 찾고 싶다면 라운희 공식 유튜브 뮤직 채널: <a href="https://music.youtube.com/channel/UCaVxiNWhf2qEjlInTdj3lUA" target="_blank" rel="noopener noreferrer">music.youtube.com/@罗云熙</a><br>
-    데이터 출처: 《此刻 X 以光》 전체 공연 영상·공식 라이브 합집, CCTV·湖南卫视·浙江卫视·江苏卫视·四川卫视·Mediacorp 공식 편성 및 YouTube 영상, Apple Music·Shazam 곡 정보, 사용자 제공 광저우 세트리스트 이미지, 현장 보도 종합 · 2026.08.11 보강
+    데이터 출처: 《此刻 X 以光》 전체 공연 영상·공식 라이브 합집, 2024葫芦果音乐节 공식 행사 정보·전체 직캠, CCTV·湖南卫视·浙江卫视·江苏卫视·四川卫视·Mediacorp 공식 편성 및 YouTube 영상, Apple Music·Shazam 곡 정보, 사용자 제공 광저우 세트리스트 이미지, 현장 보도 종합 · 2026.08.11 보강
   </footer>
 
 </div>
@@ -535,6 +561,16 @@ const X_CONCERT = [
   xSong("钢铁人", 19, "Original", {yt:"9j_xCAcj438", source:"《此刻 X 以光》 콘서트 직캠 · 4:21"}),
   xSong("等风停", 20, "Original", {yt:"4OaMpOoVcnA", source:"@irene79709 《此刻 X 以光》 콘서트 무대 · 4:12"}),
   xSong("星星之火", 21, "Original", {info:"2020년 앨범 《X》의 팬 헌정곡. 첫 단독 콘서트의 마지막을 가수와 팬이 서로의 빛이 되는 장면으로 맺었다.", tag:"피날레", yt:"1SPxfD9Ggzg", source:"《此刻 X 以光》 콘서트 직캠 · 6:18"}),
+];
+
+// 2024.09.21 马鞍山 2024葫芦果音乐节 — order from the supplied full-stage video's description.
+const MAANSHAN_FESTIVAL = [
+  {n:1, cn:"站在永恒里的人", hanja:"참재영항리적인", py:"Zhàn zài Yǒnghéng lǐ de Rén", kr:"잔 짜이 융헝 리 더 런", mean:"영원 속에 서 있는 사람", info:"라운희가 2020년 발표한 앨범 《X》 수록곡. 음악제 첫 무대의 문을 연 자전적인 만도팝 곡이다.", lyrics:"빠르게 변하는 세상에서도 어린 시절의 순수함과 변하지 않는 자신을 지키며, 스스로 삶의 답을 찾겠다고 노래한다.", role:"Original · Festival", yt:"K7HzmauZJjw", source:"마안산 후루궈 음악제 전체 직캠 · 1번 곡"},
+  {n:2, cn:"失去就是这样么", hanja:"실거취시저양마", py:"Shīqù Jiù Shì Zhèyàng Me", kr:"스취 지우 스 저양 머", mean:"잃는다는 건 이런 걸까", info:"위커웨이(郁可唯)가 부른 영화 《李茂扮太子》 삽입곡을 커버했다. 리충 작사, 첸레이 작곡의 2022년 발라드다.", lyrics:"제대로 작별하지 못한 사람을 떠나보낸 뒤, 사라지지 않는 포옹의 기억과 뒤늦은 상처를 질문하듯 되짚는다.", role:"Cover · 郁可唯", yt:"K7HzmauZJjw", source:"마안산 후루궈 음악제 전체 직캠 · 2번 곡"},
+  {n:3, cn:"会呼吸的痛", hanja:"회호흡적통", py:"Huì Hūxī de Tòng", kr:"후이 후시 더 퉁", mean:"숨 쉴 때마다 느껴지는 아픔", info:"량징루(梁静茹)의 2007년 대표 발라드. 라운희가 여러 라이브 무대에서 선보인 감성 커버곡이다.", lyrics:"떠난 사람을 잊으려 해도 숨 쉬는 순간마다 기억이 되살아나고, 곁에 있을 때 잘하지 못한 일을 후회한다.", role:"Cover · 梁静茹", yt:"K7HzmauZJjw", source:"마안산 후루궈 음악제 전체 직캠 · 3번 곡"},
+  {n:4, cn:"挚友", hanja:"지우", py:"Zhìyǒu", kr:"즈여우", mean:"마음을 다하는 벗", info:"A-Lin의 발라드를 커버했다. 연인과 친구 사이에 머문 관계의 복잡한 감정을 섬세하게 다룬 곡이다.", lyrics:"가장 가까운 친구라는 이름 뒤에 사랑을 감춘 채, 곁에 머물 수 있지만 마음을 온전히 말할 수 없는 아픔을 노래한다.", role:"Cover · A-Lin", yt:"K7HzmauZJjw", source:"마안산 후루궈 음악제 전체 직캠 · 4번 곡"},
+  {n:5, cn:"三生三世", hanja:"삼생삼세", py:"Sān Shēng Sān Shì", kr:"싼 셩 싼 스", mean:"세 번의 삶, 세 번의 세상", info:"장제(张杰)가 부른 드라마 《三生三世十里桃花》 주제곡을 커버했다. 웅장한 국풍 록 발라드다.", lyrics:"여러 생과 세상을 건너는 긴 시간에도 한 사람을 향한 사랑과 약속을 놓지 않겠다는 운명적인 마음을 담는다.", role:"OST Cover · 张杰", yt:"K7HzmauZJjw", source:"마안산 후루궈 음악제 전체 직캠 · 5번 곡"},
+  {n:6, cn:"不渝梦", hanja:"불투몽", py:"Bùyú Mèng", kr:"뿌위 멍", mean:"변치 않는 꿈", info:"라운희가 2024년 발표한 솔로 싱글. 평범함 속에서도 꿈을 포기하지 않는 사람들에게 보내는 응원가다.", lyrics:"시간과 환경이 달라져도 처음 품은 꿈은 평범하지 않으며, 흔들리더라도 자기 빛을 따라 계속 나아가자고 말한다.", role:"Original · Festival", yt:"K7HzmauZJjw", source:"마안산 후루궈 음악제 전체 직캠 · 6번 곡"}
 ];
 
 const TV_STAGES = [
@@ -684,6 +720,7 @@ function setupSearch(inputId, countId, data, listEl){
 setupSearch("search-nj", "count-nj", NANJING, document.getElementById("list-nj"));
 setupSearch("search-gz", "count-gz", GUANGZHOU, document.getElementById("list-gz"));
 setupSearch("search-x", "count-x", X_CONCERT, document.getElementById("list-x"));
+setupSearch("search-festival", "count-festival", MAANSHAN_FESTIVAL, document.getElementById("list-festival"));
 setupSearch("search-tv", "count-tv", TV_STAGES, document.getElementById("list-tv"));
 
 const tabs = [...document.querySelectorAll('[role="tab"]')];
