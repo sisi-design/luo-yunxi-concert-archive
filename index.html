@@ -124,6 +124,7 @@
   .legend-item{ display:flex; align-items:center; gap:7px; color:var(--mute); }
   .dot{ width:8px; height:8px; border-radius:50%; flex-shrink:0; }
   .dot.found{ background:var(--red-glow); box-shadow:0 0 8px var(--red-glow); }
+  .dot.clean{ background:var(--purple-glow); box-shadow:0 0 8px var(--purple-glow); }
   .dot.missing{ background:var(--mute-2); }
 
   @media (max-width:720px){
@@ -208,15 +209,15 @@
     transition: background 0.16s ease, border-color 0.16s ease, transform 0.16s ease;
     text-decoration:none;
   }
-  a.track{ cursor:pointer; }
-  a.track:hover, a.track:focus-visible{ background:var(--panel); border-color:var(--line); transform:translateX(2px); }
-  a.track:focus-visible{ outline:2px solid var(--purple-glow); outline-offset:2px; }
+  .track:hover{ background:var(--panel); border-color:var(--line); transform:translateX(2px); }
   .track + .track{ border-top:1px solid var(--line); }
 
   .thumb{
-    width:64px; height:44px; border-radius:8px; overflow:hidden; position:relative;
+    display:block; width:64px; height:44px; border-radius:8px; overflow:hidden; position:relative;
     background:var(--panel); flex-shrink:0; border:1px solid var(--line);
   }
+  a.thumb:focus-visible{ outline:2px solid var(--purple-glow); outline-offset:3px; }
+  a.thumb:hover .play-badge{ background:rgba(196,52,74,.58); }
   .thumb img{ width:100%; height:100%; object-fit:cover; display:block; }
   .thumb .play-badge{
     position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
@@ -259,18 +260,28 @@
   }
   .badge.gold{ border-color:var(--gold); color:var(--gold); }
 
-  .track-listen{ display:flex; flex-direction:column; align-items:flex-end; gap:4px; flex-shrink:0; }
+  .track-listen{ display:flex; flex-direction:column; align-items:stretch; gap:7px; flex-shrink:0; min-width:142px; }
   .listen-label{
-    font-family:'JetBrains Mono', monospace; font-size:10.5px; color:var(--red-glow);
-    display:flex; align-items:center; gap:5px; white-space:nowrap;
+    font-family:'JetBrains Mono', monospace; font-size:10.5px; font-weight:600;
+    display:flex; align-items:center; justify-content:center; gap:6px; white-space:nowrap;
+    min-height:31px; padding:6px 10px; border-radius:8px; text-decoration:none;
+    transition:transform .15s ease, background .15s ease, border-color .15s ease;
   }
   .listen-label svg{ width:12px; height:12px; }
-  .listen-label.missing{ color:var(--mute-2); }
+  .listen-label.primary{ color:var(--red-glow); border:1px solid rgba(255,109,126,.3); background:rgba(196,52,74,.08); }
+  .listen-label.cleaner{ color:var(--purple-glow); border:1px solid rgba(183,156,255,.36); background:rgba(139,111,217,.12); }
+  .listen-label:hover{ transform:translateY(-1px); }
+  .listen-label.primary:hover{ background:rgba(196,52,74,.17); border-color:rgba(255,109,126,.55); }
+  .listen-label.cleaner:hover{ background:rgba(139,111,217,.22); border-color:rgba(183,156,255,.62); }
+  .listen-label:focus-visible{ outline:2px solid var(--ivory); outline-offset:2px; }
+  .listen-label.missing{ color:var(--mute-2); justify-content:flex-end; padding:0; min-height:0; }
+  .quality-note{ color:var(--mute-2); font-size:9.5px; line-height:1.35; text-align:center; max-width:170px; }
 
   @media (max-width: 620px){
     .track{ grid-template-columns: 52px 1fr; }
-    .track-listen{ grid-column: 2 / 3; align-items:flex-start; margin-top:6px; }
+    .track-listen{ grid-column: 2 / 3; align-items:stretch; margin-top:6px; width:min(100%,220px); }
     .thumb{ width:52px; height:36px; }
+    .listen-label.missing{ justify-content:flex-start; }
   }
 
   .empty-state{ padding:40px 10px; text-align:center; color:var(--mute-2); font-size:14px; }
@@ -321,6 +332,7 @@
         <b>VIDEO GUIDE</b>
         <div class="legend">
           <div class="legend-item"><span class="dot found"></span> YouTube 영상 연결</div>
+          <div class="legend-item"><span class="dot clean"></span> 방송·공식 음향 안정 영상</div>
           <div class="legend-item"><span class="dot missing"></span> 영상 미확인</div>
         </div>
       </div>
@@ -558,6 +570,36 @@ const TV_STAGES = [
 
 TV_STAGES.forEach((stage, index) => { stage.n = index + 1; });
 
+/* 현장 직캠과 함께 볼 수 있는 방송사 무대·공식 MV·공식 음원 영상.
+   같은 영상 ID가 기본 링크로 쓰인 카드에서는 중복 버튼을 표시하지 않는다. */
+const CLEANER_VIDEOS = {
+  "逆流而上": {yt:"NK6GCEH388I", type:"공식 MV", source:"罗云熙 공식 MV"},
+  "旅人": {yt:"-APALXidIFI", type:"방송 무대", source:"《熠熠生辉闪耀之夜》"},
+  "与你": {yt:"gOztOwXvkl0", type:"방송 무대", source:"Star Awards 2026"},
+  "一往": {yt:"NPqKMzL3hMM", type:"방송 무대", source:"四川卫视 신년 무대"},
+  "等风停": {yt:"Rps-w_9i5Wc", type:"공식 MV", source:"罗云熙工作室 공개 MV"},
+  "一霎": {yt:"naTD3WdQlrU", type:"방송사 HD", source:"浙江卫视 《百度潮盛典》"},
+  "桃花诺": {yt:"HhzNARutnbM", type:"방송사 HD", source:"北京卫视 《美好奇妙夜》"},
+  "要不然我们就这样一万年": {yt:"Vnn0qT-vvOQ", type:"공식 OST", source:"YOUKU 공식 OST"},
+  "星星之火": {yt:"MHdNr3VdV3M", type:"공식 음원", source:"罗云熙 공식 음원 채널"},
+  "今年勇": {yt:"C30HJVQ3iUk", type:"방송 무대", source:"四川卫视 신년 무대"},
+  "天后": {yt:"HYS6AhViG8s", type:"방송사 HD", source:"浙江卫视音乐频道"}
+};
+
+function cleanerVideoFor(track){
+  const video = CLEANER_VIDEOS[track.cn];
+  return video && video.yt !== track.yt ? video : null;
+}
+
+function primaryVideoLabel(track){
+  const source = track.source || "";
+  if(/콘서트|직캠|공연/.test(source)) return "콘서트·현장 영상";
+  if(track.program || /卫视|CCTV|방송/.test(source)) return "방송 영상";
+  if(/MV/.test(source)) return "공식 MV";
+  if(/OST/.test(source)) return "공식 OST";
+  return "기본 YouTube 영상";
+}
+
 function ytWatchURL(id){ return "https://www.youtube.com/watch?v=" + id; }
 function ytThumbURL(id){ return "https://img.youtube.com/vi/" + id + "/hqdefault.jpg"; }
 function ytChannelURL(){ return "https://music.youtube.com/channel/UCaVxiNWhf2qEjlInTdj3lUA"; }
@@ -570,21 +612,21 @@ function renderList(container, data){
   }
   data.forEach(t => {
     const hasVideo = !!t.yt;
-    const el = document.createElement(hasVideo ? "a" : "div");
+    const cleanerVideo = cleanerVideoFor(t);
+    const el = document.createElement("article");
     el.className = "track";
-    if(hasVideo){
-      el.href = ytWatchURL(t.yt);
-      el.target = "_blank";
-      el.rel = "noopener noreferrer";
-    }
 
     const thumbHTML = hasVideo
-      ? `<div class="thumb"><img src="${ytThumbURL(t.yt)}" alt="" loading="lazy"><div class="play-badge"><svg viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></div></div>`
+      ? `<a class="thumb" href="${ytWatchURL(t.yt)}" target="_blank" rel="noopener noreferrer" aria-label="${t.cn} 기본 영상 재생"><img src="${ytThumbURL(t.yt)}" alt="" loading="lazy"><div class="play-badge"><svg viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></div></a>`
       : `<div class="thumb no-video"><div class="track-num">${String(t.n).padStart(2,"0")}</div></div>`;
 
     const listenHTML = hasVideo
-      ? `<span class="listen-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 5v14l11-7z"/></svg>YouTube 재생</span>`
+      ? `<a class="listen-label primary" href="${ytWatchURL(t.yt)}" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 5v14l11-7z"/></svg>${primaryVideoLabel(t)}</a>`
       : `<span class="listen-label missing">영상 미확인</span>`;
+
+    const cleanerHTML = cleanerVideo
+      ? `<a class="listen-label cleaner" href="${ytWatchURL(cleanerVideo.yt)}" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 5v14l11-7z"/></svg>방송·공식 영상</a><span class="quality-note">음향 안정 추천 · ${cleanerVideo.type}<br>${cleanerVideo.source}</span>`
+      : "";
 
     el.innerHTML = `
       ${thumbHTML}
@@ -610,7 +652,7 @@ function renderList(container, data){
         ${t.review ? `<div class="stage-review"><b>무대 평가 ${t.rating}</b>${t.review}</div>` : ""}
         ${t.source ? `<div class="track-source">출처: ${t.source}</div>` : ""}
       </div>
-      <div class="track-listen">${listenHTML}</div>
+      <div class="track-listen">${listenHTML}${cleanerHTML}</div>
     `;
     container.appendChild(el);
   });
@@ -631,8 +673,9 @@ function setupSearch(inputId, countId, data, listEl){
       (t.with || "").toLowerCase().includes(q) || (t.review || "").toLowerCase().includes(q)
     ) : data;
     renderList(listEl, filtered);
-    const withVideo = filtered.filter(t => t.yt).length;
-    count.textContent = `${filtered.length}곡 (영상 확인 ${withVideo}개)`;
+    const withVideo = filtered.filter(t => t.yt || cleanerVideoFor(t)).length;
+    const withCleaner = filtered.filter(t => cleanerVideoFor(t)).length;
+    count.textContent = `${filtered.length}곡 (영상 확인 ${withVideo}개${withCleaner ? ` · 음향 안정 ${withCleaner}개` : ""})`;
   }
   input.addEventListener("input", update);
   update();
