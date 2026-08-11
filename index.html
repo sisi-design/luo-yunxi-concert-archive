@@ -75,34 +75,65 @@
   .hero p{ color:var(--mute); font-size:16px; line-height:1.7; max-width:600px; margin:0; }
   .hero p b{ color:var(--ivory); font-weight:600; }
 
-  /* honesty banner */
-  .honesty-box{
-    margin-top:26px;
-    padding:18px 20px;
-    border-radius:12px;
-    background: linear-gradient(135deg, rgba(139,111,217,0.12), rgba(227,182,85,0.06));
-    border:1px solid var(--line);
-    font-size:13.5px;
-    line-height:1.75;
-    color:var(--mute);
+  .artist-feature{
+    margin-top:30px; overflow:hidden; border-radius:20px;
+    background:linear-gradient(145deg, rgba(27,20,40,.98), rgba(16,11,25,.98));
+    border:1px solid rgba(183,156,255,.2); box-shadow:0 28px 70px rgba(0,0,0,.28);
   }
-  .honesty-box .title{
-    display:flex; align-items:center; gap:8px;
-    color:var(--gold);
-    font-family:'JetBrains Mono', monospace;
-    font-size:11.5px;
-    letter-spacing:0.06em;
-    text-transform:uppercase;
-    margin-bottom:8px;
+  .concert-poster{ position:relative; margin:0; aspect-ratio:16/9; overflow:hidden; background:#dbefff; }
+  .concert-poster img{ width:100%; height:100%; display:block; object-fit:cover; }
+  .concert-poster::after{
+    content:''; position:absolute; inset:0;
+    background:linear-gradient(180deg, transparent 48%, rgba(10,7,17,.8) 100%);
+    pointer-events:none;
   }
+  .poster-caption{
+    position:absolute; z-index:1; left:22px; right:22px; bottom:18px;
+    display:flex; align-items:end; justify-content:space-between; gap:16px;
+    color:#fff; text-shadow:0 2px 16px rgba(0,0,0,.5);
+  }
+  .poster-caption span{ display:block; }
+  .poster-kicker{ font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.15em; color:#d7efff; }
+  .poster-title{ margin-top:4px; font-family:'Noto Serif KR',serif; font-size:clamp(18px,3vw,27px); font-weight:600; }
+  .poster-date{ font-family:'JetBrains Mono',monospace; font-size:11px; color:#eef9ff; white-space:nowrap; }
+  .artist-story{ display:grid; grid-template-columns:1.08fr .92fr; gap:30px; padding:27px 28px 24px; }
+  .story-kicker{ font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.14em; color:var(--gold); }
+  .artist-story h2{ margin:8px 0 11px; font-family:'Noto Serif KR',serif; font-size:clamp(21px,3vw,29px); line-height:1.35; }
+  .artist-story p{ max-width:none; color:var(--mute); font-size:13.5px; line-height:1.75; }
+  .artist-facts{ display:flex; flex-wrap:wrap; gap:7px; margin-top:17px; }
+  .artist-facts span{
+    padding:6px 9px; border-radius:999px; border:1px solid rgba(183,156,255,.2);
+    background:rgba(139,111,217,.08); color:var(--purple-glow); font-size:11px;
+  }
+  .concert-chapters{ display:grid; gap:10px; align-content:start; }
+  .chapter{
+    position:relative; padding:14px 15px 14px 45px; border-radius:12px;
+    background:rgba(255,255,255,.025); border:1px solid var(--line);
+  }
+  .chapter-num{ position:absolute; left:14px; top:15px; font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--gold); }
+  .chapter b{ display:block; margin-bottom:4px; font-family:'Noto Serif KR',serif; font-size:14px; color:var(--ivory); }
+  .chapter span{ display:block; color:var(--mute); font-size:11.5px; line-height:1.55; }
+  .archive-key{
+    display:flex; align-items:center; gap:14px; flex-wrap:wrap; padding:13px 28px 15px;
+    border-top:1px solid var(--line); color:var(--mute-2); font-size:11px;
+  }
+  .archive-key > b{ color:var(--mute); font-family:'JetBrains Mono',monospace; font-size:9.5px; letter-spacing:.12em; }
   .legend{
-    display:flex; gap:18px; flex-wrap:wrap; margin-top:12px;
-    font-size:12px;
+    display:flex; gap:16px; flex-wrap:wrap; margin:0; font-size:11px;
   }
   .legend-item{ display:flex; align-items:center; gap:7px; color:var(--mute); }
   .dot{ width:8px; height:8px; border-radius:50%; flex-shrink:0; }
   .dot.found{ background:var(--red-glow); box-shadow:0 0 8px var(--red-glow); }
   .dot.missing{ background:var(--mute-2); }
+
+  @media (max-width:720px){
+    .artist-story{ grid-template-columns:1fr; gap:22px; padding:22px 20px 20px; }
+    .concert-poster{ aspect-ratio:4/3; }
+    .concert-poster img{ object-position:43% center; }
+    .poster-caption{ left:16px; right:16px; bottom:13px; }
+    .poster-date{ display:none !important; }
+    .archive-key{ padding:12px 20px 14px; }
+  }
 
   .tabs{ display:flex; gap:6px; margin:44px 0 6px; border-bottom:1px solid var(--line); overflow-x:auto; scrollbar-width:none; }
   .tabs::-webkit-scrollbar{ display:none; }
@@ -265,14 +296,35 @@
     <h1><span class="cn">熙界无限剧场</span>라운희 무대 아카이브</h1>
     <p>2024·2026 콘서트 세트리스트와 <b>2019년 이후 TV 라이브</b>를 유튜브 영상과 함께 정리했습니다.</p>
 
-    <div class="honesty-box">
-      <div class="title">⚠ 솔직한 안내</div>
-      2026 난징·광저우의 전체 직캠은 유튜브에서 확인하기 어렵지만, 2024 《此刻 X 以光》은 2시간 20분 전체 공연 영상을 확인했습니다. TV 페이지는 방송사 편성과 공식·확인 가능한 무대를 교차 확인했습니다. 곡마다 실제로 검색한 <b style="color:var(--ivory)">라운희 공연·공식 음원/MV·원곡 영상</b>을 연결했으며, 확인 안 된 곡은 링크를 지어내지 않고 "영상 미확인"으로 표시했습니다.
-      <div class="legend">
-        <div class="legend-item"><span class="dot found"></span> 실제 유튜브 영상 확인됨 (클릭 시 바로 재생 페이지)</div>
-        <div class="legend-item"><span class="dot missing"></span> 유튜브에서 확인 안 됨</div>
+    <section class="artist-feature" aria-labelledby="artist-story-title">
+      <figure class="concert-poster">
+        <img src="assets/cike-poster-2024.jpg" alt="라운희 2024 첫 솔로 콘서트 此刻 X 以光 대표 포스터" fetchpriority="high">
+        <figcaption class="poster-caption">
+          <span><span class="poster-kicker">LUO YUNXI · FIRST SOLO CONCERT</span><span class="poster-title">《此刻 X 以光》 — 빛을 따라 무대로</span></span>
+          <span class="poster-date">2024.06.01 · CHENGDU</span>
+        </figcaption>
+      </figure>
+      <div class="artist-story">
+        <div class="artist-copy">
+          <span class="story-kicker">ARTIST · ACTOR · SINGER · DANCER</span>
+          <h2 id="artist-story-title">배우의 서사를, 음악의 무대로</h2>
+          <p>라운희(罗云熙)는 배우이자 가수이며, 11년간 쌓은 발레 훈련을 바탕으로 노래·춤·연기를 하나의 장면처럼 엮어내는 무대가 인상적인 아티스트입니다. OST의 인물 서사부터 직접 발표한 앨범과 싱글까지, 섬세한 음색과 선명한 움직임으로 자신만의 공연 세계를 확장하고 있습니다.</p>
+          <div class="artist-facts"><span>11년 발레 수련</span><span>배우·가수·무용가</span><span>2018 《12人生》</span><span>2024 첫 솔로 콘서트</span></div>
+        </div>
+        <div class="concert-chapters" aria-label="라운희 콘서트 이야기">
+          <div class="chapter"><span class="chapter-num">01</span><b>此刻 X 以光 · 2024</b><span>고향 청두에서 연 첫 단독 콘서트. ‘빛을 좇아, 빛이 되는 순간’을 21곡과 발레·영상 연출로 펼쳤습니다.</span></div>
+          <div class="chapter"><span class="chapter-num">02</span><b>熙界无限剧场 · 2026</b><span>음악을 열쇠로 배우·가수 라운희의 여러 세계를 다시 여는 첫 개인 투어. 난징에서 시작해 광저우로 이어졌습니다.</span></div>
+          <div class="chapter"><span class="chapter-num">03</span><b>이 아카이브에서</b><span>콘서트 세트리스트, 곡의 뜻과 발음, 가사 이야기, TV 라이브와 확인된 YouTube 무대를 함께 볼 수 있습니다.</span></div>
+        </div>
       </div>
-    </div>
+      <div class="archive-key">
+        <b>VIDEO GUIDE</b>
+        <div class="legend">
+          <div class="legend-item"><span class="dot found"></span> YouTube 영상 연결</div>
+          <div class="legend-item"><span class="dot missing"></span> 영상 미확인</div>
+        </div>
+      </div>
+    </section>
   </div>
 
   <div class="tabs" role="tablist" aria-label="콘서트 선택">
