@@ -268,16 +268,12 @@
     padding:9px 10px; border-left:2px solid rgba(183,156,255,0.35);
     background:rgba(139,111,217,0.05); border-radius:0 7px 7px 0;
   }
-  .track-lyrics > b{ display:block; margin-bottom:5px; color:var(--purple-glow); font-weight:600; }
   .lyric-line{
     display:block; color:var(--mute); font-size:12px; line-height:1.6;
   }
-  .lyric-line + .lyric-line{ margin-top:3px; }
+  .lyric-line + .lyric-line{ margin-top:4px; }
   .lyric-line.highlight{ color:var(--ivory); font-family:'Noto Serif KR',serif; font-size:12.5px; }
-  .lyric-line em{
-    display:inline-block; min-width:82px; margin-right:7px; color:var(--gold); font-family:'Pretendard',sans-serif;
-    font-size:10px; font-style:normal; font-weight:600;
-  }
+  .lyric-line.highlight::before{ content:'— '; color:var(--gold); }
   .track-source{ font-size:10.5px; color:var(--mute-2); margin-top:2px; font-style:italic; }
 
   .badge{
@@ -878,7 +874,7 @@ function renderList(container, data){
         <div class="track-meaning">뜻 · ${t.mean}</div>
         ${t.program ? `<div class="stage-meta"><span><b>방송</b> ${t.date} · ${t.program}</span><span><b>채널</b> ${t.network}</span><span><b>함께 부른 사람</b> ${t.with}</span></div>` : ""}
         ${t.info ? `<div class="track-info">${conciseText(t.info)}</div>` : ""}
-        ${t.lyrics ? `<div class="track-lyrics"><b>가사 이야기</b><span class="lyric-line"><em>내용·해석</em>${conciseText(t.lyrics)} · ${lyricInsightFor(t)}</span><span class="lyric-line highlight"><em>가사 하이라이트</em>${lyricHighlightFor(t)}, ${lyricEchoFor(t)}</span></div>` : ""}
+        ${t.lyrics ? `<div class="track-lyrics"><span class="lyric-line">${conciseText(t.lyrics)} · ${lyricInsightFor(t)}</span><span class="lyric-line highlight">${lyricHighlightFor(t)}, ${lyricEchoFor(t)}</span></div>` : ""}
         ${t.review ? `<div class="stage-review"><b>무대 평가 ${t.rating}</b>${conciseText(t.review)}</div>` : ""}
         ${t.source ? `<div class="track-source">출처: ${t.source}</div>` : ""}
       </div>
