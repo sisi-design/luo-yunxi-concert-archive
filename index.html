@@ -275,7 +275,7 @@
   .lyric-line + .lyric-line{ margin-top:3px; }
   .lyric-line.highlight{ color:var(--ivory); font-family:'Noto Serif KR',serif; font-size:12.5px; }
   .lyric-line em{
-    display:inline-block; min-width:58px; margin-right:7px; color:var(--gold); font-family:'Pretendard',sans-serif;
+    display:inline-block; min-width:82px; margin-right:7px; color:var(--gold); font-family:'Pretendard',sans-serif;
     font-size:10px; font-style:normal; font-weight:600;
   }
   .track-source{ font-size:10.5px; color:var(--mute-2); margin-top:2px; font-style:italic; }
@@ -756,6 +756,34 @@ function lyricInsightFor(track){
   return "제목의 상징과 화자의 감정 변화를 함께 읽는 곡";
 }
 
+function lyricEchoFor(track){
+  const special = {
+    "白色舞鞋":"넘어진 자리마다 다시 일어선 발끝의 기억",
+    "无人之岛":"서로를 부르는 목소리만 바다 위를 오래 맴도는 밤",
+    "小小的我":"작은 모래알 같은 나도 하나의 우주가 되는 순간",
+    "星星之火":"혼자서는 희미한 빛도 함께라면 밤을 밝히는 불꽃",
+    "等风停":"지친 네가 돌아올 때까지 사라지지 않을 한 자리",
+    "旅人":"정해진 답 대신 지나온 발자국으로 완성하는 지도",
+    "黑月光":"놓을수록 깊어지고 미워할수록 선명해지는 사랑",
+    "桃花诺":"꽃이 지고 다시 피어도 변하지 않을 오래된 기억",
+    "成都":"골목 끝 작은 가게에도 아직 남아 있는 우리의 시간",
+    "相思赋予谁":"갈 곳 잃은 그리움이 꽃잎처럼 머무는 봄밤"
+  };
+  if(special[track.cn]) return special[track.cn];
+  const text = `${track.mean || ""} ${track.lyrics || ""}`;
+  if(/미확인|미공개/.test(text)) return "곡명과 무대가 확인되는 날 이어질 두 번째 문장";
+  if(/이별|그리움|후회|잃|빈자리|외로움/.test(text)) return "떠난 뒤에도 사라지지 않고 마음 가장자리에 남은 온기";
+  if(/재회|다시 만나|되돌아|귀환/.test(text)) return "멀어진 계절을 건너 마침내 같은 자리로 돌아온 두 사람";
+  if(/꿈|용기|성장|시작|나아가|전진/.test(text)) return "두려움을 품은 채로도 끝내 자신의 빛을 향해 걷는 마음";
+  if(/운명|생을|만 년|영원|약속/.test(text)) return "몇 번의 계절과 생이 지나도 지워지지 않을 단 하나의 선택";
+  if(/자연|생명|새|고래|별|우주|하늘/.test(text)) return "작은 숨결 하나에도 저마다의 넓은 세계가 있다는 믿음";
+  if(/청춘|여름|여행|길|바람/.test(text)) return "낯선 바람과 흔들림까지 지나온 시간의 일부로 품는 순간";
+  if(/친구|벗|동행|곁|함께/.test(text)) return "멀리 있어도 같은 방향을 바라보며 이어지는 마음";
+  if(/사랑|연인|설렘|관계|마음/.test(text)) return "가까워질수록 더 솔직해지고 멀어질수록 선명해지는 진심";
+  if(/고향|도시|가족|명절/.test(text)) return "익숙한 풍경과 사람 속에서 다시 발견하는 돌아갈 자리";
+  return "말로 다 전하지 못한 마음을 제목의 이미지에 남긴 순간";
+}
+
 function cleanerVideoFor(track){
   const video = CLEANER_VIDEOS[track.cn];
   return video && video.yt !== track.yt ? video : null;
@@ -850,7 +878,7 @@ function renderList(container, data){
         <div class="track-meaning">뜻 · ${t.mean}</div>
         ${t.program ? `<div class="stage-meta"><span><b>방송</b> ${t.date} · ${t.program}</span><span><b>채널</b> ${t.network}</span><span><b>함께 부른 사람</b> ${t.with}</span></div>` : ""}
         ${t.info ? `<div class="track-info">${conciseText(t.info)}</div>` : ""}
-        ${t.lyrics ? `<div class="track-lyrics"><b>가사 이야기</b><span class="lyric-line"><em>내용</em>${conciseText(t.lyrics)}</span><span class="lyric-line highlight"><em>핵심 한줄</em>${lyricHighlightFor(t)}</span><span class="lyric-line"><em>해석 포인트</em>${lyricInsightFor(t)}</span></div>` : ""}
+        ${t.lyrics ? `<div class="track-lyrics"><b>가사 이야기</b><span class="lyric-line"><em>내용·해석</em>${conciseText(t.lyrics)} · ${lyricInsightFor(t)}</span><span class="lyric-line highlight"><em>가사 하이라이트</em>${lyricHighlightFor(t)}, ${lyricEchoFor(t)}</span></div>` : ""}
         ${t.review ? `<div class="stage-review"><b>무대 평가 ${t.rating}</b>${conciseText(t.review)}</div>` : ""}
         ${t.source ? `<div class="track-source">출처: ${t.source}</div>` : ""}
       </div>
