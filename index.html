@@ -141,14 +141,21 @@
     .concert-chapters{ grid-template-columns:1fr; }
   }
 
-  .tabs{ display:flex; gap:6px; margin:44px 0 6px; border-bottom:1px solid var(--line); overflow-x:auto; scrollbar-width:none; }
-  .tabs::-webkit-scrollbar{ display:none; }
+  .tabs{
+    display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:4px;
+    margin:44px 0 6px; border-bottom:1px solid var(--line);
+  }
   .tab{
     appearance:none; background:none; border:none; color:var(--mute);
-    font-family:'Noto Serif KR', serif; font-weight:600; font-size:16px;
-    padding:14px 6px; margin-right:20px; cursor:pointer; position:relative; transition: color 0.2s ease; flex:0 0 auto;
+    font-family:'Noto Serif KR', serif; font-weight:600; font-size:15px;
+    padding:12px 5px 14px; cursor:pointer; position:relative; transition:color .2s ease, background .2s ease;
+    border-radius:9px 9px 0 0; white-space:nowrap;
   }
-  .tab .num{ font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--mute-2); margin-right:8px; }
+  .tab .num{
+    display:block; margin:0 0 5px; font-family:'JetBrains Mono',monospace;
+    font-size:9px; font-weight:500; letter-spacing:.02em; color:var(--mute-2);
+  }
+  .tab:hover{ color:var(--ivory); background:rgba(139,111,217,.06); }
   .tab[aria-selected="true"]{ color:var(--ivory); }
   .tab[aria-selected="true"] .num{ color:var(--gold); }
   .tab::after{
@@ -158,6 +165,12 @@
   }
   .tab[aria-selected="true"]::after{ transform:scaleX(1); }
   .tab:focus-visible{ outline:2px solid var(--purple-glow); outline-offset:4px; }
+
+  @media (max-width:620px){
+    .tabs{ gap:1px; margin-top:34px; }
+    .tab{ padding:12px 2px 13px; font-size:12.5px; }
+    .tab .num{ display:none; }
+  }
 
   .meta-row{
     display:flex; flex-wrap:wrap; gap:10px 22px; margin:22px 0 6px;
@@ -342,11 +355,11 @@
   </div>
 
   <div class="tabs" role="tablist" aria-label="콘서트 선택">
-    <button class="tab" role="tab" id="tab-nj" aria-selected="true" aria-controls="panel-nj"><span class="num">01 · 2026.07.25</span>난징 南京站</button>
-    <button class="tab" role="tab" id="tab-gz" aria-selected="false" aria-controls="panel-gz" tabindex="-1"><span class="num">02 · 2026.08.08</span>광저우 广州站</button>
-    <button class="tab" role="tab" id="tab-x" aria-selected="false" aria-controls="panel-x" tabindex="-1"><span class="num">03 · 2024.06.01</span>라운희 [此刻X以光] 첫 솔로 콘서트</button>
-    <button class="tab" role="tab" id="tab-festival" aria-selected="false" aria-controls="panel-festival" tabindex="-1"><span class="num">04 · 2024.09.21</span>후루궈 음악제 葫芦果音乐节</button>
-    <button class="tab" role="tab" id="tab-tv" aria-selected="false" aria-controls="panel-tv" tabindex="-1"><span class="num">05</span>2019년 이후 TV 무대</button>
+    <button class="tab" role="tab" id="tab-nj" aria-selected="true" aria-controls="panel-nj"><span class="num">01 · 2026.07</span>난징</button>
+    <button class="tab" role="tab" id="tab-gz" aria-selected="false" aria-controls="panel-gz" tabindex="-1"><span class="num">02 · 2026.08</span>광저우</button>
+    <button class="tab" role="tab" id="tab-x" aria-selected="false" aria-controls="panel-x" tabindex="-1"><span class="num">03 · 2024.06</span>첫 솔로</button>
+    <button class="tab" role="tab" id="tab-festival" aria-selected="false" aria-controls="panel-festival" tabindex="-1"><span class="num">04 · 2024.09</span>음악제</button>
+    <button class="tab" role="tab" id="tab-tv" aria-selected="false" aria-controls="panel-tv" tabindex="-1"><span class="num">05 · 2019–</span>TV 무대</button>
   </div>
 
   <section id="panel-nj" role="tabpanel" aria-labelledby="tab-nj">
