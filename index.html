@@ -126,6 +126,11 @@
     display:flex; flex-wrap:wrap; gap:10px 22px; margin:22px 0 6px;
     font-family:'JetBrains Mono', monospace; font-size:12.5px; color:var(--mute);
   }
+  .concert-heading{
+    margin:22px 0 4px; font-family:'Noto Serif KR',serif; font-size:clamp(20px,3.5vw,28px);
+    line-height:1.35; color:var(--ivory); font-weight:600;
+  }
+  .concert-heading .date{ display:block; margin-bottom:5px; font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.08em; color:var(--gold); }
   .meta-row span b{ color:var(--purple-glow); font-weight:500; }
 
   .notice{
@@ -271,13 +276,14 @@
   </div>
 
   <div class="tabs" role="tablist" aria-label="콘서트 선택">
-    <button class="tab" role="tab" id="tab-nj" aria-selected="true" aria-controls="panel-nj"><span class="num">01</span>난징 南京站</button>
-    <button class="tab" role="tab" id="tab-gz" aria-selected="false" aria-controls="panel-gz" tabindex="-1"><span class="num">02</span>광저우 广州站</button>
-    <button class="tab" role="tab" id="tab-x" aria-selected="false" aria-controls="panel-x" tabindex="-1"><span class="num">03</span>이전 콘서트 X</button>
+    <button class="tab" role="tab" id="tab-nj" aria-selected="true" aria-controls="panel-nj"><span class="num">01 · 2026.07.25</span>난징 南京站</button>
+    <button class="tab" role="tab" id="tab-gz" aria-selected="false" aria-controls="panel-gz" tabindex="-1"><span class="num">02 · 2026.08.08</span>광저우 广州站</button>
+    <button class="tab" role="tab" id="tab-x" aria-selected="false" aria-controls="panel-x" tabindex="-1"><span class="num">03 · 2024.06.01</span>라운희 [此刻X以光] 첫 솔로 콘서트</button>
     <button class="tab" role="tab" id="tab-tv" aria-selected="false" aria-controls="panel-tv" tabindex="-1"><span class="num">04</span>최근 1년 TV 무대</button>
   </div>
 
   <section id="panel-nj" role="tabpanel" aria-labelledby="tab-nj">
+    <h2 class="concert-heading"><span class="date">2026.07.25</span>라운희 《熙界无限剧场》 난징 콘서트</h2>
     <div class="meta-row">
       <span><b>2026.07.25</b> 南京青奥体育公园体育馆</span>
       <span><b>1.4만</b> 관객 · 전석 매진</span>
@@ -291,6 +297,7 @@
   </section>
 
   <section id="panel-x" role="tabpanel" aria-labelledby="tab-x" hidden>
+    <h2 class="concert-heading"><span class="date">2024.06.01</span>라운희 [此刻X以光] 첫 솔로 콘서트</h2>
     <div class="meta-row">
       <span><b>2024.06.01</b> 成都金融城演艺中心</span>
       <span><b>첫 단독 콘서트</b> · 고향 청두 공연</span>
@@ -315,6 +322,7 @@
   </section>
 
   <section id="panel-gz" role="tabpanel" aria-labelledby="tab-gz" hidden>
+    <h2 class="concert-heading"><span class="date">2026.08.08</span>라운희 《熙界无限剧场》 광저우 콘서트</h2>
     <div class="meta-row">
       <span><b>2026.08.08</b> 广州宝能国际体育演艺中心</span>
       <span><b>전석</b> 매진 · 대기표 발생</span>
