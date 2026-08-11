@@ -269,6 +269,14 @@
     background:rgba(139,111,217,0.05); border-radius:0 7px 7px 0;
   }
   .track-lyrics b{ color:var(--purple-glow); font-weight:600; margin-right:6px; }
+  .lyric-highlight{
+    display:block; margin-top:5px; color:var(--ivory); font-family:'Noto Serif KR',serif;
+    font-size:12.5px; line-height:1.55;
+  }
+  .lyric-highlight em{
+    margin-right:7px; color:var(--gold); font-family:'Pretendard',sans-serif;
+    font-size:10px; font-style:normal; font-weight:600;
+  }
   .track-source{ font-size:10.5px; color:var(--mute-2); margin-top:2px; font-style:italic; }
 
   .badge{
@@ -648,6 +656,89 @@ const CLEANER_VIDEOS = {
   "天后": {yt:"HYS6AhViG8s", type:"방송사 HD", source:"浙江卫视音乐频道"}
 };
 
+// 실제 가사의 번역·인용이 아닌, 곡의 핵심 정서를 짧게 압축한 편집 문구
+const LYRIC_HIGHLIGHTS = {
+  "Because of You":"너를 만난 뒤 다시 움직이기 시작한 마음",
+  "Lydia":"오래 헤매어도 끝내 놓지 못한 이름",
+  "一往":"한 번 정한 길과 마음을 끝까지",
+  "一霎":"한순간의 만남, 오래 남은 기억",
+  "三生三世":"세 번의 삶을 건너도 이어지는 인연",
+  "不到潇湘岂有诗":"강과 산을 따라 만나는 소상의 시",
+  "不染":"상처 속에서도 지키는 맑은 마음",
+  "不渝梦":"시간이 흘러도 변하지 않는 처음의 꿈",
+  "与你":"험한 길에서도 너와 같은 방향으로",
+  "事隔多年":"긴 세월 뒤 다시 마주한 두 사람",
+  "今年勇":"새해의 첫걸음을 밀어 주는 용기",
+  "会呼吸的痛":"숨 쉴 때마다 되살아나는 이별의 통증",
+  "保护你":"비바람 속에서도 네 곁을 지키는 약속",
+  "冬雪至":"겨울눈과 함께 찾아온 조용한 그리움",
+  "冷苹果":"차가운 겉모습 안에 남은 달콤한 마음",
+  "初心":"흔들릴 때마다 돌아가는 처음의 마음",
+  "勇":"빛을 향해 다시 내딛는 한 걸음",
+  "化作孤岛的鲸":"외딴 바다에서 단 한 사람을 기다리는 고래",
+  "只对你有感觉":"오직 너 앞에서만 숨길 수 없는 설렘",
+  "叱咤红人":"규칙보다 재치로 세상을 건너는 영웅",
+  "团圆年":"밝은 등불 아래 다시 모이는 사람들",
+  "圣塔利奥酒馆":"낯선 술집의 밤, 스쳐 가는 유혹",
+  "壁上观":"천년 벽화에서 깨어나는 찬란한 순간",
+  "夜梦春游":"꿈속 봄바람을 따라 떠나는 짧은 나들이",
+  "大鱼":"보내 주어야 하지만 잊을 수 없는 마음",
+  "天下":"온 세상보다 소중한 단 한 사람",
+  "天使的礼物":"평범한 친절이 건네는 가장 큰 선물",
+  "天后":"사랑에 자신을 잃고 남은 상처",
+  "天龙八部之宿敌":"피할 수 없는 숙적으로 다시 만난 인연",
+  "失去就是这样么":"잃고 난 뒤에야 선명해진 빈자리",
+  "宇宙第一响":"작은 목소리로 시작된 우주의 첫 울림",
+  "小小的我":"작은 나에게도 분명히 존재하는 빛",
+  "小雀":"작은 새가 스스로 찾아가는 넓은 하늘",
+  "开到荼靡":"끝까지 피어난 뒤 찾아오는 고요한 공허",
+  "心上悬":"답을 기다리며 허공에 매달린 마음",
+  "恋爱的常态":"가까워지고 멀어지는 사랑의 평범한 얼굴",
+  "成都":"익숙한 골목마다 남아 있는 사람과 기억",
+  "我们都是追梦人":"서로의 손을 잡고 같은 꿈을 향해",
+  "挚友":"말하지 않아도 곁을 지켜 주는 오래된 벗",
+  "新一天":"어제를 내려놓고 다시 맞는 아침",
+  "旅人":"정답 없는 길에서도 멈추지 않는 여행자",
+  "无人之岛":"바라보지만 닿지 못한 두 개의 외딴섬",
+  "星星之火":"작은 불빛이 모여 밝히는 긴 밤",
+  "晨星":"가장 어두운 시간에 먼저 뜨는 별",
+  "最后一页":"끝내 넘기지 못한 사랑의 마지막 장",
+  "最好":"서로에게 가장 좋은 기억으로 남기를",
+  "桃花诺":"복사꽃이 다시 피어도 잊지 않을 약속",
+  "此生不换":"긴 이별 뒤에도 바꾸지 않을 이번 생",
+  "游熙时间":"함께 웃고 즐기는 라운희의 놀이 시간",
+  "热铁皮房顶的夏天":"뜨거운 여름을 뚫고 달리는 청춘",
+  "爱的回归线":"멀어진 사랑이 다시 만나는 지점",
+  "玉粽袭香":"쭝쯔 향을 따라 이어지는 단오의 기억",
+  "琵琶行":"비파 소리에 겹쳐진 두 사람의 외로움",
+  "电影人生":"흔들리고 성장하며 이어지는 인생의 장면들",
+  "男女关系科":"실수와 이별로 배우는 사랑의 수업",
+  "白色舞鞋":"하얀 무용화에 새겨진 꿈과 청춘",
+  "相思赋予谁":"깊어진 그리움을 누구에게 건넬까",
+  "祝福你":"사랑하는 사람 곁에 머물 새해의 행운",
+  "神奇中医":"오래된 지혜와 오늘의 과학을 잇는 길",
+  "立上游":"강의 상류에서 힘차게 여는 새해",
+  "站在永恒里的人":"끝없는 시간 속에 홀로 선 사람",
+  "等风停":"바람이 멎을 때까지 같은 자리에서",
+  "缘起":"우연처럼 시작되어 운명이 된 만남",
+  "致不存在的恋人":"아직 만나지 못한 사랑에게 보내는 편지",
+  "要不然我们就这样一万年":"지금의 마음 그대로 함께할 만 년",
+  "起风了":"수많은 이별 뒤 다시 바람을 맞는 청춘",
+  "逆流而上":"세상의 흐름을 거슬러 나아가는 의지",
+  "遇见":"예고 없이 찾아와 삶을 바꾼 만남",
+  "钢铁人":"단단한 겉모습 안에 숨겨 둔 상처",
+  "陀飞轮":"흐르는 시간보다 소중한 삶의 순간",
+  "静思所有事物的伟大":"작은 생명에서 발견하는 존재의 위대함",
+  "骊龙吟":"잠든 힘을 깨우며 자신의 길로",
+  "黑月光":"사랑과 파멸이 함께 물든 검은 달빛",
+  "팬 신청곡 A":"곡명 확인 후 한줄 하이라이트 추가",
+  "팬 신청곡 B":"곡명 확인 후 한줄 하이라이트 추가"
+};
+
+function lyricHighlightFor(track){
+  return LYRIC_HIGHLIGHTS[track.cn] || "곡의 핵심 정서 한줄 정리 준비 중";
+}
+
 function cleanerVideoFor(track){
   const video = CLEANER_VIDEOS[track.cn];
   return video && video.yt !== track.yt ? video : null;
@@ -737,12 +828,12 @@ function renderList(container, data){
         </div>
         <div class="track-pronunciation">
           <span class="track-py">병음 ${t.py}</span>
-          <span class="track-kr">· 중국어 발음 ${t.kr}</span>
+          <span class="track-kr">· ${t.kr}</span>
         </div>
         <div class="track-meaning">뜻 · ${t.mean}</div>
         ${t.program ? `<div class="stage-meta"><span><b>방송</b> ${t.date} · ${t.program}</span><span><b>채널</b> ${t.network}</span><span><b>함께 부른 사람</b> ${t.with}</span></div>` : ""}
         ${t.info ? `<div class="track-info">${conciseText(t.info)}</div>` : ""}
-        ${t.lyrics ? `<div class="track-lyrics"><b>가사 이야기</b>${conciseText(t.lyrics)}</div>` : ""}
+        ${t.lyrics ? `<div class="track-lyrics"><b>가사 이야기</b>${conciseText(t.lyrics)}<span class="lyric-highlight"><em>한줄 하이라이트</em>${lyricHighlightFor(t)}</span></div>` : ""}
         ${t.review ? `<div class="stage-review"><b>무대 평가 ${t.rating}</b>${conciseText(t.review)}</div>` : ""}
         ${t.source ? `<div class="track-source">출처: ${t.source}</div>` : ""}
       </div>
