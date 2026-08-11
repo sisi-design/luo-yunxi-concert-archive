@@ -190,6 +190,8 @@
   .notice b{ color:var(--gold); font-weight:600; }
   .stage-meta{ display:flex; flex-wrap:wrap; gap:5px 14px; margin:7px 0 2px; font-size:11.5px; color:var(--mute); }
   .stage-meta b{ color:var(--purple-glow); font-weight:600; }
+  .program-intro{ margin:6px 0 2px; color:var(--mute); font-size:11.5px; line-height:1.55; }
+  .program-intro b{ margin-right:7px; color:var(--gold); font-weight:600; }
   .stage-review{ margin-top:8px; padding:9px 10px; border-radius:8px; background:rgba(227,182,85,.055); color:var(--mute); font-size:12px; line-height:1.55; }
   .stage-review b{ color:var(--gold); margin-right:7px; }
 
@@ -637,6 +639,38 @@ const TV_STAGES = [
 
 TV_STAGES.forEach((stage, index) => { stage.n = index + 1; });
 
+const PROGRAM_INTROS = {
+  "《2019喜气洋洋闹元宵》":"CCTV 정월대보름 특집 갈라 · 배우·가수 합동 명절 무대",
+  "《2023美好奇妙夜》":"베이징위성TV 문화·엔터테인먼트 갈라 · 국풍 솔로 무대",
+  "《2024湖南卫视芒果TV春节联欢晚会》":"후난위성TV 설맞이 갈라 · 시·노래·무용을 결합한 지역 문화 무대",
+  "《2025川渝春节联欢晚会》":"쓰촨·충칭 공동 설맞이 갈라 · 고향권 첫 춘완 솔로 무대",
+  "《2026年中央广播电视总台春节联欢晚会》":"CCTV 국가 춘완 이빈 분회장 · 지역 출연진 합동 생방송",
+  "《2026湖南卫视芒果TV元宵喜乐会》":"후난위성TV 원소절 갈라 · 디지털 벽화 연출의 국풍 솔로 무대",
+  "《六一八开心夜》":"후난위성TV 618 쇼핑 축제 음악 특집 · 솔로와 한중 듀엣 무대",
+  "《启航2026—中央广播电视总台跨年晚会》":"CCTV 연말 카운트다운 콘서트 · 새해 메시지 합동 무대",
+  "《国乐无双》第4期":"국악과 대중음악을 새롭게 엮는 음악 예능 · 광둥어 솔로 재해석",
+  "《天猫双11惊喜夜》":"후난위성TV·티몰 쇼핑 축제 갈라 · 드라마 OST 솔로 무대",
+  "《天猫双11狂欢夜》":"동방·저장위성TV 광군제 대형 갈라 · 초기 대표 솔로 커버",
+  "《天赐的声音》第7季 第4期":"저장위성TV 보컬 협업 음악 예능 · 황샤오윈과 국풍 듀엣",
+  "《天赐的声音》第7季 第5期":"저장위성TV 보컬 협업 음악 예능 · 야오샤오탕과 감성 듀엣",
+  "《奋斗正青春—2021年五四青年节特别节目》":"CCTV 청년절 특별 갈라 · 전통 의학과 청년 계승을 담은 합동 무대",
+  "《快手616真心夜》":"콰이쇼우 616 음악 축제 생방송 · 밝은 밴드형 솔로 무대",
+  "《我们都是追梦人—2019五月的鲜花》":"CCTV 청년절 갈라 · 배우와 대학생이 함께한 응원가 무대",
+  "《更好2026 江苏卫视跨年演唱会》":"장쑤위성TV 연말 콘서트 · 새해 용기를 전한 라이브 무대",
+  "《最忆是端午》":"CCTV 단오 특집 · 세대별 가창과 전통 풍습을 잇는 합동 무대",
+  "《湖南卫视芒果TV酸甜之夜》":"후난위성TV 음악 특집 · 대표 드라마 OST 솔로·메들리 무대",
+  "《熠熠生辉闪耀之夜》":"동방위성TV·더우인 공동 갈라 · 생일 싱글을 옮긴 솔로 무대",
+  "《百度潮盛典》":"저장위성TV 트렌드 문화 갈라 · 장발 의상과 무용을 결합한 국풍 무대",
+  "《红星大奖2026 Star Awards》":"싱가포르 Mediacorp TV 시상식 · 해외 초청 OST 공연",
+  "《美好奇妙夜秋季盛典》":"저장위성TV 가을 문화 갈라 · 시와 희곡 창법을 결합한 국풍 커버",
+  "《花开天下·国韵新年演唱会》":"쓰촨위성TV 국풍 신년 콘서트 · 드라마 캐릭터곡 솔로 무대",
+  "《非遗里的中国》2025年非遗晚会":"CCTV 무형문화유산 신년 특집 · 전승자들과 함께한 명절 무대"
+};
+
+function programIntroFor(track){
+  return PROGRAM_INTROS[track.program] || `${track.network} 음악·문화 특별 무대`;
+}
+
 /* 현장 직캠과 함께 볼 수 있는 방송사 무대·공식 MV·공식 음원 영상.
    같은 영상 ID가 기본 링크로 쓰인 카드에서는 중복 버튼을 표시하지 않는다. */
 const CLEANER_VIDEOS = {
@@ -873,6 +907,7 @@ function renderList(container, data){
         </div>
         <div class="track-meaning">뜻 · ${t.mean}</div>
         ${t.program ? `<div class="stage-meta"><span><b>방송</b> ${t.date} · ${t.program}</span><span><b>채널</b> ${t.network}</span><span><b>함께 부른 사람</b> ${t.with}</span></div>` : ""}
+        ${t.program ? `<div class="program-intro"><b>프로그램·무대</b>${programIntroFor(t)}</div>` : ""}
         ${t.info ? `<div class="track-info">${conciseText(t.info)}</div>` : ""}
         ${t.lyrics ? `<div class="track-lyrics"><span class="lyric-line">${conciseText(t.lyrics)} · ${lyricInsightFor(t)}</span><span class="lyric-line highlight">${lyricHighlightFor(t)}, ${lyricEchoFor(t)}</span></div>` : ""}
         ${t.review ? `<div class="stage-review"><b>무대 평가 ${t.rating}</b>${conciseText(t.review)}</div>` : ""}
