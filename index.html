@@ -80,23 +80,25 @@
     background:linear-gradient(145deg, rgba(27,20,40,.98), rgba(16,11,25,.98));
     border:1px solid rgba(183,156,255,.2); box-shadow:0 28px 70px rgba(0,0,0,.28);
   }
-  .concert-poster{ position:relative; margin:0; aspect-ratio:16/9; overflow:hidden; background:#dbefff; }
-  .concert-poster img{ width:100%; height:100%; display:block; object-fit:cover; }
-  .concert-poster::after{
-    content:''; position:absolute; inset:0;
-    background:linear-gradient(180deg, transparent 48%, rgba(10,7,17,.8) 100%);
-    pointer-events:none;
+  .artist-story{
+    display:grid; grid-template-columns:180px minmax(0,1fr) minmax(250px,.82fr);
+    gap:24px; align-items:start; padding:27px 28px 24px;
   }
-  .poster-caption{
-    position:absolute; z-index:1; left:22px; right:22px; bottom:18px;
-    display:flex; align-items:end; justify-content:space-between; gap:16px;
-    color:#fff; text-shadow:0 2px 16px rgba(0,0,0,.5);
+  .concert-thumb{
+    margin:0; overflow:hidden; border-radius:14px;
+    background:#171020; border:1px solid rgba(183,156,255,.24);
+    box-shadow:0 14px 34px rgba(0,0,0,.28);
   }
-  .poster-caption span{ display:block; }
-  .poster-kicker{ font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.15em; color:#d7efff; }
-  .poster-title{ margin-top:4px; font-family:'Noto Serif KR',serif; font-size:clamp(18px,3vw,27px); font-weight:600; }
-  .poster-date{ font-family:'JetBrains Mono',monospace; font-size:11px; color:#eef9ff; white-space:nowrap; }
-  .artist-story{ display:grid; grid-template-columns:1.08fr .92fr; gap:30px; padding:27px 28px 24px; }
+  .concert-thumb img{
+    width:100%; aspect-ratio:4/3; display:block; object-fit:cover; object-position:58% center;
+  }
+  .concert-thumb figcaption{
+    padding:9px 11px 10px; color:var(--mute); font-size:10.5px; line-height:1.45;
+  }
+  .concert-thumb figcaption b{
+    display:block; margin-bottom:2px; color:var(--gold); font-family:'JetBrains Mono',monospace;
+    font-size:8.5px; font-weight:500; letter-spacing:.1em;
+  }
   .story-kicker{ font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.14em; color:var(--gold); }
   .artist-story h2{ margin:8px 0 11px; font-family:'Noto Serif KR',serif; font-size:clamp(21px,3vw,29px); line-height:1.35; }
   .artist-story p{ max-width:none; color:var(--mute); font-size:13.5px; line-height:1.75; }
@@ -127,13 +129,16 @@
   .dot.clean{ background:var(--purple-glow); box-shadow:0 0 8px var(--purple-glow); }
   .dot.missing{ background:var(--mute-2); }
 
-  @media (max-width:720px){
-    .artist-story{ grid-template-columns:1fr; gap:22px; padding:22px 20px 20px; }
-    .concert-poster{ aspect-ratio:4/3; }
-    .concert-poster img{ object-position:43% center; }
-    .poster-caption{ left:16px; right:16px; bottom:13px; }
-    .poster-date{ display:none !important; }
+  @media (max-width:840px){
+    .artist-story{ grid-template-columns:160px minmax(0,1fr); gap:20px; padding:22px 20px 20px; }
+    .concert-chapters{ grid-column:1 / -1; grid-template-columns:repeat(3,minmax(0,1fr)); }
     .archive-key{ padding:12px 20px 14px; }
+  }
+  @media (max-width:620px){
+    .artist-story{ grid-template-columns:120px minmax(0,1fr); gap:16px; }
+    .concert-thumb img{ aspect-ratio:1/1; }
+    .concert-thumb figcaption{ padding:8px 9px 9px; }
+    .concert-chapters{ grid-template-columns:1fr; }
   }
 
   .tabs{ display:flex; gap:6px; margin:44px 0 6px; border-bottom:1px solid var(--line); overflow-x:auto; scrollbar-width:none; }
@@ -308,14 +313,11 @@
     <p>2024·2026 콘서트 세트리스트와 <b>2019년 이후 TV 라이브</b>를 유튜브 영상과 함께 정리했습니다.</p>
 
     <section class="artist-feature" aria-labelledby="artist-story-title">
-      <figure class="concert-poster">
-        <img src="assets/cike-poster-2024.jpg" alt="라운희 2024 첫 솔로 콘서트 此刻 X 以光 대표 포스터" fetchpriority="high">
-        <figcaption class="poster-caption">
-          <span><span class="poster-kicker">LUO YUNXI · FIRST SOLO CONCERT</span><span class="poster-title">《此刻 X 以光》 — 빛을 따라 무대로</span></span>
-          <span class="poster-date">2024.06.01 · CHENGDU</span>
-        </figcaption>
-      </figure>
       <div class="artist-story">
+        <figure class="concert-thumb">
+          <img src="https://img.youtube.com/vi/FjDq3HOI1_w/maxresdefault.jpg" alt="2026 희계무한극장 난징 콘서트 무대에서 노래하는 라운희" fetchpriority="high">
+          <figcaption><b>2026 TOUR · NANJING</b>《熙界无限剧场》 공연 현장</figcaption>
+        </figure>
         <div class="artist-copy">
           <span class="story-kicker">ARTIST · ACTOR · SINGER · DANCER</span>
           <h2 id="artist-story-title">배우의 서사를, 음악의 무대로</h2>
