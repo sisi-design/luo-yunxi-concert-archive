@@ -86,6 +86,7 @@
     display:grid; grid-template-columns:180px minmax(0,1fr) minmax(250px,.82fr);
     gap:24px; align-items:start; padding:27px 28px 24px;
   }
+  .artist-copy, .concert-chapters, .chapter, .archive-key, .legend{ min-width:0; max-width:100%; }
   .concert-thumb{
     margin:0; overflow:hidden; border-radius:14px;
     background:#171020; border:1px solid rgba(183,156,255,.24);
@@ -311,8 +312,14 @@
     .artist-story{ grid-template-columns:100px minmax(0,1fr); gap:13px; padding:18px 15px; }
     .artist-story h2{ font-size:20px; }
     .artist-story p{ font-size:12.5px; line-height:1.68; }
+    .hero p, .artist-copy, .artist-story h2, .artist-story p, .chapter, .chapter span,
+    .track-main, .track-cn, .track-py, .track-info, .program-intro, .stage-review, .lyric-line{
+      overflow-wrap:anywhere; word-break:break-word;
+    }
     .concert-thumb figcaption{ font-size:9px; }
     .archive-key{ padding:11px 15px 13px; }
+    .archive-key{ align-items:flex-start; }
+    .legend{ display:grid; grid-template-columns:1fr; gap:7px; width:100%; }
     .toolbar{ flex-direction:column; align-items:stretch; gap:8px; }
     .count-pill{ min-height:20px; padding:0; justify-content:flex-end; white-space:normal; text-align:right; }
     .full-concert{ gap:12px; padding:16px; }
