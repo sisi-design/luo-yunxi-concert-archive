@@ -80,6 +80,15 @@
   h1 .cn{ display:block; font-size:0.4em; font-weight:600; color:var(--purple-glow); letter-spacing:0.06em; margin-bottom:10px; }
   .hero p{ color:var(--mute); font-size:16px; line-height:1.7; max-width:600px; margin:0; }
   .hero p b{ color:var(--ivory); font-weight:600; }
+  .hero-actions{ display:flex; flex-wrap:wrap; gap:9px; margin-top:18px; }
+  .hero-link{
+    display:inline-flex; align-items:center; gap:8px; padding:9px 13px; border-radius:999px;
+    border:1px solid rgba(183,156,255,.28); background:rgba(139,111,217,.11);
+    color:var(--purple-glow); font-size:12px; font-weight:600; text-decoration:none;
+    transition:transform .16s ease, border-color .16s ease, background .16s ease;
+  }
+  .hero-link:hover, .hero-link:focus-visible{ transform:translateY(-1px); border-color:var(--purple-glow); background:rgba(139,111,217,.18); }
+  .hero-link:focus-visible{ outline:2px solid var(--purple-glow); outline-offset:3px; }
 
   .artist-feature{
     width:100%; max-width:100%; min-width:0; margin-top:30px; overflow:hidden; contain:inline-size; border-radius:20px;
@@ -380,6 +389,9 @@
     <div class="eyebrow">Luo Yunxi · 罗云熙 Stage Archive · YouTube ver.</div>
     <h1><span class="cn">熙界无限剧场</span>라운희 무대 아카이브</h1>
     <p>2024·2026 콘서트 세트리스트 · <b>2019년 이후 TV 라이브</b> · YouTube 영상 아카이브</p>
+    <div class="hero-actions">
+      <a class="hero-link" href="lyrics.html">가사로 배우는 중국어 <span aria-hidden="true">→</span></a>
+    </div>
 
     <section class="artist-feature" aria-labelledby="artist-story-title">
       <div class="artist-story">

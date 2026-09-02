@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>가사로 배우는 중국어 | 라운희</title>
+<meta name="description" content="라운희 노래의 중국어 가사를 한글 발음, 병음, 한국어 해석과 핵심 단어로 공부합니다.">
+<meta name="theme-color" content="#0e0a16">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&family=Noto+Serif+KR:wght@600;700;900&display=swap');
+  :root{
+    --bg:#0e0a16; --panel:#181123; --panel-2:#21172f; --line:rgba(183,156,255,.17);
+    --purple:#b79cff; --purple-2:#8b6fd9; --gold:#e3b655; --text:#f4effb;
+    --muted:#a69ab9; --soft:#746986; --radius:18px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth; width:100%; overflow-x:hidden; -webkit-text-size-adjust:100%}
+  body{
+    margin:0; min-height:100svh; overflow-x:hidden; color:var(--text);
+    font-family:'Noto Sans KR',-apple-system,BlinkMacSystemFont,sans-serif;
+    background:
+      radial-gradient(800px 520px at 10% -10%,rgba(139,111,217,.28),transparent 62%),
+      radial-gradient(660px 500px at 100% 8%,rgba(227,182,85,.08),transparent 58%),var(--bg);
+  }
+  a{color:inherit}
+  button{font:inherit}
+  .skip{position:absolute; left:-9999px; top:8px; z-index:20; padding:9px 12px; background:var(--text); color:var(--bg); border-radius:8px}
+  .skip:focus{left:8px}
+  .shell{width:min(100% - 40px,920px); margin:0 auto; padding:30px 0 100px}
+  .topbar{display:flex; justify-content:space-between; align-items:center; gap:16px; margin-bottom:38px}
+  .back{display:inline-flex; align-items:center; gap:7px; color:var(--muted); font-size:13px; text-decoration:none}
+  .back:hover,.back:focus-visible{color:var(--text)}
+  .series{font-size:10px; letter-spacing:.14em; color:var(--gold); text-transform:uppercase}
+  .song-picker{display:flex; gap:8px; margin:-12px 0 30px; padding-bottom:3px; overflow-x:auto; scrollbar-width:thin}
+  .song-button{flex:0 0 auto; padding:9px 13px; border:1px solid var(--line); border-radius:999px; color:var(--muted); background:rgba(24,17,35,.65); cursor:pointer}
+  .song-button[aria-pressed="true"]{color:var(--text); border-color:var(--purple); background:rgba(139,111,217,.2)}
+  .song-button:focus-visible{outline:2px solid var(--purple); outline-offset:2px}
+  .hero{display:grid; grid-template-columns:minmax(0,1fr) 230px; gap:30px; align-items:end; padding:14px 0 40px; border-bottom:1px solid var(--line)}
+  .kicker{margin-bottom:13px; color:var(--gold); font-size:11px; font-weight:600; letter-spacing:.18em}
+  h1{margin:0; font-family:'Noto Serif KR',serif; font-size:clamp(38px,8vw,68px); line-height:1.05; letter-spacing:.02em}
+  .title-reading{margin:13px 0 0; color:var(--purple); font-size:18px; font-weight:600}
+  .title-meaning{margin:5px 0 0; color:var(--muted); font-size:14px}
+  .song-note{margin:20px 0 0; max-width:610px; color:var(--muted); font-size:14px; line-height:1.75}
+  .song-note b{color:var(--text)}
+  .credits{display:grid; gap:10px; padding:17px; border:1px solid var(--line); border-radius:14px; background:rgba(24,17,35,.72)}
+  .credit{display:flex; justify-content:space-between; gap:12px; font-size:12px}
+  .credit span{color:var(--soft)} .credit b{font-weight:500; text-align:right}
+  .credit-details{margin-top:2px; padding-top:10px; border-top:1px solid var(--line)}
+  .credit-details summary{color:var(--purple); font-size:11px; font-weight:600; cursor:pointer; list-style-position:inside}
+  .credit-details[open] summary{margin-bottom:11px}
+  .production-list{display:grid; gap:7px}
+  .production-row{display:grid; grid-template-columns:76px minmax(0,1fr); gap:8px; font-size:10.5px; line-height:1.5}
+  .production-row span{color:var(--soft)}
+  .production-row b{font-weight:500; text-align:left; overflow-wrap:anywhere}
+  .listen{display:flex; justify-content:center; align-items:center; gap:8px; margin-top:3px; padding:9px 11px; border-radius:9px; background:#e94f4f; color:white; font-size:12px; font-weight:700; text-decoration:none}
+  .guide{display:flex; flex-wrap:wrap; gap:8px 16px; margin:20px 0 0; color:var(--soft); font-size:11px}
+  .guide span::before{content:''; display:inline-block; width:6px; height:6px; margin-right:6px; border-radius:50%; vertical-align:1px; background:var(--purple)}
+  .guide span:nth-child(2)::before{background:var(--gold)}
+  .guide span:nth-child(3)::before{background:#6fc6b5}
+  main{padding-top:44px}
+  .section{margin-top:42px}
+  .section:first-child{margin-top:0}
+  .section-head{display:flex; align-items:center; gap:12px; margin-bottom:12px}
+  .section-label{color:var(--gold); font-size:10px; font-weight:700; letter-spacing:.16em; text-transform:uppercase; white-space:nowrap}
+  .section-head::after{content:''; height:1px; flex:1; background:var(--line)}
+  .lyric-card{overflow:hidden; border:1px solid var(--line); border-radius:var(--radius); background:rgba(24,17,35,.72)}
+  .lyric-row{padding:22px 24px}
+  .lyric-row+.lyric-row{border-top:1px solid var(--line)}
+  .chinese{margin:0; font-family:'Noto Serif KR',serif; font-size:clamp(20px,4vw,26px); font-weight:700; line-height:1.5; letter-spacing:.025em}
+  .reading{margin:7px 0 0; color:var(--purple); font-size:14px; font-weight:600; line-height:1.65}
+  .pinyin{margin:3px 0 0; color:var(--soft); font-size:11px; line-height:1.6; letter-spacing:.015em}
+  .translation{margin:11px 0 0; padding-top:11px; border-top:1px dashed rgba(183,156,255,.13); color:#d7cfdf; font-size:14px; line-height:1.7}
+  .repeat-note{display:inline-flex; margin-left:7px; padding:3px 7px; border-radius:999px; background:rgba(139,111,217,.13); color:var(--purple); font-size:9px; letter-spacing:.04em; vertical-align:1px}
+  .study{margin-top:72px; padding-top:34px; border-top:1px solid var(--line)}
+  .study h2{margin:0; font-family:'Noto Serif KR',serif; font-size:clamp(25px,5vw,36px)}
+  .study-intro{margin:9px 0 24px; color:var(--muted); font-size:13px; line-height:1.7}
+  .vocab{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px}
+  .word{padding:17px; border:1px solid var(--line); border-radius:13px; background:rgba(33,23,47,.55)}
+  .word-top{display:flex; align-items:baseline; gap:9px; flex-wrap:wrap}
+  .word-cn{font-family:'Noto Serif KR',serif; font-size:20px; font-weight:700}
+  .word-py{color:var(--purple); font-size:11px}
+  .word-kr{margin-top:6px; color:var(--muted); font-size:12px; line-height:1.55}
+  .patterns{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; margin-top:34px}
+  .patterns h3{grid-column:1/-1; margin:0 0 2px; font-family:'Noto Serif KR',serif; font-size:20px}
+  .pattern{padding:17px; border-left:2px solid var(--gold); background:rgba(227,182,85,.055); border-radius:0 12px 12px 0}
+  .pattern b{display:block; color:var(--gold); font-size:14px}
+  .pattern span{display:block; margin-top:7px; color:var(--muted); font-size:12px; line-height:1.65}
+  .note{margin-top:30px; padding:16px 18px; border-radius:12px; color:var(--muted); background:rgba(139,111,217,.07); font-size:12px; line-height:1.75}
+  footer{margin-top:52px; color:var(--soft); font-size:11px; line-height:1.7}
+  footer a{color:var(--purple)}
+  @media(max-width:720px){
+    .shell{width:min(100% - 28px,920px); padding-top:21px}
+    .topbar{margin-bottom:25px}
+    .hero{grid-template-columns:1fr; gap:22px; padding-bottom:30px}
+    .credits{max-width:none}
+    main{padding-top:30px}
+    .section{margin-top:32px}
+    .lyric-row{padding:18px 16px}
+    .vocab,.patterns{grid-template-columns:1fr}
+    .study{margin-top:55px}
+  }
+  @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<a class="skip" href="#lyrics">가사로 바로 이동</a>
+<div class="shell">
+  <nav class="topbar" aria-label="페이지 이동">
+    <a class="back" href="index.html"><span aria-hidden="true">←</span> 무대 아카이브</a>
+    <span class="series">Lyrics · Chinese Study</span>
+  </nav>
+  <div class="song-picker" id="song-picker" aria-label="가사 곡 선택"></div>
+
+  <header class="hero">
+    <div>
+      <div class="kicker">罗云熙 · LUO YUNXI</div>
+      <h1 id="song-title" lang="zh-Hans">星星之火</h1>
+      <p class="title-reading" id="song-reading">싱싱 즈 훠</p>
+      <p class="title-meaning" id="song-meaning">작은 불씨 · Spark of the Stars</p>
+      <p class="song-note" id="song-note"><b>가수와 팬이 서로에게 건네는 감사와 약속.</b> 평범한 돌도 오랜 시간과 동행을 거치면 빛날 수 있다는 이야기에서 출발해, 하나하나의 작은 불씨가 모여 어두운 밤을 밝히는 장면으로 이어지는 팬 헌정곡.</p>
+      <div class="guide" aria-label="가사 표기 안내"><span>중국어 원문</span><span>한글 발음</span><span>병음·한국어 해석</span></div>
+    </div>
+    <aside class="credits" id="song-credits" aria-label="곡 정보"></aside>
+  </header>
+
+  <main id="lyrics" aria-label="星星之火 가사">
+    <div id="lyric-sections"></div>
+
+    <section class="study" aria-labelledby="study-title">
+      <div class="kicker">VOCABULARY &amp; EXPRESSIONS</div>
+      <h2 id="study-title">가사로 익히는 중국어</h2>
+      <p class="study-intro">곡의 핵심 이미지와 감정을 이해하는 데 도움이 되는 단어. 병음의 성조표를 함께 보며 익혀보세요.</p>
+      <div class="vocab" id="vocab-list"></div>
+
+      <div class="patterns" id="pattern-list"></div>
+
+      <div class="note" id="study-note"></div>
+    </section>
+  </main>
+
+  <footer>한글 발음은 보통화 발음을 한국어 화자가 따라 읽기 쉽게 옮긴 학습용 표기이며 실제 소리와 완전히 같지는 않습니다. 원문은 사용자 제공 이미지·텍스트와 공개 음원 정보를 대조했습니다.</footer>
+</div>
+
+<script>
+const verse = [
+  ["最平凡 石头 要如何 闪烁","쭈이 핑판 스터우 야오 루허 샨숴","Zuì píngfán shítou yào rúhé shǎnshuò","가장 평범한 돌은 어떻게 빛날 수 있을까"],
+  ["让时光亲手 一点点雕琢","랑 스광 친서우 이뎬뎬 댜오줘","Ràng shíguāng qīnshǒu yìdiǎndiǎn diāozhuó","시간이 손수 조금씩 다듬어 빛나게 하겠지"],
+  ["幸好一路上 你在左右 抚慰了寂寞","싱하오 이루상 니 짜이 쭤여우 푸웨이 러 지모","Xìnghǎo yílùshang nǐ zài zuǒyòu, fǔwèi le jìmò","다행히 오는 길 내 곁에 네가 있어 외로움을 달래주었고"],
+  ["有疲惫 全被陪伴清空","여우 피베이 취안 베이 페이반 칭쿵","Yǒu píbèi, quán bèi péibàn qīngkōng","피곤함도 함께하는 동안 모두 말끔히 사라져"]
+];
+const pre = [
+  ["当这个 世界 因你 变不同","당 쪄거 스지에 인 니 비앤 부퉁","Dāng zhège shìjiè yīn nǐ biàn bùtóng","이 세상은 너로 인해 달라지고"],
+  ["所有的回忆 在心里 感动","쒀여우 더 후이이 짜이 신리 간둥","Suǒyǒu de huíyì zài xīnlǐ gǎndòng","모든 추억이 마음속에 감동으로 남아"],
+  ["彼此经过 多少风波 从不曾退缩","비츠 징궈 뚸사오 펑보 총 부청 퉤이쒀","Bǐcǐ jīngguò duōshao fēngbō, cóng bùcéng tuìsuō","우리는 수많은 풍파를 함께 지나며 한 번도 물러서지 않았고"],
+  ["共同的未来 要一起探索","궁퉁 더 웨이라이 야오 이치 탄쒀","Gòngtóng de wèilái yào yìqǐ tànsuǒ","함께할 미래도 같이 찾아가려 해"]
+];
+const chorus = [
+  ["你是星星之火 点燃夜的荒漠","니 스 싱싱 즈 훠 뎬란 예 더 황모","Nǐ shì xīngxīng zhī huǒ, diǎnrán yè de huāngmò","너는 작은 불씨, 밤의 황량한 들판을 밝혀"],
+  ["在黑暗的时候 守护我的夜空","짜이 헤이안 더 스허우 서우후 워 더 예쿵","Zài hēi'àn de shíhou, shǒuhù wǒ de yèkōng","어둠이 내릴 때 내 밤하늘을 지켜줘"],
+  ["穿过凛冽暴风 顽固出 更多的火种","촨궈 린리에 바오펑 완구 추 껑 뚸 더 훠종","Chuānguò lǐnliè bàofēng, wángù chū gèng duō de huǒzhǒng","매서운 폭풍을 뚫고 꿋꿋이 더 많은 불씨를 피워내"],
+  ["我也想 成为 你的依托","워 예 샹 청웨이 니 더 이퉈","Wǒ yě xiǎng chéngwéi nǐ de yītuō","나도 너의 기댈 곳이 되고 싶어"],
+  ["多少星星之火 绵延夜的荒漠","뚸사오 싱싱 즈 훠 미앤옌 예 더 황모","Duōshao xīngxīng zhī huǒ, miányán yè de huāngmò","수많은 작은 불씨가 밤의 황야로 끝없이 이어지고"],
+  ["在寒冷的时候 给我盛夏的暖流","짜이 한렁 더 스허우 게이 워 성샤 더 놘리우","Zài hánlěng de shíhou, gěi wǒ shèngxià de nuǎnliú","추울 때 내게 한여름의 따뜻한 물결을 건네"],
+  ["不放手 要肩并肩 走到最后","부 팡서우 야오 지앤빙지앤 쩌우 따오 쭈이허우","Bù fàngshǒu, yào jiānbìngjiān zǒu dào zuìhòu","손을 놓지 않고 나란히 끝까지 걸어갈게"],
+  ["不辜负 你微笑眼中 有我的轮廓","부 구푸 니 웨이샤오 옌중 여우 워 더 룬쿼","Bù gūfù, nǐ wēixiào yǎnzhōng yǒu wǒ de lúnkuò","미소 짓는 네 눈 속에 새겨진 내 모습을 저버리지 않을게"]
+];
+
+const sparkSections = [
+  ["Verse 01", verse, ""],
+  ["Pre-Chorus", pre, ""],
+  ["Chorus", chorus, ""],
+  ["Verse 02", pre, "반복"],
+  ["Chorus 02", chorus, "반복"],
+  ["Final Chorus", chorus, "마지막 반복"]
+];
+
+const sparkVocabulary = [
+  ["平凡","píngfán · 핑판","평범하다, 보통이다"],
+  ["闪烁","shǎnshuò · 샨숴","반짝이다, 깜박이다"],
+  ["雕琢","diāozhuó · 댜오줘","조각하고 다듬다; 사람을 갈고닦다"],
+  ["抚慰","fǔwèi · 푸웨이","달래다, 위로하다"],
+  ["陪伴","péibàn · 페이반","곁에서 함께하다, 동행하다"],
+  ["风波","fēngbō · 펑보","풍파, 소동이나 시련"],
+  ["退缩","tuìsuō · 퉤이쒀","위축되어 물러서다"],
+  ["探索","tànsuǒ · 탄쒀","탐색하다, 찾아 나서다"],
+  ["荒漠","huāngmò · 황모","황야, 황량한 사막"],
+  ["守护","shǒuhù · 서우후","지키고 보호하다"],
+  ["凛冽","lǐnliè · 린리에","바람이나 추위가 매섭다"],
+  ["火种","huǒzhǒng · 훠종","불씨; 어떤 힘을 퍼뜨리는 씨앗"],
+  ["依托","yītuō · 이퉈","의지할 대상이나 기반"],
+  ["绵延","miányán · 미앤옌","길게 끊임없이 이어지다"],
+  ["肩并肩","jiānbìngjiān · 지앤빙지앤","어깨를 나란히 하다"],
+  ["辜负","gūfù · 구푸","기대나 호의를 저버리다"],
+  ["轮廓","lúnkuò · 룬쿼","윤곽, 겉모습의 선"],
+  ["星星之火","xīngxīng zhī huǒ · 싱싱 즈 훠","작은 불씨; 작지만 퍼질 가능성이 있는 힘"]
+];
+
+const heartVerse = [
+  ["为你折心上明月","웨이 니 저 신상 밍위에","Wèi nǐ zhé xīnshàng míngyuè","너를 위해 마음 위에 걸린 밝은 달을 꺾어"],
+  ["吹梦到庭前","추이 멍 따오 팅치앤","Chuī mèng dào tíngqián","꿈에 실어 뜰 앞으로 보내"],
+  ["它知我心切","타 즈 워 신치에","Tā zhī wǒ xīnqiè","그 달은 내 간절한 마음을 알고"],
+  ["想同你凯旋","샹 퉁 니 카이쉬앤","Xiǎng tóng nǐ kǎixuán","너와 함께 승리해 돌아오고 싶어"],
+  ["听南雨未歇","팅 난위 웨이 시에","Tīng nányǔ wèi xiē","남쪽의 비가 아직 그치지 않는 소리를 듣고"],
+  ["也捧西山落雪","예 펑 시산 뤄쉬에","Yě pěng xīshān luòxuě","서산에 내리는 눈도 두 손에 받아"],
+  ["一街 两巷 三青阙","이 지에 량 샹 산 칭취에","Yì jiē, liǎng xiàng, sān qīngquè","한 거리, 두 골목, 세 채의 푸른 누각에서"],
+  ["无时不照面","우스 부 자오미앤","Wúshí bù zhàomiàn","어느 때든 서로 얼굴을 마주하고"],
+  ["只悬你 落我心尖","즈 쉬앤 니 뤄 워 신지앤","Zhǐ xuán nǐ, luò wǒ xīnjiān","오직 너만 내 마음 끝에 내려앉아 걸려 있어"],
+  ["炉烟暖霜天","루옌 놘 솽티앤","Lúyān nuǎn shuāngtiān","화롯불 연기가 서리 낀 하늘을 데우고"],
+  ["春来迟也不怨","춘 라이 츠 예 부 위앤","Chūn lái chí yě bú yuàn","봄이 늦게 와도 원망하지 않아"],
+  ["尽依你 时间","진 이 니 스지앤","Jìn yī nǐ shíjiān","모든 시간을 너에게 맞출게"]
+];
+
+const heartChorusA = [
+  ["我们以心遇见就别再失约","워먼 이 신 위지앤 지우 비에 짜이 스위에","Wǒmen yǐ xīn yùjiàn jiù bié zài shīyuē","우리 마음으로 만났으니 다시는 약속을 어기지 말자"],
+  ["你是我朝夕贪念","니 스 워 자오시 탄니앤","Nǐ shì wǒ zhāoxī tānniàn","너는 내가 아침저녁으로 간절히 그리는 사람"],
+  ["我愿为你登天摘得云上月","워 위앤 웨이 니 떵티앤 자이 더 윈상 위에","Wǒ yuàn wèi nǐ dēngtiān zhāi dé yúnshàng yuè","널 위해 하늘에 올라 구름 위 달을 따오고 싶어"],
+  ["为你织星河一卷","웨이 니 즈 싱허 이 쥐앤","Wèi nǐ zhī xīnghé yī juǎn","널 위해 은하수 한 폭을 짜고"],
+  ["我们以心遇见就别再失约","워먼 이 신 위지앤 지우 비에 짜이 스위에","Wǒmen yǐ xīn yùjiàn jiù bié zài shīyuē","우리 마음으로 만났으니 다시는 약속을 어기지 말자"],
+  ["为你将年岁搁浅","웨이 니 지앙 니앤쑤이 꺼치앤","Wèi nǐ jiāng niánsuì gēqiǎn","널 위해 흐르는 세월도 멈춰 세워"],
+  ["要这花开不谢 余生终无缺","야오 쪄 화 카이 부 시에 위성 중 우 취에","Yào zhè huā kāi bú xiè, yúshēng zhōng wú quē","이 꽃이 지지 않아 남은 생에 모자람 없게"],
+  ["答应我 以心落笺","다잉 워 이 신 뤄지앤","Dāying wǒ, yǐ xīn luòjiān","내게 약속해줘, 그 마음을 글로 써 내려"],
+  ["不食言","부 스옌","Bù shíyán","말을 어기지 않겠다고"]
+];
+
+const heartChorusB = [
+  ...heartChorusA.slice(0, 7),
+  ["我绝不食言","워 쥐에 부 스옌","Wǒ jué bù shíyán","나는 절대로 약속을 어기지 않을게"]
+];
+
+const heartSections = [
+  ["Verse 01", heartVerse, ""],
+  ["Chorus 01", heartChorusA, ""],
+  ["Verse 02", heartVerse, "반복"],
+  ["Chorus 02", heartChorusB, "끝맺음 변화"],
+  ["Final Chorus", heartChorusB, "마지막 반복"]
+];
+
+const heartVocabulary = [
+  ["折","zhé · 저","꺾다, 접다; 꽃이나 달을 따는 고전적 이미지에 사용"],
+  ["庭前","tíngqián · 팅치앤","뜰 앞, 정원 앞"],
+  ["心切","xīnqiè · 신치에","마음이 매우 간절하다"],
+  ["凯旋","kǎixuán · 카이쉬앤","승리하여 돌아오다"],
+  ["未歇","wèi xiē · 웨이 시에","아직 멈추지 않다, 그치지 않다"],
+  ["捧","pěng · 펑","두 손으로 받쳐 들다"],
+  ["青阙","qīngquè · 칭취에","푸른 누각이나 궁궐 문을 이르는 고풍스러운 표현"],
+  ["照面","zhàomiàn · 자오미앤","서로 얼굴을 마주하다"],
+  ["心尖","xīnjiān · 신지앤","마음의 가장 깊고 소중한 자리; 몹시 아끼는 사람"],
+  ["霜天","shuāngtiān · 솽티앤","서리 내리는 차가운 하늘이나 계절"],
+  ["朝夕","zhāoxī · 자오시","아침저녁; 늘, 언제나"],
+  ["贪念","tānniàn · 탄니앤","간절히 탐내고 그리는 마음"],
+  ["星河","xīnghé · 싱허","별의 강, 은하수"],
+  ["搁浅","gēqiǎn · 꺼치앤","좌초하다; 흐름이 멈추거나 일이 중단되다"],
+  ["不谢","bú xiè · 부 시에","시들거나 지지 않다"],
+  ["余生","yúshēng · 위성","앞으로 남은 생"],
+  ["落笺","luòjiān · 뤄지앤","마음을 종이에 써 내려가다"],
+  ["食言","shíyán · 스옌","한 말을 어기다, 약속을 저버리다"]
+];
+
+const foreverVerse = [
+  ["我想借天边 那轮将落未落的悬月","워 샹 지에 티앤비앤 나 룬 지앙 뤄 웨이 뤄 더 쉬앤위에","Wǒ xiǎng jiè tiānbiān, nà lún jiāng luò wèi luò de xuányuè","하늘 끝에서 막 지려다 아직 지지 않은 저 달을 빌리고 싶어"],
+  ["悬一只萤蝶 悬将至风雪","쉬앤 이 즈 잉디에 쉬앤 지앙 즈 펑쉬에","Xuán yì zhī yíngdié, xuán jiāng zhì fēngxuě","한 마리 빛나는 나비를 걸어두고, 다가올 눈보라도 걸어두고 싶어"],
+  ["悬不合时宜里 忘我的一切","쉬앤 부 허 스이 리 왕 워 더 이치에","Xuán bù hé shíyí lǐ, wàng wǒ de yíqiè","때에 어긋난 세상에 나를 잊었던 모든 순간을 걸어두고"],
+  ["悬一场梦 滴泪交换你 心如焰","쉬앤 이 창 멍 디 레이 지아오환 니 신 루 옌","Xuán yì chǎng mèng, dī lèi jiāohuàn nǐ, xīn rú yàn","눈물방울을 내어 너와 맞바꾼, 불꽃 같은 마음을 한바탕 꿈에 걸어두고 싶어"]
+];
+
+const foreverRefrain = [
+  ["要不然我们 就这样一万年","야오부란 워먼 지우 쪄양 이 완 니앤","Yàobùrán wǒmen jiù zhèyàng yí wàn nián","그렇지 않으면 우리, 그냥 이대로 만 년을 함께하자"],
+  ["把时间泊在 说再见之前","바 스지앤 보 짜이 숴 짜이젠 즈치앤","Bǎ shíjiān bó zài shuō zàijiàn zhīqián","시간을 이별을 말하기 전 그 순간에 머물게 하고"],
+  ["用你 浅笑的甜 我的泪之盐","융 니 치앤샤오 더 티앤 워 더 레이 즈 옌","Yòng nǐ qiǎnxiào de tián, wǒ de lèi zhī yán","네 옅은 미소의 달콤함과 내 눈물의 소금기로"],
+  ["做你的还 和我的亏欠","쭤 니 더 환 허 워 더 쿠이치앤","Zuò nǐ de huán hé wǒ de kuīqiàn","네게 돌려줄 몫과 내가 진 빚으로 삼아"]
+];
+
+const foreverChorusA = [
+  ["你可知明哲的灵魂 轻徊过沦陷","니 커 즈 밍저 더 링훈 칭화이 궈 룬시앤","Nǐ kě zhī míngzhé de línghún, qīnghuái guò lúnxiàn","너는 아는지, 현명하고 이성적인 영혼조차 무너짐의 가장자리를 가만히 맴돈다는 걸"],
+  ["一颗心被爱恨撕裂 也不肯飞远","이 커 신 베이 아이헌 쓰리에 예 부 컨 페이위앤","Yì kē xīn bèi àihèn sīliè, yě bù kěn fēiyuǎn","사랑과 미움에 찢긴 마음도 끝내 멀리 날아가려 하지 않는다는 걸"],
+  ["可知你铭心的一眼 如同入骨的一剑","커 즈 니 밍신 더 이 옌 루퉁 루구 더 이 지앤","Kě zhī nǐ míngxīn de yì yǎn, rútóng rùgǔ de yí jiàn","너의 마음에 새겨진 그 한 번의 눈길이 뼛속에 박힌 한 자루 검과 같았음을 아는지"],
+  ["如缘似劫 不得化解","루 위앤 쓰 지에 부 더 화지에","Rú yuán sì jié, bùdé huàjiě","인연인 듯 재앙인 듯, 도무지 풀어낼 수 없어"]
+];
+
+const foreverChorusB = [
+  ...foreverChorusA.slice(0, 3),
+  ["如缘似劫 无歇","루 위앤 쓰 지에 우 시에","Rú yuán sì jié, wú xiē","인연인 듯 재앙인 듯, 끝없이 이어져"]
+];
+
+const foreverBridge = [
+  ["荒原的沙滚过思念 我翻涌的年","황위앤 더 사 군궈 쓰니앤 워 판융 더 니앤","Huāngyuán de shā gǔnguò sīniàn, wǒ fānyǒng de nián","황야의 모래가 그리움을 굴려 지나가고, 내 세월은 거세게 뒤척여"],
+  ["梦一场厮守的幻觉 心岁何以万千","멍 이 창 쓰서우 더 환쥐에 신쑤이 허이 완치앤","Mèng yì chǎng sīshǒu de huànjué, xīnsuì héyǐ wànqiān","함께 지키며 사는 환상을 한바탕 꿈꾸니, 마음의 세월은 어찌 이리 수없이 갈라지는가"],
+  ["只因那清冷的暗夜 永记繁花落尽前","즈 인 나 칭렁 더 안예 융지 판화 뤄진 치앤","Zhǐ yīn nà qīnglěng de ànyè, yǒng jì fánhuā luòjìn qián","그 서늘하고 어두운 밤 때문에 꽃이 모두 지기 전의 찬란함을 영원히 기억해"],
+  ["曾得少年 以吻相劝","청 더 사오니앤 이 원 샹취앤","Céng dé shàonián, yǐ wěn xiāngquàn","한때 그 소년과 입맞춤으로 서로를 달랬고"],
+  ["将爱泊在 灰烬之前","지앙 아이 보 짜이 후이진 즈치앤","Jiāng ài bó zài huījìn zhīqián","사랑을 재가 되기 전 그 순간에 머물게 했어"]
+];
+
+const foreverSections = [
+  ["Verse 01", foreverVerse, ""],
+  ["Refrain 01", foreverRefrain, ""],
+  ["Chorus 01", foreverChorusA, ""],
+  ["Refrain 02", foreverRefrain, "반복"],
+  ["Chorus 02", foreverChorusB, "끝맺음 변화"],
+  ["Bridge · Outro", foreverBridge, ""]
+];
+
+const foreverVocabulary = [
+  ["悬月","xuányuè · 쉬앤위에","하늘에 걸린 달"],
+  ["萤蝶","yíngdié · 잉디에","반딧불처럼 빛나는 나비의 시적 이미지"],
+  ["风雪","fēngxuě · 펑쉬에","눈보라; 시련을 비유하기도 함"],
+  ["不合时宜","bù hé shíyí · 부 허 스이","때나 상황에 맞지 않다"],
+  ["心如焰","xīn rú yàn · 신 루 옌","마음이 불꽃과 같다"],
+  ["泊","bó · 보","배를 대다, 머물게 하다"],
+  ["浅笑","qiǎnxiào · 치앤샤오","옅고 은은한 미소"],
+  ["亏欠","kuīqiàn · 쿠이치앤","남에게 빚지다, 미안한 마음이 남다"],
+  ["明哲","míngzhé · 밍저","사리에 밝고 지혜롭다"],
+  ["沦陷","lúnxiàn · 룬시앤","함락되다; 감정에 깊이 빠지다"],
+  ["撕裂","sīliè · 쓰리에","찢어 갈라놓다"],
+  ["铭心","míngxīn · 밍신","마음속 깊이 새기다"],
+  ["入骨","rùgǔ · 루구","뼛속까지 깊이 스며들다"],
+  ["缘／劫","yuán／jié · 위앤／지에","인연／피할 수 없는 재앙이나 시련"],
+  ["厮守","sīshǒu · 쓰서우","서로 곁을 지키며 함께 살다"],
+  ["繁花","fánhuā · 판화","무성하고 화려하게 핀 꽃들"],
+  ["相劝","xiāngquàn · 샹취앤","서로 달래거나 권하다"],
+  ["灰烬","huījìn · 후이진","타고 남은 재; 모든 것이 소멸한 상태의 비유"]
+];
+
+const yiwangVerse1 = [
+  ["梦里把酒浅笑醉","멍 리 바 지우 치앤샤오 쭈이","Mèng lǐ bǎ jiǔ qiǎnxiào zuì","꿈속에서 술잔을 들고 옅은 미소로 취하고"],
+  ["御琴花纷飞","위 친 화 펀페이","Yù qín huā fēnfēi","고금을 타니 꽃잎이 어지러이 흩날려"],
+  ["林中曲","린 중 취","Lín zhōng qǔ","숲속에 울리는 한 곡조"],
+  ["一杯红一滴泪","이 베이 훙 이 디 레이","Yì bēi hóng, yì dī lèi","한 잔의 붉은 술, 한 방울의 눈물"],
+  ["烟霄坠","옌샤오 쭈이","Yānxiāo zhuì","높은 하늘에서 아득히 떨어지고"],
+  ["楼中浮光零碎","러우 중 푸광 링쑤이","Lóu zhōng fúguāng língsuì","누각 안을 떠도는 빛은 조각조각 흩어져"],
+  ["袖染残阳独钓秋水","시우 란 찬양 두 댜오 치우수이","Xiù rǎn cányáng, dú diào qiūshuǐ","저무는 해에 소매를 물들이며 홀로 가을 물에서 낚시해"]
+];
+
+const yiwangPre = [
+  ["落叶归","뤄예 구이","Luòyè guī","낙엽은 돌아가는데"],
+  ["何时再回","허스 짜이 후이","Héshí zài huí","언제 다시 돌아올까"],
+  ["一生一世不够","이 성 이 스 부 꺼우","Yì shēng yí shì bú gòu","한 번의 생과 한 세상만으로는 부족해"],
+  ["镌刻我心扉","쥐앤커 워 신페이","Juānkè wǒ xīnfēi","내 마음 깊은 곳에 새기고"],
+  ["云卷随衣袂","윈 쥐앤 쑤이 이메이","Yún juǎn suí yīmèi","구름은 옷자락을 따라 감겨 들어"],
+  ["这一舞又为谁","쪄 이 우 여우 웨이 쉐이","Zhè yí wǔ yòu wèi shuí","이 한 번의 춤은 또 누구를 위한 것인가"],
+  ["神州地星辰雨同辉","선저우 디 싱천 위 퉁후이","Shénzhōu dì, xīngchén yǔ tónghuī","신주의 땅에서 별과 비가 함께 빛나"]
+];
+
+const yiwangChorusA = [
+  ["一心一往一梦","이 신 이 왕 이 멍","Yì xīn, yì wǎng, yí mèng","한마음, 한결같은 길, 하나의 꿈"],
+  ["也匆匆","예 충충","Yě cōngcōng","그마저도 총총히 흘러가고"],
+  ["揽山河月涌","란 산허 위에 융","Lǎn shānhé, yuè yǒng","산하를 품으니 달빛이 솟아올라"],
+  ["恩怨付酒盅","언위앤 푸 지우중","Ēnyuàn fù jiǔzhōng","은혜와 원한은 술잔에 맡기고"],
+  ["是成愿也成空","스 청위앤 예 청쿵","Shì chéngyuàn yě chéngkōng","소원이 이루어져도 결국 허공이 되는가"],
+  ["一念一往一生","이 니앤 이 왕 이 성","Yí niàn, yì wǎng, yì shēng","한 생각, 한결같은 길, 하나의 생"],
+  ["饮长风","인 창펑","Yǐn chángfēng","긴 바람을 들이마시고"],
+  ["渡红尘枯荣","두 훙천 쿠룽","Dù hóngchén kūróng","속세의 쇠함과 번영을 건너"],
+  ["弦音落曲终","시앤인 뤄 취중","Xiányīn luò, qǔ zhōng","현의 소리가 내려앉고 곡은 끝나"],
+  ["声声叹几重相逢","성성 탄 지 충 샹펑","Shēngshēng tàn jǐ chóng xiāngféng","소리마다 몇 겹의 만남을 탄식해"]
+];
+
+const yiwangVerse2 = [
+  ["秋风起","치우펑 치","Qiūfēng qǐ","가을바람이 일고"],
+  ["雨落无情","위 뤄 우칭","Yǔ luò wúqíng","비는 무정하게 내려"],
+  ["花开花谢花去","화 카이 화 시에 화 취","Huā kāi, huā xiè, huā qù","꽃은 피고 시들고 떠나가"],
+  ["花落漫天迎","화 뤄 만티앤 잉","Huā luò màntiān yíng","온 하늘 가득 지는 꽃을 맞이하고"],
+  ["离歌藏我心","리거 창 워 신","Lígē cáng wǒ xīn","이별 노래에 내 마음을 숨겨"],
+  ["亦化作诗未竟","이 화쭤 스 웨이징","Yì huàzuò shī wèijìng","끝맺지 못한 시로 변해가도"],
+  ["风华泠却不枉此行","펑화 링 취에 부 왕 츠싱","Fēnghuá líng què bù wǎng cǐxíng","빛나던 시절이 차갑게 식어도 이 길은 헛되지 않아"]
+];
+
+const yiwangBridge = [
+  ["曾经沧海难再觅水","청징 창하이 난 짜이 미수이","Céngjīng cānghǎi, nán zài mì shuǐ","한번 넓은 바다를 겪고 나면 다른 물은 다시 찾기 어려워"],
+  ["残羽犹作玄鸟飞","찬위 여우 쭤 쉬앤냐오 페이","Cányǔ yóu zuò xuánniǎo fēi","부서진 깃털로도 여전히 현조가 되어 날아"],
+  ["浮云散何必沉醉","푸윈 싼 허비 천쭈이","Fúyún sàn, hébì chénzuì","뜬구름은 흩어지는데 무엇 하러 취한 채 머무나"],
+  ["前尘已褪千刃做碑","치앤천 이 퉤이 치앤 런 쭤 베이","Qiánchén yǐ tuì, qiān rèn zuò bēi","지난 인연은 이미 빛이 바래고 천 개의 칼날은 비석이 되어"],
+  ["斩断了执念的余魅","잔돤 러 즈니앤 더 위메이","Zhǎnduàn le zhíniàn de yúmèi","집착이 남긴 마지막 그림자마저 베어내"],
+  ["莫问喜与悲","모 원 시 위 베이","Mò wèn xǐ yǔ bēi","기쁨과 슬픔은 묻지 말고"],
+  ["勿憾无悔","우 한 우 후이","Wù hàn, wú huǐ","아쉬워하지도 후회하지도 않아"]
+];
+
+const yiwangChorusB = [
+  ["一心一往一梦","이 신 이 왕 이 멍","Yì xīn, yì wǎng, yí mèng","한마음, 한결같은 길, 하나의 꿈"],
+  ["也从容","예 충룽","Yě cóngróng","이제는 담담하고 여유롭게"],
+  ["谱千秋长虹","푸 치앤치우 창훙","Pǔ qiānqiū chánghóng","천추에 이어질 긴 무지개를 써 내려가"],
+  ["恩怨付酒盅","언위앤 푸 지우중","Ēnyuàn fù jiǔzhōng","은혜와 원한은 술잔에 맡기고"],
+  ["是成愿也成空","스 청위앤 예 청쿵","Shì chéngyuàn yě chéngkōng","소원이 이루어져도 결국 허공이 되는가"],
+  ["一念一往一生","이 니앤 이 왕 이 성","Yí niàn, yì wǎng, yì shēng","한 생각, 한결같은 길, 하나의 생"],
+  ["怎由衷","전 여우중","Zěn yóuzhōng","어찌 마음에서 우러난다 하랴"],
+  ["却笑尽英雄","취에 샤오진 잉슝","Què xiàojìn yīngxióng","그래도 천하의 영웅을 웃음으로 다 보내고"],
+  ["弦音落曲终","시앤인 뤄 취중","Xiányīn luò, qǔ zhōng","현의 소리가 내려앉고 곡은 끝나"],
+  ["相知何须再相逢","샹즈 허쉬 짜이 샹펑","Xiāngzhī héxū zài xiāngféng","서로를 깊이 안다면 어찌 다시 만날 필요가 있을까"]
+];
+
+const yiwangOutro = [
+  ["古琴音缭缭","구친 인 랴오랴오","Gǔqín yīn liáoliáo","고금 소리가 오래 감돌고"],
+  ["玉笛声遥遥","위디 성 야오야오","Yùdí shēng yáoyáo","옥피리 소리는 멀리 퍼져"],
+  ["恍若梦中最美一笑","황뤄 멍중 쭈이 메이 이 샤오","Huǎngruò mèngzhōng zuì měi yí xiào","마치 꿈속에서 본 가장 아름다운 미소 같아"],
+  ["是否","스포우","Shìfǒu","그런가"],
+  ["知否","즈포우","Zhīfǒu","알고 있는가"],
+  ["轮回往生是渺渺","룬후이 왕성 스 먀오먀오","Lúnhuí wǎngshēng shì miǎomiǎo","윤회와 왕생은 아득하고 또 아득해"]
+];
+
+const yiwangSections = [
+  ["Verse 01", yiwangVerse1, ""],
+  ["Pre-Chorus", yiwangPre, ""],
+  ["Chorus 01", yiwangChorusA, ""],
+  ["Verse 02", yiwangVerse2, ""],
+  ["Chorus 02", yiwangChorusA, "반복"],
+  ["Bridge", yiwangBridge, ""],
+  ["Final Chorus", yiwangChorusB, "가사 변화"],
+  ["Outro", yiwangOutro, ""]
+];
+
+const yiwangVocabulary = [
+  ["把酒","bǎ jiǔ · 바 지우","술잔을 들다"],
+  ["御琴","yù qín · 위 친","고금을 다루거나 연주하다"],
+  ["烟霄","yānxiāo · 옌샤오","구름과 안개가 낀 높은 하늘"],
+  ["浮光","fúguāng · 푸광","물결이나 공간 위에 떠도는 빛"],
+  ["残阳","cányáng · 찬양","저물어가는 해, 석양"],
+  ["心扉","xīnfēi · 신페이","마음의 문; 마음 깊은 곳"],
+  ["衣袂","yīmèi · 이메이","옷소매나 옷자락"],
+  ["酒盅","jiǔzhōng · 지우중","작은 술잔"],
+  ["红尘","hóngchén · 훙천","속세, 인간 세상"],
+  ["枯荣","kūróng · 쿠룽","시듦과 번영; 쇠퇴와 흥성"],
+  ["未竟","wèijìng · 웨이징","아직 끝내지 못하다"],
+  ["沧海","cānghǎi · 창하이","넓고 푸른 바다; 큰 경험이나 깊은 사랑의 비유"],
+  ["玄鸟","xuánniǎo · 쉬앤냐오","고대 신화의 검은 신조"],
+  ["前尘","qiánchén · 치앤천","지나간 인연과 옛일"],
+  ["执念","zhíniàn · 즈니앤","놓지 못하는 집착이나 신념"],
+  ["从容","cóngróng · 충룽","침착하고 여유롭다"],
+  ["相知","xiāngzhī · 샹즈","서로의 마음을 깊이 이해하다"],
+  ["轮回往生","lúnhuí wǎngshēng · 룬후이 왕성","윤회하여 다시 태어남"]
+];
+
+const lilongVerse = [
+  ["不问何处落脚","부 원 허추 뤄지아오","Bù wèn héchù luòjiǎo","어디에 발을 디딜지 묻지 않고"],
+  ["不顾负伤跌倒","부 구 푸상 디에다오","Bù gù fùshāng diēdǎo","상처 입어 넘어지는 것도 아랑곳하지 않고"],
+  ["不惧众山险要","부 쥐 중산 시앤야오","Bù jù zhòngshān xiǎnyào","수많은 산의 험준함도 두려워하지 않고"],
+  ["展翅飞高","잔츠 페이가오","Zhǎnchì fēigāo","날개를 펼쳐 높이 날아"],
+  ["只为心中正道","즈 웨이 신중 정다오","Zhǐ wèi xīnzhōng zhèngdào","오직 마음속 바른 길을 위해"],
+  ["光明笼罩","광밍 룽자오","Guāngmíng lǒngzhào","밝은 빛으로 온 세상을 감싸"],
+  ["誓要","스 야오","Shì yào","반드시 맹세코"],
+  ["冲云霄","충 윈샤오","Chōng yúnxiāo","구름 위 높은 하늘로 치솟으리라"]
+];
+
+const lilongPre = [
+  ["信念 化成一束光","신니앤 화청 이 수 광","Xìnniàn huàchéng yí shù guāng","신념은 한 줄기 빛으로 변하고"],
+  ["誓言 斩断那道殇","스옌 잔돤 나 다오 상","Shìyán zhǎnduàn nà dào shāng","맹세는 그 상처를 베어 끊고"],
+  ["挥剑 黎明破晓前","후이젠 리밍 풔샤오 치앤","Huījiàn, límíng pòxiǎo qián","검을 휘둘러 새벽이 밝아오기 전에"],
+  ["幻变 伫立天地间","환비앤 주리 티앤디 지앤","Huànbiàn, zhùlì tiāndì jiān","변화를 거듭하며 천지 사이에 우뚝 서"]
+];
+
+const lilongChorusA = [
+  ["破晓之光灼天","풔샤오 즈 광 줘 티앤","Pòxiǎo zhī guāng zhuó tiān","새벽빛이 하늘을 불태우고"],
+  ["永昼燎原不灭","융저우 랴오위앤 부 미에","Yǒngzhòu liáoyuán bú miè","영원한 낮은 들불처럼 번져 꺼지지 않아"],
+  ["这不堪的一切","쪄 부칸 더 이치에","Zhè bùkān de yíqiè","견디기 힘든 이 모든 것을"],
+  ["去打破这罪孽","취 다풔 쪄 쭈이니에","Qù dǎpò zhè zuìniè","나아가 이 죄악을 깨뜨리고"],
+  ["冲破轮回","충풔 룬후이","Chōngpò lúnhuí","윤회의 굴레를 돌파해"]
+];
+
+const lilongChorusB = [
+  ["破晓之光灼天","풔샤오 즈 광 줘 티앤","Pòxiǎo zhī guāng zhuó tiān","새벽빛이 하늘을 불태우고"],
+  ["永昼燎原不灭","융저우 랴오위앤 부 미에","Yǒngzhòu liáoyuán bú miè","영원한 낮은 들불처럼 번져 꺼지지 않아"],
+  ["去照亮这暗夜","취 자오량 쪄 안예","Qù zhàoliàng zhè ànyè","이 어두운 밤을 밝히러 나아가"],
+  ["斩寒风的凛冽","잔 한펑 더 린리에","Zhǎn hánfēng de lǐnliè","매서운 찬바람을 베어내고"],
+  ["冲破幻灭的世界","충풔 환미에 더 스지에","Chōngpò huànmiè de shìjiè","허망하게 소멸하는 세계를 뚫고 나아가"]
+];
+
+const lilongSections = [
+  ["Verse 01", lilongVerse, ""],
+  ["Pre-Chorus 01", lilongPre, ""],
+  ["Chorus 01", lilongChorusA, ""],
+  ["Chorus 02", lilongChorusB, ""],
+  ["Pre-Chorus 02", lilongPre, "반복"],
+  ["Chorus 03", lilongChorusA, "반복"],
+  ["Final Chorus", lilongChorusB, "마지막 반복"]
+];
+
+const lilongVocabulary = [
+  ["落脚","luòjiǎo · 뤄지아오","발을 딛다; 머물 곳을 정하다"],
+  ["不顾","bú gù · 부 구","돌보지 않다, 아랑곳하지 않다"],
+  ["负伤","fùshāng · 푸상","부상을 입다"],
+  ["险要","xiǎnyào · 시앤야오","지세가 험하고 중요하다"],
+  ["展翅","zhǎnchì · 잔츠","날개를 펼치다"],
+  ["正道","zhèngdào · 정다오","올바른 길, 정의로운 도리"],
+  ["笼罩","lǒngzhào · 룽자오","넓게 뒤덮거나 감싸다"],
+  ["云霄","yúnxiāo · 윈샤오","구름 낀 높은 하늘"],
+  ["信念","xìnniàn · 신니앤","굳게 믿는 생각이나 신념"],
+  ["誓言","shìyán · 스옌","굳게 다짐한 말, 맹세"],
+  ["斩断","zhǎnduàn · 잔돤","베어서 끊다"],
+  ["殇","shāng · 상","젊은 죽음이나 깊은 상처를 나타내는 문학적 표현"],
+  ["伫立","zhùlì · 주리","오랫동안 우뚝 서 있다"],
+  ["破晓","pòxiǎo · 풔샤오","동이 트다, 새벽이 밝다"],
+  ["燎原","liáoyuán · 랴오위앤","불길이 들판 전체로 번지다"],
+  ["罪孽","zuìniè · 쭈이니에","죄악, 죄로 인한 업보"],
+  ["轮回","lúnhuí · 룬후이","삶과 죽음이 되풀이되는 윤회"],
+  ["幻灭","huànmiè · 환미에","환상이 사라지다, 희망이 허망하게 무너지다"]
+];
+
+const windVerse1 = [
+  ["你说你要走了","니 숴 니 야오 쩌우 러","Nǐ shuō nǐ yào zǒu le","너는 이제 떠나야 한다고 말했고"],
+  ["所以认真地向我告别","쒀이 런전 더 샹 워 가오비에","Suǒyǐ rènzhēn de xiàng wǒ gàobié","그래서 진지하게 내게 작별을 건넸어"],
+  ["你说你年纪又大了一些","니 숴 니 니앤지 여우 따 러 이시에","Nǐ shuō nǐ niánjì yòu dà le yìxiē","너는 이제 나이도 조금 더 들었으니"],
+  ["该是时候看看这世界","까이 스 스허우 칸칸 쪄 스지에","Gāi shì shíhou kànkan zhè shìjiè","세상을 둘러볼 때가 되었다고 했지"]
+];
+
+const windVerse2 = [
+  ["你说风要来了","니 숴 펑 야오 라이 러","Nǐ shuō fēng yào lái le","너는 바람이 곧 불어올 거라고 말했고"],
+  ["你的行李就放在旁边","니 더 싱리 지우 팡 짜이 팡비앤","Nǐ de xíngli jiù fàng zài pángbiān","네 짐은 바로 곁에 놓여 있어"],
+  ["随时出发随时要说再见","쑤이스 추파 쑤이스 야오 숴 짜이젠","Suíshí chūfā, suíshí yào shuō zàijiàn","언제든 출발하고 언제든 작별을 말해야 하며"],
+  ["随时飞向辽阔的蓝天","쑤이스 페이샹 랴오쿼 더 란티앤","Suíshí fēixiàng liáokuò de lántiān","언제든 드넓은 푸른 하늘로 날아가야 해"]
+];
+
+const windPre = [
+  ["挥挥手向你告别","후이후이 서우 샹 니 가오비에","Huīhuī shǒu xiàng nǐ gàobié","손을 흔들며 네게 작별을 건네고"],
+  ["我要记住你年轻的脸","워 야오 지주 니 니앤칭 더 리앤","Wǒ yào jìzhù nǐ niánqīng de liǎn","나는 네 젊은 얼굴을 기억할게"],
+  ["愿这风再柔软一些","위앤 쪄 펑 짜이 러우롼 이시에","Yuàn zhè fēng zài róuruǎn yìxiē","이 바람이 조금 더 부드럽기를"],
+  ["愿星光照亮黑夜","위앤 싱광 자오량 헤이예","Yuàn xīngguāng zhàoliàng hēiyè","별빛이 어두운 밤을 밝혀주기를"]
+];
+
+const windChorus = [
+  ["等风来的时候，你就要随风远扬","덩 펑 라이 더 스허우 니 지우 야오 쑤이펑 위앤양","Děng fēng lái de shíhou, nǐ jiù yào suífēng yuǎnyáng","바람이 불어올 때 너는 그 바람을 타고 멀리 날아가야 해"],
+  ["愿我的歌化作你的翅膀","위앤 워 더 거 화쭤 니 더 츠방","Yuàn wǒ de gē huàzuò nǐ de chìbǎng","내 노래가 너의 날개가 되어"],
+  ["陪着你到远方","페이저 니 따오 위앤팡","Péizhe nǐ dào yuǎnfāng","먼 곳까지 너와 함께하기를"],
+  ["等风停的时候，你不要随波逐浪","덩 펑 팅 더 스허우 니 부 야오 쑤이보 주랑","Děng fēng tíng de shíhou, nǐ bú yào suíbō zhúlàng","바람이 멎을 때는 물결에 휩쓸려 떠돌지 않기를"],
+  ["无论何时你愿回头望","우룬 허스 니 위앤 후이터우 왕","Wúlùn héshí nǐ yuàn huítóu wàng","언제라도 네가 뒤돌아보고 싶을 때"],
+  ["我都会做你，最暖的光","워 떠우 후이 쭤 니 쭈이 놘 더 광","Wǒ dōu huì zuò nǐ zuì nuǎn de guāng","나는 언제나 너의 가장 따뜻한 빛이 될게"]
+];
+
+const windOutro = [
+  ["无论何时你愿回头望","우룬 허스 니 위앤 후이터우 왕","Wúlùn héshí nǐ yuàn huítóu wàng","언제라도 네가 뒤돌아보고 싶을 때"],
+  ["我都会做你，最暖的光","워 떠우 후이 쭤 니 쭈이 놘 더 광","Wǒ dōu huì zuò nǐ zuì nuǎn de guāng","나는 언제나 너의 가장 따뜻한 빛이 될게"]
+];
+
+const windSections = [
+  ["Verse 01", windVerse1, ""],
+  ["Verse 02", windVerse2, ""],
+  ["Pre-Chorus 01", windPre, ""],
+  ["Chorus 01", windChorus, ""],
+  ["Pre-Chorus 02", windPre, "반복"],
+  ["Chorus 02", windChorus, "반복"],
+  ["Final Chorus", windChorus, "마지막 반복"],
+  ["Outro", windOutro, "마지막 약속"]
+];
+
+const windVocabulary = [
+  ["告别","gàobié · 가오비에","작별을 고하다"],
+  ["认真","rènzhēn · 런전","진지하다, 성실하다"],
+  ["年纪","niánjì · 니앤지","나이"],
+  ["行李","xíngli · 싱리","여행할 때 챙기는 짐"],
+  ["旁边","pángbiān · 팡비앤","옆, 곁"],
+  ["随时","suíshí · 쑤이스","언제든지, 수시로"],
+  ["出发","chūfā · 추파","출발하다"],
+  ["辽阔","liáokuò · 랴오쿼","넓고 아득하다"],
+  ["挥手","huīshǒu · 후이서우","손을 흔들다"],
+  ["记住","jìzhù · 지주","기억해 두다"],
+  ["柔软","róuruǎn · 러우롼","부드럽다, 유연하다"],
+  ["照亮","zhàoliàng · 자오량","빛을 비추어 밝히다"],
+  ["远扬","yuǎnyáng · 위앤양","멀리 날아가거나 이름을 널리 떨치다"],
+  ["化作","huàzuò · 화쭤","~으로 변하다"],
+  ["翅膀","chìbǎng · 츠방","날개"],
+  ["随波逐浪","suíbō zhúlàng · 쑤이보 주랑","파도를 따라 떠돌다; 자기 방향 없이 휩쓸리다"],
+  ["无论","wúlùn · 우룬","~와 관계없이, 무엇이든"],
+  ["回头望","huítóu wàng · 후이터우 왕","뒤돌아보다"]
+];
+
+const SONGS = [
+  {
+    id:"xingxing-zhihuo", title:"星星之火", reading:"싱싱 즈 훠", meaning:"작은 불씨 · Spark of the Stars",
+    note:"<b>가수와 팬이 서로에게 건네는 감사와 약속.</b> 평범한 돌도 오랜 시간과 동행을 거치면 빛날 수 있다는 이야기에서 출발해, 하나하나의 작은 불씨가 모여 어두운 밤을 밝히는 장면으로 이어지는 팬 헌정곡.",
+    credits:[["발표","2020.07.28"],["작사","张鹏鹏 · 장펑펑"],["작곡·제작","郑国锋 · 정궈펑"],["수록","《X》"]],
+    youtube:"https://www.youtube.com/watch?v=F-S68QiENAo", sections:sparkSections, vocabulary:sparkVocabulary,
+    patterns:[
+      ["因你变不同","yīn nǐ biàn bùtóng · 너로 인해 달라지다<br>‘因 + 원인’은 ‘~로 인해’라는 원인을 표시."],
+      ["从不曾退缩","cóng bùcéng tuìsuō · 한 번도 물러선 적 없다<br>‘从不曾’은 과거부터 지금까지 전혀 없었음을 강조."],
+      ["成为你的依托","chéngwéi nǐ de yītuō · 너의 의지할 곳이 되다<br>‘成为 + 명사’는 ‘~이 되다’라는 변화의 표현."],
+      ["肩并肩走到最后","jiānbìngjiān zǒu dào zuìhòu · 어깨를 나란히 하고 끝까지 걷다<br>‘동사 + 到 + 지점’은 그 지점까지 동작이 이어짐을 표현."]
+    ],
+    studyNote:"<b lang=\"zh-Hans\">星星之火</b>는 직역하면 ‘작은 불씨’. 관용적으로는 아주 작게 시작된 힘이나 희망을 뜻하며, 이 노래에서는 팬 한 사람 한 사람의 빛과 그 빛들이 모여 만드는 따뜻한 연대를 상징."
+  },
+  {
+    id:"xinshang-xuan", title:"心上悬", reading:"신상 쉬앤", meaning:"마음에 걸린 달 · Hanging on the Heart",
+    note:"<b>드라마 《颜心记》의 사랑을 고전적인 달·비·눈·은하수 이미지로 옮긴 OST.</b> 서로를 마음으로 알아본 두 사람이 다시는 약속을 어기지 않고, 남은 시간을 끝까지 함께하겠다는 서약을 노래.",
+    credits:[["발표","2024.06.22"],["작사","周洁颖 · 저우제잉"],["작곡·제작","胡小鸥 · 후샤오어우"],["OST","《颜心记》 안심기"]],
+    youtube:"https://www.youtube.com/watch?v=UYoEuuzGBk0", sections:heartSections, vocabulary:heartVocabulary,
+    patterns:[
+      ["为你……","wèi nǐ… · 너를 위해…<br>상대방을 위해 하려는 행동을 앞에 내세우는 표현."],
+      ["无时不照面","wúshí bù zhàomiàn · 어느 때든 마주하다<br>‘无…不…’은 예외 없이 모두 그러하다는 이중 부정의 강조."],
+      ["尽依你时间","jìn yī nǐ shíjiān · 온전히 네 시간에 따르다<br>‘尽’은 남김없이 전부, ‘依’는 따르거나 기대다는 뜻."],
+      ["绝不食言","jué bù shíyán · 절대로 약속을 어기지 않다<br>‘绝不’은 강한 부정, ‘食言’은 자신이 한 말을 뒤집는다는 표현."]
+    ],
+    studyNote:"<b lang=\"zh-Hans\">心上悬</b>은 직역하면 ‘마음 위에 걸려 있다’. 달이 하늘에 걸린 모습과 한 사람이 마음에서 떠나지 않는 상태를 겹친 제목. 가사 전체에서 달·눈·별·꽃이 변치 않는 사랑의 약속을 상징."
+  },
+  {
+    id:"yaoburan-yiwannian", title:"要不然我们就这样一万年", reading:"야오부란 워먼 지우 쪄양 이 완 니앤", meaning:"차라리 우리 이대로 만 년을 · Or Forever",
+    note:"<b>황샤오윈이 부른 드라마 《长月烬明》 삽입곡으로, 라운희가 공연과 방송에서 다시 불러 인물의 서사를 이어간 곡.</b> 사랑과 증오, 인연과 시련이 풀리지 않는 운명 속에서 이별 직전의 시간을 붙들어 영원처럼 머물고 싶은 마음을 노래.",
+    credits:[["발표","2023.04.10"],["원가창","黄霄雲 · 황샤오윈"],["작사","段思思 · 돤쓰쓰"],["작곡·제작","谭旋 · 탄쉬안"],["OST","《长月烬明》 장월신명"]],
+    youtube:"https://www.youtube.com/watch?v=YOMRu1ItvLo", sections:foreverSections, vocabulary:foreverVocabulary,
+    patterns:[
+      ["将落未落","jiāng luò wèi luò · 지려 하지만 아직 지지 않은<br>‘将…未…’는 곧 일어날 듯하지만 아직 완성되지 않은 경계 상태."],
+      ["把时间泊在……之前","bǎ shíjiān bó zài…zhīqián · 시간을 …하기 전에 머물게 하다<br>‘把 + 대상 + 동사’로 대상에 가하는 변화나 처리를 강조."],
+      ["如缘似劫","rú yuán sì jié · 인연 같고 재앙 같다<br>‘如 A 似 B’는 ‘A와 같고 B와도 같다’는 문학적 비유."],
+      ["何以万千","héyǐ wànqiān · 어찌 이리 수없이 많은가<br>‘何以’는 문어체에서 ‘어찌하여·무엇으로’라는 질문을 표현."]
+    ],
+    studyNote:"<b lang=\"zh-Hans\">要不然</b>은 ‘그렇지 않으면·아니면’이라는 뜻. 제목에서는 모든 해결책이 사라진 뒤 내놓는 마지막 바람처럼 쓰이며, ‘이별할 수 없다면 차라리 이 순간 그대로 만 년을 함께하자’는 절박한 선택을 표현."
+  },
+  {
+    id:"yiwang", title:"一往", reading:"이왕", meaning:"오직 앞으로 · Ever Forward",
+    note:"<b>라운희가 직접 작사하고 노래한 《水龙吟》 당려사 인물곡.</b> 술·고금·옥피리·낙엽·현조 같은 무협적 이미지로 강호를 건너온 인물의 집착과 상실을 되짚고, 마지막에는 기쁨과 슬픔을 넘어 후회 없이 앞으로 나아가는 깨달음에 도달.",
+    credits:[["발표","2025.10.23"],["노래·작사","罗云熙 · 라운희"],["작곡","王星贺 · 왕싱허"],["편곡·제작","翟锦彦 · 자이진옌"],["인물곡","《水龙吟》 唐俪辞"]],
+    production:[
+      ["노래","罗云熙"],["작사","罗云熙"],["작곡","王星贺"],["편곡","翟锦彦"],
+      ["보컬 제작","张生磊"],["녹음","唐子翔、张生磊、王小四"],["화음","王馨悦、董嘉鸿"],
+      ["현악","国际首席爱乐乐团"],["호른","刘佳乐"],["고쟁","丁雪儿"],["퉁소","丁晓逵"],["기타","郇正睿"],
+      ["믹싱·마스터","张生磊"],["총괄","聂伊辰、樊硕"],["프로듀서","翟锦彦"],
+      ["녹음실","8082AUDIOSTUDIO录音棚／金田录音棚"]
+    ],
+    youtube:"https://www.youtube.com/watch?v=k2Z8SIxCXmg", sections:yiwangSections, vocabulary:yiwangVocabulary,
+    patterns:[
+      ["一心一往一梦","yì xīn, yì wǎng, yí mèng · 한마음, 한길, 하나의 꿈<br>같은 수사 구조를 반복해 인물의 한결같은 의지와 생을 압축."],
+      ["曾经沧海难再觅水","céngjīng cānghǎi nán zài mì shuǐ · 바다를 겪은 뒤 다른 물을 찾기 어렵다<br>원진의 시구 ‘曾经沧海难为水’를 변주해 대체할 수 없는 경험과 인연을 표현."],
+      ["何必／何须","hébì／héxū · 무엇 하러／어찌 ~할 필요가 있는가<br>답을 요구하기보다 필요 없음을 강조하는 수사적 질문."],
+      ["莫问／勿憾","mò wèn／wù hàn · 묻지 말라／아쉬워하지 말라<br>‘莫·勿 + 동사’는 고전적인 금지·권고 표현으로 단호한 결심을 전달."]
+    ],
+    studyNote:"<b lang=\"zh-Hans\">一往</b>은 ‘한 방향으로 줄곧 나아감’을 뜻하며 <b lang=\"zh-Hans\">一往无前</b>(거침없이 앞으로 나아가다), <b lang=\"zh-Hans\">一往情深</b>(한결같이 정이 깊다)의 두 의미를 함께 떠올리게 하는 제목. 당려사의 전진과 깊은 정을 동시에 품은 표현."
+  },
+  {
+    id:"lilong-yin", title:"骊龙吟", reading:"리룽 인", meaning:"검은 용의 노래 · Chant of the Black Dragon",
+    note:"<b>황쯔훙판이 부른 《水龙吟》 오프닝곡으로, 라운희가 콘서트 팬 신청 코너에서 다시 부른 곡.</b> 상처와 험로를 두려워하지 않고 마음속 정의를 따라 날아올라, 새벽빛으로 죄악과 윤회의 굴레를 깨뜨리는 영웅의 전진을 노래.",
+    credits:[["발표","2025.10.23"],["원가창","黄子弘凡 · 황쯔훙판"],["작사","赵瑟、胡海涛"],["작곡","杨阔、赵瑟、萨吉"],["OST","《水龙吟》 오프닝곡"]],
+    production:[
+      ["노래","黄子弘凡"],["작사","赵瑟、胡海涛"],["작곡","杨阔、赵瑟、萨吉"],
+      ["프로듀서","薛媛、艳子"],["편곡","杨阔、赵瑟"],["피리","丁晓逵"],["수오나","姚笛"],
+      ["현악","国际首席爱乐乐团"],["녹음·믹싱","孟韬"],["녹음실","Jet Studio"],
+      ["음악 제작","北京星合尚世影视文化有限公司／妙音音乐（M MUSIC STUDIO）"]
+    ],
+    links:[
+      ["라운희 콘서트 버전","https://www.youtube.com/watch?v=jKvVp4CDcd8"],
+      ["황쯔훙판 원곡","https://www.youtube.com/watch?v=3U9ysNcQ7yg"]
+    ],
+    sections:lilongSections, vocabulary:lilongVocabulary,
+    patterns:[
+      ["不问／不顾／不惧","bù wèn／bú gù／bú jù · 묻지 않고／아랑곳하지 않고／두려워하지 않고<br>세 개의 부정 표현을 나란히 배치해 어떤 장애에도 멈추지 않는 결의를 강조."],
+      ["只为心中正道","zhǐ wèi xīnzhōng zhèngdào · 오직 마음속 바른 길을 위해<br>‘只为’는 다른 이유를 모두 제외하고 단 하나의 목적만 강조."],
+      ["誓要冲云霄","shì yào chōng yúnxiāo · 반드시 높은 하늘로 치솟겠다고 맹세하다<br>‘誓要 + 동사’는 반드시 행동하겠다는 강한 다짐."],
+      ["冲破……","chōngpò… · …을 뚫고 돌파하다<br>장애물·한계·굴레를 힘으로 깨고 나아갈 때 사용하는 역동적인 표현."]
+    ],
+    studyNote:"<b lang=\"zh-Hans\">骊龙</b>은 검은 용을 뜻하고 <b lang=\"zh-Hans\">吟</b>은 시가나 노래를 읊는다는 뜻. 제목 전체는 ‘검은 용의 노래’로, 어둠을 뚫고 빛을 향해 솟구치는 《水龙吟》의 영웅적 세계관을 압축."
+  },
+  {
+    id:"dengfeng-ting", title:"等风停", reading:"덩 펑 팅", meaning:"바람이 멎기를 기다리며 · Waiting for the Wind to Stop",
+    note:"<b>떠나는 이를 붙잡는 대신 더 넓은 세상으로 보내주며 건네는 다정한 송별가.</b> 바람이 불 때는 노래가 날개가 되어 먼 길을 동행하고, 바람이 멎어 방향을 잃는 순간에는 언제든 돌아볼 수 있는 따뜻한 빛으로 남겠다는 약속.",
+    credits:[["발표","2020.06.19"],["노래","罗云熙 · 라운희"],["작사·작곡·제작","秦昊 · 친하오"],["편곡","罗威、秦昊"],["수록","《X》"]],
+    production:[
+      ["노래","罗云熙"],["작사·작곡","秦昊"],["프로듀서","秦昊"],["편곡","罗威、秦昊"],
+      ["드럼","祁大为"],["기타","胡洋"],["베이스","仲伟莛"],["피아노","罗威"],
+      ["화음","葛琪璘、秦昊"],["현악","国际首席爱乐乐团"],["현악 감독","罗威"],
+      ["보컬 녹음","倪涵文＠Studio21A"],["악기 녹음","周天澈、徐志明＠Studio21A"],
+      ["현악 녹음","刘韧＠TTL"],["믹싱·마스터","周天澈＠Studio21A"]
+    ],
+    links:[
+      ["공식 MV","https://www.youtube.com/watch?v=Rps-w_9i5Wc"],
+      ["《此刻 X 以光》 콘서트","https://www.youtube.com/watch?v=4OaMpOoVcnA"]
+    ],
+    sections:windSections, vocabulary:windVocabulary,
+    patterns:[
+      ["该是时候……","gāi shì shíhou… · 이제 …할 때가 되다<br>어떤 행동을 시작하기에 적절한 시점이 왔음을 나타내는 표현."],
+      ["随时……随时……","suíshí… suíshí… · 언제든 …하고 언제든 …하다<br>같은 말을 반복해 떠남과 작별이 언제라도 닥칠 수 있음을 강조."],
+      ["愿……","yuàn… · …하기를 바라다<br>상대에게 보내는 소망이나 축원을 부드럽고 문학적으로 전달."],
+      ["无论何时……都……","wúlùn héshí… dōu… · 언제라도 반드시 …하다<br>조건이나 시간과 관계없이 결과가 변하지 않음을 강조."]
+    ],
+    studyNote:"제목의 <b lang=\"zh-Hans\">等</b>은 ‘기다리다’, <b lang=\"zh-Hans\">风停</b>은 ‘바람이 멎다’. 가사에서는 <b lang=\"zh-Hans\">风来</b>(출발할 때)와 <b lang=\"zh-Hans\">风停</b>(방향을 잃기 쉬운 때)을 대비해, 자유롭게 떠나도록 응원하면서도 돌아올 자리는 지켜주겠다는 사랑을 표현."
+  }
+];
+
+function lyricRow([cn, reading, pinyin, translation]){
+  return `<div class="lyric-row"><p class="chinese" lang="zh-Hans">${cn}</p><p class="reading">${reading}</p><p class="pinyin" lang="zh-Latn-pinyin">${pinyin}</p><p class="translation">${translation}</p></div>`;
+}
+
+function renderSong(song){
+  document.title = `${song.title} — 한글 발음·가사 해석 | 라운희`;
+  document.getElementById("song-title").textContent = song.title;
+  document.getElementById("song-reading").textContent = song.reading;
+  document.getElementById("song-meaning").textContent = song.meaning;
+  document.getElementById("song-note").innerHTML = song.note;
+  const productionHTML = song.production ? `<details class="credit-details"><summary>전체 제작진 보기</summary><div class="production-list">${song.production.map(([label,value]) =>
+    `<div class="production-row"><span>${label}</span><b>${value}</b></div>`
+  ).join("")}</div></details>` : "";
+  const listenLinks = song.links || [["YouTube에서 듣기", song.youtube]];
+  const listenHTML = listenLinks.map(([label,url]) =>
+    `<a class="listen" href="${url}" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">▶</span> ${label}</a>`
+  ).join("");
+  document.getElementById("song-credits").innerHTML = song.credits.map(([label,value]) =>
+    `<div class="credit"><span>${label}</span><b>${value}</b></div>`
+  ).join("") + productionHTML + listenHTML;
+  document.getElementById("lyric-sections").innerHTML = song.sections.map(([label, lines, note]) =>
+    `<section class="section"><div class="section-head"><span class="section-label">${label}${note ? `<span class="repeat-note">${note}</span>` : ""}</span></div><div class="lyric-card">${lines.map(lyricRow).join("")}</div></section>`
+  ).join("");
+  document.getElementById("vocab-list").innerHTML = song.vocabulary.map(([cn, py, meaning]) =>
+    `<article class="word"><div class="word-top"><span class="word-cn" lang="zh-Hans">${cn}</span><span class="word-py">${py}</span></div><div class="word-kr">${meaning}</div></article>`
+  ).join("");
+  document.getElementById("pattern-list").innerHTML = `<h3>가사 속 표현</h3>` + song.patterns.map(([title,body]) =>
+    `<div class="pattern"><b>${title}</b><span>${body}</span></div>`
+  ).join("");
+  document.getElementById("study-note").innerHTML = song.studyNote;
+  document.querySelectorAll(".song-button").forEach(button => button.setAttribute("aria-pressed", String(button.dataset.song === song.id)));
+}
+
+document.getElementById("song-picker").innerHTML = SONGS.map(song =>
+  `<button class="song-button" type="button" data-song="${song.id}" aria-pressed="false"><span lang="zh-Hans">${song.title}</span> · ${song.reading}</button>`
+).join("");
+
+document.getElementById("song-picker").addEventListener("click", event => {
+  const button = event.target.closest(".song-button");
+  if(!button) return;
+  const song = SONGS.find(item => item.id === button.dataset.song);
+  if(song){
+    renderSong(song);
+    location.hash = song.id;
+    window.scrollTo({top:0, behavior:"smooth"});
+  }
+});
+
+const initialSong = SONGS.find(song => song.id === location.hash.slice(1)) || SONGS[0];
+renderSong(initialSong);
+</script>
+</body>
+</html>
