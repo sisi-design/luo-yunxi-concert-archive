@@ -206,6 +206,8 @@
   .overview-cn{ color:var(--ivory); font-family:'Noto Serif KR',serif; font-size:15px; line-height:1.65; }
   .overview-py{ color:var(--gold); font-family:'JetBrains Mono',monospace; font-size:10.5px; line-height:1.65; margin-top:2px; }
   .overview-kr{ color:var(--mute); font-size:11.5px; line-height:1.65; margin-top:2px; }
+  .overview-line .word-list{ margin-top:9px; }
+  .overview-line .word-list li{ padding:7px 9px; background:rgba(139,111,217,.075); }
   .detail-block{ margin-top:18px; }
   .word-list{ display:flex; flex-wrap:wrap; gap:6px; margin:0; padding:0; list-style:none; }
   .word-list li{ padding:7px 9px; background:rgba(139,111,217,.07); border:1px solid rgba(183,156,255,.12); border-radius:8px; color:var(--mute); font-size:10.5px; line-height:1.5; }
@@ -947,13 +949,45 @@ function escapeHTML(value=""){
   return String(value).replace(/[&<>"']/g, char => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"})[char]);
 }
 
+const COMMON_LYRIC_WORDS = [
+  ["我","wǒ · 워","나"],["你","nǐ · 니","너"],["我们","wǒmen · 워먼","우리"],["我的","wǒ de · 워 더","나의"],["你的","nǐ de · 니 더","너의"],
+  ["他","tā · 타","그"],["不","bù · 부","~하지 않다"],["没有","méiyǒu · 메이여우","없다"],["也","yě · 예","또한, ~도"],["都","dōu · 떠우","모두"],
+  ["是","shì · 스","~이다"],["在","zài · 짜이","~에 있다, ~에서"],["有","yǒu · 여우","있다, 가지다"],["为你","wèi nǐ · 웨이 니","너를 위해"],["因为","yīnwèi · 인웨이","~때문에"],
+  ["让","ràng · 랑","~하게 하다"],["把","bǎ · 바","대상을 앞세우는 처치문 표지"],["被","bèi · 베이","~에 의해"],["要","yào · 야오","원하다, ~해야 한다"],["想","xiǎng · 샹","생각하다, ~하고 싶다"],
+  ["愿","yuàn · 위앤","바라다, 소망하다"],["能","néng · 넝","~할 수 있다"],["会","huì · 후이","~할 수 있다, ~하게 되다"],["就","jiù · 지우","곧, 바로, 그러면"],["再","zài · 짜이","다시"],
+  ["如何","rúhé · 루허","어떻게"],["何时","héshí · 허스","언제"],["多少","duōshao · 뚸사오","얼마나, 수많은"],["时候","shíhou · 스허우","때, 시간"],["一起","yìqǐ · 이치","함께"],
+  ["最后","zuìhòu · 쭈이허우","마지막"],["世界","shìjiè · 스지에","세상"],["未来","wèilái · 웨이라이","미래"],["时间","shíjiān · 스지앤","시간"],["年岁","niánsuì · 니앤쑤이","세월, 나이"],
+  ["心","xīn · 신","마음"],["梦","mèng · 멍","꿈"],["爱","ài · 아이","사랑"],["回忆","huíyì · 후이이","추억"],["思念","sīniàn · 쓰니앤","그리움"],
+  ["相逢","xiāngféng · 샹펑","서로 만나다"],["告别","gàobié · 가오비에","작별하다"],["陪着","péizhe · 페이저","곁에서 함께하다"],["守护","shǒuhù · 서우후","지키다"],["回头","huítóu · 후이터우","뒤돌아보다"],
+  ["走","zǒu · 쩌우","걷다, 떠나다"],["来","lái · 라이","오다"],["去","qù · 취","가다"],["飞","fēi · 페이","날다"],["归","guī · 구이","돌아가다"],
+  ["风","fēng · 펑","바람"],["雨","yǔ · 위","비"],["雪","xuě · 쉬에","눈"],["月","yuè · 위에","달"],["星","xīng · 싱","별"],
+  ["光","guāng · 광","빛"],["夜","yè · 예","밤"],["天","tiān · 티앤","하늘, 날"],["花","huā · 화","꽃"],["云","yún · 윈","구름"],
+  ["酒","jiǔ · 지우","술"],["泪","lèi · 레이","눈물"],["一生","yìshēng · 이성","일생"],["一切","yíqiè · 이치에","모든 것"],["从不","cóngbù · 총부","한 번도 ~하지 않다"],
+  ["无论","wúlùn · 우룬","~와 관계없이"],["只为","zhǐwèi · 즈웨이","오직 ~을 위해"],["化作","huàzuò · 화쭤","~으로 변하다"],["穿过","chuānguò · 촨궈","통과하다, 뚫고 지나가다"],["照亮","zhàoliàng · 자오량","비추어 밝히다"]
+];
+
+function wordsForLyricLine(song, chinese, pinyin, translation){
+  const curated = song.vocabulary.flatMap(([term,py,meaning]) => term.split(/[／/、]/).map(part => [part.trim(),py,meaning,2]));
+  const common = COMMON_LYRIC_WORDS.map(word => [...word,1]);
+  const candidates = [...curated,...common]
+    .filter(([term]) => term && chinese.includes(term))
+    .sort((a,b) => b[3]-a[3] || b[0].length-a[0].length);
+  const selected = [];
+  for(const word of candidates){
+    if(selected.some(item => item[0] === word[0] || item[0].includes(word[0]))) continue;
+    selected.push(word);
+    if(selected.length === 6) break;
+  }
+  return selected.length ? selected : [[chinese,pinyin,translation,0]];
+}
+
 function renderLyricsArchive(){
   const container = document.getElementById("lyrics-index");
   container.innerHTML = LYRICS_ARCHIVE.map(song => {
     const credits = song.credits.map(([label,value]) => `<span><b>${escapeHTML(label)}</b> ${escapeHTML(value)}</span>`).join("");
     const sections = song.sections.map(([label,lines,note]) => `
       <div class="lyrics-section-title">${escapeHTML(label)}${note ? ` · ${escapeHTML(note)}` : ""}</div>
-      ${lines.map(([cn,reading,pinyin,translation]) => `<div class="overview-line"><div class="overview-cn" lang="zh-Hans">${escapeHTML(cn)}</div><div class="overview-py">${escapeHTML(pinyin)}</div><div class="overview-kr"><b>${escapeHTML(reading)}</b> · ${escapeHTML(translation)}</div></div>`).join("")}
+      ${lines.map(([cn,reading,pinyin,translation]) => { const lineWords = wordsForLyricLine(song,cn,pinyin,translation).map(([word,py,meaning]) => `<li><b lang="zh-Hans">${escapeHTML(word)}</b> ${escapeHTML(py)} · ${escapeHTML(meaning)}</li>`).join(""); return `<div class="overview-line"><div class="overview-cn" lang="zh-Hans">${escapeHTML(cn)}</div><div class="overview-py">${escapeHTML(pinyin)} · ${escapeHTML(reading)}</div><div class="overview-kr">${escapeHTML(translation)}</div><ul class="word-list">${lineWords}</ul></div>`; }).join("")}
     `).join("");
     const words = song.vocabulary.map(([cn,py,meaning]) => `<li><b lang="zh-Hans">${escapeHTML(cn)}</b> · ${escapeHTML(py)} · ${escapeHTML(meaning)}</li>`).join("");
     return `<details class="lyrics-item" id="lyrics-${song.id}"><summary><span>🎵 <span lang="zh-Hans">${escapeHTML(song.title)}</span> · ${escapeHTML(song.reading)}<span class="lyrics-summary-sub">${escapeHTML(song.meaning)}</span></span></summary><div class="lyrics-body"><p class="lyrics-note">${song.note}</p><div class="lyrics-credit-line">${credits}</div><div class="lyrics-overview"><div class="overview-title">전체 가사 · 원문 / 병음 / 한글 발음 / 해석</div>${sections}</div><div class="detail-block"><div class="detail-title">중국어 핵심 단어</div><ul class="word-list">${words}</ul></div></div></details>`;
