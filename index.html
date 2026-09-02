@@ -160,7 +160,7 @@
   }
 
   .tabs{
-    width:100%; max-width:100%; min-width:0; display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:4px;
+    width:100%; max-width:100%; min-width:0; display:grid; grid-template-columns:repeat(6,minmax(0,1fr)); gap:4px;
     margin:44px 0 6px; border-bottom:1px solid var(--line);
   }
   .tab{
@@ -183,6 +183,9 @@
   }
   .tab[aria-selected="true"]::after{ transform:scaleX(1); }
   .tab:focus-visible{ outline:2px solid var(--purple-glow); outline-offset:4px; }
+  .tab-link{ display:block; text-align:center; text-decoration:none; }
+  .tab-link::after{ transform:scaleX(.28); opacity:.55; }
+  .tab-link:hover::after, .tab-link:focus-visible::after{ transform:scaleX(1); opacity:1; }
 
   [role="tabpanel"], footer{ width:100%; max-width:100%; min-width:0; }
 
@@ -315,9 +318,11 @@
   .listen-label svg{ width:12px; height:12px; }
   .listen-label.primary{ color:var(--red-glow); border:1px solid rgba(255,109,126,.3); background:rgba(196,52,74,.08); }
   .listen-label.cleaner{ color:var(--purple-glow); border:1px solid rgba(183,156,255,.36); background:rgba(139,111,217,.12); }
+  .listen-label.lyrics-page{ color:var(--gold); border:1px solid rgba(227,182,85,.38); background:rgba(227,182,85,.09); }
   .listen-label:hover{ transform:translateY(-1px); }
   .listen-label.primary:hover{ background:rgba(196,52,74,.17); border-color:rgba(255,109,126,.55); }
   .listen-label.cleaner:hover{ background:rgba(139,111,217,.22); border-color:rgba(183,156,255,.62); }
+  .listen-label.lyrics-page:hover{ background:rgba(227,182,85,.17); border-color:rgba(227,182,85,.68); }
   .listen-label:focus-visible{ outline:2px solid var(--ivory); outline-offset:2px; }
   .listen-label.missing{ color:var(--mute-2); justify-content:flex-end; padding:0; min-height:0; }
   .quality-note{ color:var(--mute-2); font-size:9.5px; line-height:1.35; text-align:center; max-width:170px; }
@@ -422,12 +427,13 @@
     </section>
   </div>
 
-  <div class="tabs" role="tablist" aria-label="콘서트 선택">
+  <div class="tabs" role="tablist" aria-label="무대 아카이브 선택">
     <button class="tab" role="tab" id="tab-nj" aria-selected="true" aria-controls="panel-nj"><span class="num">01 · 2026.07</span>난징</button>
     <button class="tab" role="tab" id="tab-gz" aria-selected="false" aria-controls="panel-gz" tabindex="-1"><span class="num">02 · 2026.08</span>광저우</button>
     <button class="tab" role="tab" id="tab-x" aria-selected="false" aria-controls="panel-x" tabindex="-1"><span class="num">03 · 2024.06</span>첫 솔로</button>
     <button class="tab" role="tab" id="tab-festival" aria-selected="false" aria-controls="panel-festival" tabindex="-1"><span class="num">04 · 2024.09</span>음악제</button>
     <button class="tab" role="tab" id="tab-tv" aria-selected="false" aria-controls="panel-tv" tabindex="-1"><span class="num">05 · 2019–</span>TV 무대</button>
+    <a class="tab tab-link" href="lyrics.html"><span class="num">06 · STUDY</span>가사</a>
   </div>
 
   <section id="panel-nj" role="tabpanel" aria-labelledby="tab-nj">
@@ -893,6 +899,20 @@ function ytWatchURL(id){ return "https://www.youtube.com/watch?v=" + id; }
 function ytThumbURL(id){ return "https://img.youtube.com/vi/" + id + "/hqdefault.jpg"; }
 function ytChannelURL(){ return "https://music.youtube.com/channel/UCaVxiNWhf2qEjlInTdj3lUA"; }
 
+const LYRICS_PAGES = {
+  "星星之火":"xingxing-zhihuo",
+  "心上悬":"xinshang-xuan",
+  "要不然我们就这样一万年":"yaoburan-yiwannian",
+  "一往":"yiwang",
+  "骊龙吟":"lilong-yin",
+  "等风停":"dengfeng-ting"
+};
+
+function lyricsPageFor(track){
+  const id = LYRICS_PAGES[track.cn];
+  return id ? `lyrics.html#${id}` : "";
+}
+
 function conciseText(text=""){
   return text.split(/\.\s+/).map(part => {
     let s = part.trim().replace(/\.$/, "");
@@ -934,6 +954,7 @@ function renderList(container, data){
   data.forEach(t => {
     const hasVideo = !!t.yt;
     const cleanerVideo = cleanerVideoFor(t);
+    const lyricsPage = lyricsPageFor(t);
     const el = document.createElement("article");
     el.className = "track";
 
@@ -947,6 +968,10 @@ function renderList(container, data){
 
     const cleanerHTML = cleanerVideo
       ? `<a class="listen-label cleaner" href="${ytWatchURL(cleanerVideo.yt)}" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 5v14l11-7z"/></svg>방송·공식 영상</a><span class="quality-note">음향 안정 추천 · ${cleanerVideo.type}<br>${cleanerVideo.source}</span>`
+      : "";
+
+    const lyricsHTML = lyricsPage
+      ? `<a class="listen-label lyrics-page" href="${lyricsPage}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 4h14v16H5z"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>가사 보기</a>`
       : "";
 
     el.innerHTML = `
@@ -974,7 +999,7 @@ function renderList(container, data){
         ${t.review ? `<div class="stage-review"><b>무대 평가 ${t.rating}</b>${conciseText(t.review)}</div>` : ""}
         ${t.source ? `<div class="track-source">출처: ${t.source}</div>` : ""}
       </div>
-      <div class="track-listen">${listenHTML}${cleanerHTML}</div>
+      <div class="track-listen">${listenHTML}${cleanerHTML}${lyricsHTML}</div>
     `;
     container.appendChild(el);
   });
