@@ -167,7 +167,7 @@
     appearance:none; background:none; border:none; color:var(--mute);
     font-family:'Noto Serif KR', serif; font-weight:600; font-size:15px;
     padding:12px 5px 14px; cursor:pointer; position:relative; transition:color .2s ease, background .2s ease;
-    border-radius:9px 9px 0 0; white-space:nowrap;
+    border-radius:9px 9px 0 0; white-space:nowrap; text-align:center; text-decoration:none;
   }
   .tab .num{
     display:block; margin:0 0 5px; font-family:'JetBrains Mono',monospace;
@@ -293,6 +293,20 @@
   .thumb .play-badge svg{ width:18px; height:18px; }
   .thumb.no-video{ display:flex; align-items:center; justify-content:center; }
   .thumb.no-video .track-num{ border:none; width:auto; height:auto; }
+  .thumb.fallback img{ filter:saturate(.72) brightness(.72); }
+  .thumb-note{ position:absolute; inset:auto 3px 3px; padding:2px 4px; border-radius:4px; background:rgba(10,8,18,.82); color:var(--ivory); font-size:7px; line-height:1.15; text-align:center; letter-spacing:.02em; }
+
+  .channel-picks{ margin:16px 0 25px; }
+  .channel-picks-head{ display:flex; justify-content:space-between; gap:12px; align-items:end; margin-bottom:10px; }
+  .channel-picks-head b{ color:var(--gold); font-size:13px; }
+  .channel-picks-head span{ color:var(--mute-2); font-size:10.5px; text-align:right; }
+  .channel-picks-grid{ display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:8px; }
+  .channel-pick{ min-width:0; color:var(--ivory); text-decoration:none; border:1px solid var(--line); border-radius:9px; overflow:hidden; background:var(--panel); }
+  .channel-pick img{ display:block; width:100%; aspect-ratio:16/9; object-fit:cover; }
+  .channel-pick-copy{ display:block; padding:7px 8px 8px; }
+  .channel-pick-copy b{ display:block; font-size:10.5px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .channel-pick-copy small{ display:block; margin-top:3px; color:var(--mute-2); font-size:8.5px; line-height:1.35; }
+  .channel-pick:hover, .channel-pick:focus-visible{ border-color:var(--purple-glow); transform:translateY(-1px); }
 
   .track-num{
     font-family:'JetBrains Mono', monospace; font-size:12px; color:var(--mute-2);
@@ -342,6 +356,7 @@
   .listen-label svg{ width:12px; height:12px; }
   .listen-label.primary{ color:var(--red-glow); border:1px solid rgba(255,109,126,.3); background:rgba(196,52,74,.08); }
   .listen-label.cleaner{ color:var(--purple-glow); border:1px solid rgba(183,156,255,.36); background:rgba(139,111,217,.12); }
+  .listen-label.alternate{ color:var(--gold); border:1px solid rgba(227,182,85,.32); background:rgba(227,182,85,.07); }
   .listen-label.lyrics-page{ color:var(--gold); border:1px solid rgba(227,182,85,.38); background:rgba(227,182,85,.09); }
   .listen-label:hover{ transform:translateY(-1px); }
   .listen-label.primary:hover{ background:rgba(196,52,74,.17); border-color:rgba(255,109,126,.55); }
@@ -380,6 +395,9 @@
     .track-listen{ grid-column: 2 / 3; align-items:stretch; margin-top:6px; width:min(100%,220px); }
     .thumb{ width:52px; height:36px; }
     .listen-label.missing{ justify-content:flex-start; }
+    .channel-picks-grid{ grid-template-columns:repeat(2,minmax(0,1fr)); }
+    .channel-picks-head{ align-items:flex-start; flex-direction:column; }
+    .channel-picks-head span{ text-align:left; }
   }
 
   @media (max-width: 380px){
@@ -458,7 +476,7 @@
     <button class="tab" role="tab" id="tab-x" aria-selected="false" aria-controls="panel-x" tabindex="-1"><span class="num">04 · 2024.06</span>첫 솔로</button>
     <button class="tab" role="tab" id="tab-festival" aria-selected="false" aria-controls="panel-festival" tabindex="-1"><span class="num">05 · 2024.09</span>음악제</button>
     <button class="tab" role="tab" id="tab-tv" aria-selected="false" aria-controls="panel-tv" tabindex="-1"><span class="num">06 · 2019–</span>TV 무대</button>
-    <button class="tab" role="tab" id="tab-lyrics" aria-selected="false" aria-controls="panel-lyrics" tabindex="-1"><span class="num">07 · LYRICS</span>가사</button>
+    <a class="tab" role="tab" id="tab-lyrics" aria-selected="false" aria-controls="panel-lyrics" tabindex="-1" href="lyrics.html"><span class="num">07 · LYRICS</span>가사집</a>
   </div>
 
   <section id="panel-lyrics" role="tabpanel" aria-labelledby="tab-lyrics" hidden>
@@ -552,6 +570,16 @@
       </span>
       <span class="full-play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></span>
     </a>
+    <div class="channel-picks" aria-label="청두 공연 채널 영상 모음">
+      <div class="channel-picks-head"><b>청두 공연 채널 영상 모음</b><span>지정 채널 · 3분 이상 · 제목에 곡명이 없는 영상은 개별 곡과 임의 매핑하지 않음</span></div>
+      <div class="channel-picks-grid">
+        <a class="channel-pick" href="https://www.youtube.com/watch?v=AIswILFf2vo" target="_blank" rel="noopener noreferrer"><img src="https://img.youtube.com/vi/AIswILFf2vo/hqdefault.jpg" alt="청두 공연 클립" loading="lazy"><span class="channel-pick-copy"><b>청두 공연 클립 01</b><small>5:30 · @luoyunxi-fansSriLanka</small></span></a>
+        <a class="channel-pick" href="https://www.youtube.com/watch?v=CFnmW2VZySg" target="_blank" rel="noopener noreferrer"><img src="https://img.youtube.com/vi/CFnmW2VZySg/hqdefault.jpg" alt="청두 공연 클립" loading="lazy"><span class="channel-pick-copy"><b>청두 공연 클립 02</b><small>4:26 · @luoyunxi-fansSriLanka</small></span></a>
+        <a class="channel-pick" href="https://www.youtube.com/watch?v=kdNIQZ5Ii54" target="_blank" rel="noopener noreferrer"><img src="https://img.youtube.com/vi/kdNIQZ5Ii54/hqdefault.jpg" alt="청두 공연 클립" loading="lazy"><span class="channel-pick-copy"><b>청두 공연 클립 03</b><small>3:49 · @Divya_jk</small></span></a>
+        <a class="channel-pick" href="https://www.youtube.com/watch?v=VF1TvQUByPg" target="_blank" rel="noopener noreferrer"><img src="https://img.youtube.com/vi/VF1TvQUByPg/hqdefault.jpg" alt="청두 공연 클립" loading="lazy"><span class="channel-pick-copy"><b>청두 공연 클립 04</b><small>4:04 · @Divya_jk</small></span></a>
+        <a class="channel-pick" href="https://www.youtube.com/watch?v=I-S2_WRPKp4" target="_blank" rel="noopener noreferrer"><img src="https://img.youtube.com/vi/I-S2_WRPKp4/hqdefault.jpg" alt="청두 공연 클립" loading="lazy"><span class="channel-pick-copy"><b>청두 공연 클립 05</b><small>5:08 · @Divya_jk</small></span></a>
+      </div>
+    </div>
     <div class="toolbar">
       <input type="text" class="search-input" id="search-cd" placeholder="곡명·발음·가사 주제로 검색…" aria-label="청두 세트리스트 검색">
       <div class="count-pill" id="count-cd"></div>
@@ -619,7 +647,7 @@ const NANJING = [
   {n:6, cn:"爱的回归线", hanja:"애적회귀선", py:"Ài de Huíguīxiàn", kr:"아이더 후이꾸이시엔", mean:"사랑의 회귀선", info:"천윈뤄·천메이원의 듀엣곡으로 알려진 《爱情公寓3》 OST를 라운희가 커버했다.", lyrics:"멀어져 버린 두 사람이 사랑이 되돌아오는 지점에서 다시 만나기를 기다리는 재회의 노래", yt:"tpbZvRWolns", source:"@luoyunxi-fans 난징 콘서트 직캠 · 3:42"},
   {n:7, cn:"与你", hanja:"여니", py:"Yǔ Nǐ", kr:"위 니", mean:"너와 함께", info:"드라마 《水龙吟》 관련 OST로 소개된 곡이며 음악제에서 먼저 공개됐다.", lyrics:"험한 운명 속에서도 ‘너’와 같은 길을 선택하겠다는 동행과 신뢰를 담은 노래", yt:"aCGFfLsr0vA", source:"@luoyunxi-fans 난징 콘서트 직캠 · 3:51"},
   {n:8, cn:"开到荼靡", hanja:"개도도미", py:"Kāi Dào Túmí", kr:"카이따오 투미", mean:"도미꽃이 마지막까지 피다", info:"왕페이의 1999년 앨범 《只爱陌生人》 수록곡. 작사 린시, 작곡 C. Y. Kong의 곡을 커버했다.", lyrics:"꽃이 절정 뒤에 지듯 욕망과 환상이 끝까지 피어난 뒤 남는 공허와 자기 성찰을 날카롭게 조명", yt:"TbWFwTUK7qc", source:"왕페이 원곡 음원 영상 · 라운희 영상 아님"},
-  {n:9, cn:"最好", hanja:"최호", py:"Zuìhǎo", kr:"쭈이하오", mean:"가장 좋은 것", info:"라운희의 2020년 앨범 《X》 수록곡으로 알려진 솔로곡이다.", lyrics:"완벽한 답보다 서로에게 가장 좋은 기억과 선택으로 남고 싶은 마음을 담담하게 표현", yt:"ykiwedn8HJA", source:"@luoyunxi-fans 난징 콘서트 풀버전 · 4:38"},
+  {n:9, cn:"最好", hanja:"최호", py:"Zuìhǎo", kr:"쭈이하오", mean:"가장 좋은 것", info:"라운희의 2020년 앨범 《X》 수록곡으로 알려진 솔로곡이다.", lyrics:"완벽한 답보다 서로에게 가장 좋은 기억과 선택으로 남고 싶은 마음을 담담하게 표현", yt:"ykiwedn8HJA", source:"@luoyunxi-fans 난징 콘서트 풀버전 · 4:38", alternates:[{yt:"yadkJv080wY", label:"난징 추가 풀버전", source:"66 Tầng Mây · 4:31 · 조회수 2.8천회"}]},
   {n:10, cn:"致不存在的恋人", hanja:"치부존재적연인", py:"Zhì Bù Cúnzài de Liànrén", kr:"즈 뿌춘짜이더 리엔런", mean:"존재하지 않는 연인에게", info:"2020년 앨범 《X》의 수록곡. 아직 만나지 못했거나 상상 속에만 있는 상대에게 보내는 편지 형식이다.", lyrics:"외로움 속에서도 언젠가 나타날 사랑을 상상하며, 미리 건네는 고백과 기다림을 노래", yt:"CtPvv_j0TO8", source:"@luoyunxi-fans 난징 콘서트 직캠 · 3:37"},
   {n:11, cn:"Because of You", hanja:"—", py:"Because of You", kr:"비커즈 오브 유", mean:"너 때문에", info:"라운희 주연 드라마 《良言写意》의 OST. 인물의 감정선과 사랑의 회복을 잇는 곡이다.", lyrics:"상처 입은 삶이 한 사람을 만난 뒤 다시 움직이기 시작하고, 그 존재가 변화의 이유가 됐다고 고백", yt:"TQYv2ZgPQTA", source:"Tencent Video 공식 OST"},
   {n:12, cn:"圣塔利奥酒馆", hanja:"성탑리아오 주관", py:"Shèngtǎlì'ào Jiǔguǎn", kr:"셩타리야오 지우관", mean:"산탈리아오 술집", info:"자료에 따라 잘못 적히던 ‘圣塔里奥’를 공식 소개 표기 ‘圣塔利奥’로 바로잡았다. 현악·피아노와 탱고 분위기의 신보 수록곡이다.", lyrics:"낯선 술집의 밤을 배경으로 장난스럽고 나른한 유혹, 스쳐 가는 인연의 긴장을 한 편의 장면처럼 전개", yt:"NJVUxnu-jQ0", source:"난징 콘서트 직캠 · 3:42"},
@@ -632,15 +660,15 @@ const NANJING = [
   {n:19, cn:"宇宙第一响", hanja:"우주제일향", py:"Yǔzhòu Dì Yī Xiǎng", kr:"위저우 띠이 샹", mean:"우주 최초의 울림", info:"2026년 앨범 《小小的我》 수록 신곡. 라운희가 창작에 참여한 곡으로 소개됐다.", lyrics:"아주 작은 존재의 첫 목소리가 우주에 번지는 이미지로, 자기 선언과 새로운 출발의 에너지를 표현", yt:"N3DEMDtvPd8", source:"@luoyunxi-fans 난징 콘서트 직캠 · 3:44"},
   {n:20, cn:"小小的我", hanja:"소소적아", py:"Xiǎoxiǎo de Wǒ", kr:"샤오샤오 더 워", mean:"작디작은 나", info:"2026년 7월 발표한 동명 앨범의 타이틀곡. 라운희가 작사·작곡한 자전적 신곡이다.", lyrics:"광대한 세상 속 작은 자신도 고유한 빛과 생명력을 지녔으며, 천천히 성장할 수 있다고 표현", yt:"iKfkTeXYNqo", source:"@luoyunxi-fans 난징 콘서트 직캠 · 3:46"},
   {n:21, cn:"热铁皮房顶的夏天", hanja:"열철피방정적하천", py:"Rè Tiěpí Fángdǐng de Xiàtiān", kr:"러 톄피 팡딩 더 샤톈", mean:"뜨거운 양철 지붕 위의 여름", info:"강한 밴드 사운드가 중심인 록 넘버. 공연에서 관객의 에너지를 끌어올리는 구간에 배치됐다.", lyrics:"달아오른 지붕과 여름의 열기를 청춘의 충동에 겹쳐, 답답한 현실을 뚫고 뛰쳐나가려는 순간을 묘사", yt:"do4T_-RE_88", source:"@luoyunxi-fans 난징 콘서트 직캠 · 3:34"},
-  {n:22, cn:"等风停", hanja:"등풍정", py:"Děng Fēng Tíng", kr:"덩 펑 팅", mean:"바람이 멎기를 기다리며", info:"2020년 발표된 라운희 솔로 싱글. 따뜻한 귀환과 기다림의 정서를 담은 발라드다.", lyrics:"거센 바람 같은 세상에서 지친 사람에게, 바람이 잦아들 때까지 같은 자리에서 기다리겠다고 위로", yt:"_EOKIHlUTh8", source:"@luoyunxi-fans 난징 콘서트 직캠 · 3:53"},
-  {n:23, cn:"遇见", hanja:"우견", py:"Yùjiàn", kr:"위젠", mean:"만남", info:"쑨옌쯔의 2003년 영화 《向左走，向右走》 주제곡. 난징에서는 라운희가 피아노를 치며 불렀다.", lyrics:"도시와 시간의 흐름 속에서 아직 모르는 누군가를 기다리다, 사랑을 가장 아름다운 우연으로 만나게 되는 이야기", tag:"피아노", yt:"ehoUkiG6N3Y", source:"@luoyunxi-fans 난징 콘서트 직캠 · 3:34"},
+  {n:22, cn:"等风停", hanja:"등풍정", py:"Děng Fēng Tíng", kr:"덩 펑 팅", mean:"바람이 멎기를 기다리며", info:"2020년 발표된 라운희 솔로 싱글. 따뜻한 귀환과 기다림의 정서를 담은 발라드다.", lyrics:"거센 바람 같은 세상에서 지친 사람에게, 바람이 잦아들 때까지 같은 자리에서 기다리겠다고 위로", yt:"_EOKIHlUTh8", source:"@luoyunxi-fans 난징 콘서트 직캠 · 3:53", alternates:[{yt:"rqgDa-t0LwU", label:"난징 추가 풀버전", source:"66 Tầng Mây · 3:32"}]},
+  {n:23, cn:"遇见", hanja:"우견", py:"Yùjiàn", kr:"위젠", mean:"만남", info:"쑨옌쯔의 2003년 영화 《向左走，向右走》 주제곡. 난징에서는 라운희가 피아노를 치며 불렀다.", lyrics:"도시와 시간의 흐름 속에서 아직 모르는 누군가를 기다리다, 사랑을 가장 아름다운 우연으로 만나게 되는 이야기", tag:"피아노", yt:"ehoUkiG6N3Y", source:"@luoyunxi-fans 난징 콘서트 직캠 · 3:34", alternates:[{yt:"WFf7CIBs-pI", label:"난징 추가 직캠", source:"66 Tầng Mây · 3:26"}]},
   {n:24, cn:"事隔多年", hanja:"사격다년", py:"Shìgé Duōnián", kr:"스거 둬녠", mean:"많은 세월이 지난 뒤", info:"오랜 이별 뒤의 재회를 다루는 서정적인 신곡으로 공연 기사에서 소개됐다.", lyrics:"시간이 많이 흐른 뒤 다시 마주한 두 사람이 쌓였던 거리와 후회를 천천히 내려놓는 장면을 묘사", yt:"zI5DCz9OPC8", source:"@luoyunxi-fans 난징 콘서트 직캠 · 4:07"},
   {n:25, cn:"小雀", hanja:"소작", py:"Xiǎoquè", kr:"샤오췌", mean:"작은 참새", info:"2020년 앨범 《X》의 환경 보호 주제곡. 작은 새의 시선으로 인간과 자연의 관계를 바라본다.", lyrics:"살 곳을 잃어 가는 작은 새를 통해 생명의 취약함을 보여 주고, 함께 살아갈 공간을 지켜 달라고 표현", yt:"ptMkcLN-7Qs", source:"@luoyunxi-fans 난징 콘서트 직캠 · 4:10"},
-  {n:26, cn:"晨星", hanja:"신성", py:"Chénxīng", kr:"천싱", mean:"새벽별", info:"2026년 앨범 《小小的我》 수록곡. 작곡 리웨이쑹(李伟菘), 작사 야오뤄룽(姚若龙)의 협업곡이다.", lyrics:"어둠이 끝나기 전 먼저 빛나는 새벽별처럼, 흔들리는 사람에게 새로운 날과 성장의 방향을 보여 주는 노래", yt:"E_olnfd1bj0", source:"@luoyunxi-fans 난징 콘서트 직캠 · 4:17"},
+  {n:26, cn:"晨星", hanja:"신성", py:"Chénxīng", kr:"천싱", mean:"새벽별", info:"2026년 앨범 《小小的我》 수록곡. 작곡 리웨이쑹(李伟菘), 작사 야오뤄룽(姚若龙)의 협업곡이다.", lyrics:"어둠이 끝나기 전 먼저 빛나는 새벽별처럼, 흔들리는 사람에게 새로운 날과 성장의 방향을 보여 주는 노래", yt:"E_olnfd1bj0", source:"@luoyunxi-fans 난징 콘서트 직캠 · 4:17", alternates:[{yt:"CDz_CFxjbt8", label:"난징 추가 풀버전", source:"66 Tầng Mây · 4:09"}]},
   {n:27, cn:"钢铁人", hanja:"강철인", py:"Gāngtiěrén", kr:"강톄런", mean:"강철 인간", info:"초기 앨범 《12人生》의 록 넘버. 단단해 보여야 하는 성인의 내면을 힘 있는 사운드로 표현", lyrics:"세상 앞에서는 강철처럼 버티지만 안에는 상처와 두려움이 있는 사람에게, 약함도 자신의 일부라고 표현", yt:"PfR76JqHF74", source:"@luoyunxi-fans 난징 콘서트 직캠 · 4:23"},
   {n:28, cn:"静思所有事物的伟大", hanja:"정사소유사물적위대", py:"Jìngsī Suǒyǒu Shìwù de Wěidà", kr:"징쓰 쒀여우 스우 더 웨이다", mean:"모든 것의 위대함을 고요히 생각하다", info:"2026년 5월 공개된 싱글. 보컬 라운희, 작곡 탄쉬안(谭旋), 작사 펑탕(冯唐), 편곡 저우궈이(周国仪).", lyrics:"자연과 일상의 작은 생명들을 천천히 바라보며, 연약함 속의 끈기와 존재 자체의 위대함을 사색", yt:"a-yWUFE2zQ4", source:"@luoyunxi-fans 난징 콘서트 직캠 · 3:45"},
   {n:29, cn:"新一天", hanja:"신일천", py:"Xīn Yī Tiān", kr:"신 이 톈", mean:"새로운 하루", info:"2026년 신보 공연 구간에 배치된 밝은 분위기의 곡. 광저우에서는 앙코르 변경곡으로 다시 등장했다.", lyrics:"어제의 피로와 후회를 내려놓고 아침을 맞으며, 작은 한 걸음으로 다시 시작하자는 희망을 메시지", yt:"w95DzLkQxXI", source:"@luoyunxi-fans 난징 콘서트 직캠 · 3:23"},
-  {n:30, cn:"星星之火", hanja:"성성지화", py:"Xīngxīng Zhī Huǒ", kr:"싱싱 즈 훠", mean:"작은 불씨", info:"2020년 앨범 《X》 수록곡이자 팬들에게 보내는 헌정곡. 난징 마지막 곡을 장식했다.", lyrics:"한 사람의 작은 빛들이 모이면 넓은 밤을 밝힐 수 있다는 이미지로, 가수와 팬의 동행과 응원을 노래", tag:"피날레", yt:"F-S68QiENAo", source:"라운희 음원 · 한글 병음 자막"},
+  {n:30, cn:"星星之火", hanja:"성성지화", py:"Xīngxīng Zhī Huǒ", kr:"싱싱 즈 훠", mean:"작은 불씨", info:"2020년 앨범 《X》 수록곡이자 팬들에게 보내는 헌정곡. 난징 마지막 곡을 장식했다.", lyrics:"한 사람의 작은 빛들이 모이면 넓은 밤을 밝힐 수 있다는 이미지로, 가수와 팬의 동행과 응원을 노래", tag:"피날레", yt:"9LpgVmsGq0A", source:"66 Tầng Mây 난징 콘서트 영상 · 7:41 · 조회수 2.3천회"},
 ];
 
 function gzSong(cn, n, part, kind, extra = {}){
@@ -706,7 +734,7 @@ const CHENGDU = [
   cdSong("夜梦春游", 7, "Act 1", "Original", {tag:"청두 구성"}),
 
   {n:8, cn:"百年孤寂", hanja:"백년고적", py:"Bǎinián Gūjì", kr:"바이녠 구지", mean:"백 년의 고독", info:"왕페이(王菲)의 1999년 앨범 《只爱陌生人》 수록곡. 감정의 소유와 영원한 고독을 건조하게 바라보는 얼터너티브 팝 커버.", lyrics:"사랑을 붙잡으려 할수록 더 깊어지는 외로움과, 관계가 사라진 뒤에도 남는 긴 고독을 노래", part:"Act 2", kind:"Cover", tag:"청두 신규", source:"2026.09.05 청두 세트리스트 확인 · 청두 개별 영상 미확인", searchQuery:"罗云熙 成都 2026.09.05 百年孤寂"},
-  cdSong("最好", 9, "Act 2", "Original"),
+  cdSong("最好", 9, "Act 2", "Original", {yt:"ceoKzTq9-CE", source:"@luoyunxi-fansSriLanka 청두·난징·광저우 3도시 《最好》 비교 영상 · 15:00 · 청두 무대 포함"}),
   {n:10, cn:"无限回廊", hanja:"무한회랑", py:"Wúxiàn Huíláng", kr:"우시앤 후이랑", mean:"끝없는 회랑", info:"라운희가 순회공연 기간에 직접 작사·작곡한 미발표 신곡. 청두에서 처음 공개한 ‘세계 초연’ 무대.", lyrics:"끝없이 이어지는 회랑과 선택의 문을 지나며 자기 안의 여러 가능성과 다시 마주하는 여정", part:"Act 2", kind:"Original", tag:"세계 최초 공개", yt:"E1XgVvp1ciQ", source:"청두 최초 공개 현장 영상 · 3:46 · 조회수 24회 · 2026.09.08 확인", searchQuery:"罗云熙 成都 2026.09.05 无限回廊"},
   cdSong("致不存在的恋人", 11, "Act 2", "Original"),
   cdSong("Because of You", 12, "Act 2", "OST / Original"),
@@ -989,6 +1017,15 @@ function cleanerVideoFor(track){
   return video && video.yt !== track.yt ? video : null;
 }
 
+function thumbnailVideoFor(track){
+  if(track.yt) return {yt:track.yt, label:"", href:ytWatchURL(track.yt)};
+  const cleaner = cleanerVideoFor(track);
+  if(cleaner) return {yt:cleaner.yt, label:"방송·공식 참고", href:ytWatchURL(cleaner.yt)};
+  const related = [...NANJING, ...GUANGZHOU, ...X_CONCERT].find(song => song !== track && song.cn === track.cn && song.yt);
+  if(related) return {yt:related.yt, label:"동일 곡 참고", href:ytWatchURL(related.yt)};
+  return {yt:"CFnmW2VZySg", label:"청두 대표 이미지", href:track.searchQuery ? ytSearchURL(track.searchQuery) : ytWatchURL("CFnmW2VZySg")};
+}
+
 function primaryVideoLabel(track){
   const source = track.source || "";
   if(/콘서트|직캠|공연/.test(source)) return "콘서트·현장 영상";
@@ -1109,13 +1146,12 @@ function renderList(container, data){
   data.forEach(t => {
     const hasVideo = !!t.yt;
     const cleanerVideo = cleanerVideoFor(t);
+    const thumb = thumbnailVideoFor(t);
     const lyricsPage = lyricsPageFor(t);
     const el = document.createElement("article");
     el.className = "track";
 
-    const thumbHTML = hasVideo
-      ? `<a class="thumb" href="${ytWatchURL(t.yt)}" target="_blank" rel="noopener noreferrer" aria-label="${t.cn} 기본 영상 재생"><img src="${ytThumbURL(t.yt)}" alt="" loading="lazy"><div class="play-badge"><svg viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></div></a>`
-      : `<div class="thumb no-video"><div class="track-num">${String(t.n).padStart(2,"0")}</div></div>`;
+    const thumbHTML = `<a class="thumb${hasVideo ? "" : " fallback"}" href="${thumb.href}" target="_blank" rel="noopener noreferrer" aria-label="${t.cn} ${hasVideo ? "영상 재생" : "참고 영상 또는 검색"}"><img src="${ytThumbURL(thumb.yt)}" alt="${t.cn} 영상 썸네일" loading="lazy"><div class="play-badge"><svg viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></div>${thumb.label ? `<span class="thumb-note">${thumb.label}</span>` : ""}</a>`;
 
     const listenHTML = hasVideo
       ? `<a class="listen-label primary" href="${ytWatchURL(t.yt)}" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 5v14l11-7z"/></svg>${primaryVideoLabel(t)}</a>`
@@ -1128,6 +1164,8 @@ function renderList(container, data){
     const cleanerHTML = cleanerVideo
       ? `<a class="listen-label cleaner" href="${ytWatchURL(cleanerVideo.yt)}" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 5v14l11-7z"/></svg>방송·공식 영상</a><span class="quality-note">음향 안정 추천 · ${cleanerVideo.type}<br>${cleanerVideo.source}</span>`
       : "";
+
+    const alternateHTML = (t.alternates || []).map(video => `<a class="listen-label alternate" href="${ytWatchURL(video.yt)}" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 5v14l11-7z"/></svg>${video.label || "추가 영상"}</a><span class="quality-note">${video.source || ""}</span>`).join("");
 
     const lyricsHTML = lyricsPage
       ? `<a class="listen-label lyrics-page" href="${lyricsPage}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 4h14v16H5z"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>가사 보기</a>`
@@ -1158,7 +1196,7 @@ function renderList(container, data){
         ${t.review ? `<div class="stage-review"><b>무대 평가 ${t.rating}</b>${conciseText(t.review)}</div>` : ""}
         ${t.source ? `<div class="track-source">출처: ${t.source}</div>` : ""}
       </div>
-      <div class="track-listen">${listenHTML}${searchHTML}${cleanerHTML}${lyricsHTML}</div>
+      <div class="track-listen">${listenHTML}${searchHTML}${alternateHTML}${cleanerHTML}${lyricsHTML}</div>
     `;
     container.appendChild(el);
   });
