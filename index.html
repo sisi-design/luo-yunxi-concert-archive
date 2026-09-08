@@ -419,7 +419,7 @@
     <h1><span class="cn">熙界无限剧场</span>라운희 무대 아카이브</h1>
     <p>2024·2026 콘서트 세트리스트 · <b>2019년 이후 TV 라이브</b> · YouTube 영상 아카이브</p>
     <div class="hero-actions">
-      <a class="hero-link" href="#lyrics-xingxing-zhihuo" data-lyrics-target="lyrics-xingxing-zhihuo">가사로 배우는 중국어 <span aria-hidden="true">→</span></a>
+      <a class="hero-link" href="lyrics.html#xingxing-zhihuo">가사로 배우는 중국어 <span aria-hidden="true">→</span></a>
     </div>
 
     <section class="artist-feature" aria-labelledby="artist-story-title">
@@ -1016,7 +1016,7 @@ const LYRICS_PAGES = {
 
 function lyricsPageFor(track){
   const id = LYRICS_PAGES[track.cn];
-  return id ? `#${id}` : "";
+  return id ? `lyrics.html#${id.replace(/^lyrics-/, "")}` : "";
 }
 
 function escapeHTML(value=""){
@@ -1205,7 +1205,13 @@ function selectTab(selected){
   });
 }
 tabs.forEach((tab, index) => {
-  tab.addEventListener("click", () => selectTab(tab));
+  tab.addEventListener("click", () => {
+    if(tab.id === "tab-lyrics"){
+      location.href = "lyrics.html";
+      return;
+    }
+    selectTab(tab);
+  });
   tab.addEventListener("keydown", e => {
     if(e.key === "ArrowRight" || e.key === "ArrowLeft"){
       e.preventDefault();
@@ -1230,7 +1236,7 @@ function openLyricsTarget(id, scroll=true){
 }
 
 document.addEventListener("click", event => {
-  const link = event.target.closest("[data-lyrics-target], a.lyrics-page");
+  const link = event.target.closest("[data-lyrics-target]");
   if(!link) return;
   const id = link.dataset.lyricsTarget || link.getAttribute("href").slice(1);
   if(document.getElementById(id)){
