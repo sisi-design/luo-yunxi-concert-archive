@@ -12,7 +12,8 @@
     "yuni":{id:"aCGFfLsr0vA",kind:"콘서트 대표영상",note:"난징 공연 직캠"},
     "zui-langman":{id:"DWtZvfMpuZc",kind:"라이브 영상",note:"칠석 특별기획 무대"},
     "youxi-shijian":{id:"XpEeYkjyCLc",kind:"콘서트 대표영상",note:"2024 《此刻 X 以光》 무대"},
-    "wayfarer":{id:"xvRoujeGUgw",kind:"콘서트 대표영상",note:"난징 공연 직캠"}
+    "wayfarer":{id:"xvRoujeGUgw",kind:"콘서트 대표영상",note:"난징 공연 직캠"},
+    "yemeng-chunyou":{id:"Z2tpUEvPdaE",kind:"콘서트 대표영상",note:"2026.09.05 청두 공연"}
   };
 
   function makeVideo(song,video){

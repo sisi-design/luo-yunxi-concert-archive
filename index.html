@@ -373,6 +373,7 @@
   .quality-note{ color:var(--mute-2); font-size:9.5px; line-height:1.35; text-align:center; max-width:170px; }
 
   @media (max-width: 620px){
+    body{ font-size:16px; -webkit-text-size-adjust:100%; }
     .wrap{ width:100vw; max-width:100vw; padding:38px 16px 84px; }
     .hero, .artist-feature, .tabs, [role="tabpanel"], footer{
       width:calc(100vw - 32px); max-width:calc(100vw - 32px);
@@ -388,6 +389,8 @@
       overflow-wrap:anywhere; word-break:break-word;
     }
     .concert-thumb figcaption{ font-size:9px; }
+    .notice{ font-size:13.5px; line-height:1.7; }
+    .meta-row{ font-size:12px; line-height:1.55; }
     .archive-key{ padding:11px 15px 13px; }
     .archive-key{ align-items:flex-start; }
     .legend{ display:grid; grid-template-columns:1fr; gap:7px; width:100%; }
@@ -400,6 +403,16 @@
     .track{ grid-template-columns:52px minmax(0,1fr); gap:12px; padding:13px 6px; }
     .track-listen{ grid-column: 2 / 3; align-items:stretch; margin-top:6px; width:min(100%,220px); }
     .thumb{ width:52px; height:36px; }
+    .track-cn{ font-size:18px; }
+    .track-hanja{ font-size:11px; }
+    .track-py{ font-size:12.5px; }
+    .track-kr{ font-size:13px; }
+    .track-meaning{ font-size:13.5px; }
+    .track-info, .track-lyrics, .lyric-line{ font-size:13px; line-height:1.65; }
+    .lyric-line.highlight{ font-size:13.5px; }
+    .track-source{ font-size:11.5px; line-height:1.5; }
+    .listen-label{ min-height:38px; font-size:11.5px; white-space:normal; text-align:center; }
+    .quality-note{ max-width:none; font-size:10.5px; }
     .listen-label.missing{ justify-content:flex-start; }
     .channel-picks-grid{ grid-template-columns:repeat(2,minmax(0,1fr)); }
     .channel-picks-head{ align-items:flex-start; flex-direction:column; }
@@ -507,6 +520,22 @@
       </span>
       <span class="full-play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></span>
     </a>
+    <a class="full-concert" href="https://www.youtube.com/watch?v=BmEpCEkUPuE" target="_blank" rel="noopener noreferrer">
+      <span class="full-copy">
+        <span class="full-kicker">NANJING FULL CONCERT · ADDITIONAL VIDEO</span>
+        <span class="full-title">罗云熙《熙界无限剧场》난징 전체 공연 · 추가 영상</span>
+        <span class="full-meta">사용자 제공 YouTube 풀공연 영상 · 기존 전체 공연 영상과 함께 보기</span>
+      </span>
+      <span class="full-play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></span>
+    </a>
+    <a class="full-concert" href="https://www.youtube.com/watch?v=DSYRp7Pkbog" target="_blank" rel="noopener noreferrer">
+      <span class="full-copy">
+        <span class="full-kicker">NANJING CONCERT · ADDITIONAL LONG VIDEO</span>
+        <span class="full-title">罗云熙《熙界无限剧场》난징 공연 · 추가 영상</span>
+        <span class="full-meta">사용자 제공 YouTube 장편 공연 영상 · 기존 난징 영상과 함께 보기</span>
+      </span>
+      <span class="full-play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></span>
+    </a>
     <div class="notice">
       난징 공연의 흐름을 한 번에 볼 수 있는 <b>2시간 26분 HD 전체 직캠</b> · 영상 설명의 곡별 타임스탬프로 원하는 무대 이동 가능
     </div>
@@ -578,6 +607,12 @@
       </div>
     </div>
     <div class="concert-video-set">
+      <strong>광저우 공연 하이라이트</strong>
+      <div class="concert-video-links">
+        <a href="https://www.youtube.com/watch?v=HurszxHw-U4" target="_blank" rel="noopener noreferrer">《熙界无限剧场》 광저우 공연 하이라이트 · YouTube</a>
+      </div>
+    </div>
+    <div class="concert-video-set">
       <strong>광저우 공연 직후·비하인드</strong>
       <div class="concert-video-links">
         <a href="https://www.youtube.com/watch?v=-6wR1HBs57A" target="_blank" rel="noopener noreferrer">2026.08.08 공연 직후 신청곡 라이브 · 16분 7초</a>
@@ -612,6 +647,7 @@
       <strong>청두 공연 준비·비하인드</strong>
       <div class="concert-video-links">
         <a href="https://www.youtube.com/watch?v=zqlf-IZsqNQ" target="_blank" rel="noopener noreferrer">2026.09.04 전날 라이브 · 《会呼吸的痛》 피아노 연습 · 11분 27초</a>
+        <a href="https://www.youtube.com/watch?v=GXPSd23eyeA" target="_blank" rel="noopener noreferrer">2026.09.05 청두 공연 종료 후 영상 · YouTube</a>
         <a href="https://x.com/_mxxnlit/status/2096616168853495926" target="_blank" rel="noopener noreferrer">X · 청두 최초 공개 신곡 《无限围廊》 제작 비하인드</a>
       </div>
     </div>
@@ -714,7 +750,7 @@ const NANJING = [
   {n:24, cn:"事隔多年", hanja:"사격다년", py:"Shìgé Duōnián", kr:"스거 둬녠", mean:"많은 세월이 지난 뒤", info:"오랜 이별 뒤의 재회를 다루는 서정적인 신곡으로 공연 기사에서 소개됐다.", lyrics:"시간이 많이 흐른 뒤 다시 마주한 두 사람이 쌓였던 거리와 후회를 천천히 내려놓는 장면을 묘사", yt:"zI5DCz9OPC8", source:"@luoyunxi-fans 난징 콘서트 직캠 · 4:07"},
   {n:25, cn:"小雀", hanja:"소작", py:"Xiǎoquè", kr:"샤오췌", mean:"작은 참새", info:"2020년 앨범 《X》의 환경 보호 주제곡. 작은 새의 시선으로 인간과 자연의 관계를 바라본다.", lyrics:"살 곳을 잃어 가는 작은 새를 통해 생명의 취약함을 보여 주고, 함께 살아갈 공간을 지켜 달라고 표현", yt:"ptMkcLN-7Qs", source:"@luoyunxi-fans 난징 콘서트 직캠 · 4:10"},
   {n:26, cn:"晨星", hanja:"신성", py:"Chénxīng", kr:"천싱", mean:"새벽별", info:"2026년 앨범 《小小的我》 수록곡. 작곡 리웨이쑹(李伟菘), 작사 야오뤄룽(姚若龙)의 협업곡이다.", lyrics:"어둠이 끝나기 전 먼저 빛나는 새벽별처럼, 흔들리는 사람에게 새로운 날과 성장의 방향을 보여 주는 노래", yt:"E_olnfd1bj0", source:"@luoyunxi-fans 난징 콘서트 직캠 · 4:17", alternates:[{yt:"CDz_CFxjbt8", label:"난징 추가 풀버전", source:"66 Tầng Mây · 4:09"}]},
-  {n:27, cn:"钢铁人", hanja:"강철인", py:"Gāngtiěrén", kr:"강톄런", mean:"강철 인간", info:"초기 앨범 《12人生》의 록 넘버. 단단해 보여야 하는 성인의 내면을 힘 있는 사운드로 표현", lyrics:"세상 앞에서는 강철처럼 버티지만 안에는 상처와 두려움이 있는 사람에게, 약함도 자신의 일부라고 표현", yt:"PfR76JqHF74", source:"@luoyunxi-fans 난징 콘서트 직캠 · 4:23"},
+  {n:27, cn:"钢铁人", hanja:"강철인", py:"Gāngtiěrén", kr:"강톄런", mean:"강철 인간", info:"초기 앨범 《12人生》의 록 넘버. 단단해 보여야 하는 성인의 내면을 힘 있는 사운드로 표현", lyrics:"세상 앞에서는 강철처럼 버티지만 안에는 상처와 두려움이 있는 사람에게, 약함도 자신의 일부라고 표현", yt:"PfR76JqHF74", source:"@luoyunxi-fans 난징 콘서트 직캠 · 4:23", alternates:[{yt:"T9WJk_4PEQE", label:"난징 《钢铁人》 추가 영상", source:"《熙界无限剧场》南京站 · 사용자 제공"}]},
   {n:28, cn:"静思所有事物的伟大", hanja:"정사소유사물적위대", py:"Jìngsī Suǒyǒu Shìwù de Wěidà", kr:"징쓰 쒀여우 스우 더 웨이다", mean:"모든 것의 위대함을 고요히 생각하다", info:"2026년 5월 공개된 싱글. 보컬 라운희, 작곡 탄쉬안(谭旋), 작사 펑탕(冯唐), 편곡 저우궈이(周国仪).", lyrics:"자연과 일상의 작은 생명들을 천천히 바라보며, 연약함 속의 끈기와 존재 자체의 위대함을 사색", yt:"a-yWUFE2zQ4", source:"@luoyunxi-fans 난징 콘서트 직캠 · 3:45", alternates:[{yt:"eGyLA7sGzYo", label:"난징 4K 직캠 + 멘트", source:"@dimplylove · 2026.07.25 난징 공연"}]},
   {n:29, cn:"新一天", hanja:"신일천", py:"Xīn Yī Tiān", kr:"신 이 톈", mean:"새로운 하루", info:"2026년 신보 공연 구간에 배치된 밝은 분위기의 곡. 광저우에서는 앙코르 변경곡으로 다시 등장했다.", lyrics:"어제의 피로와 후회를 내려놓고 아침을 맞으며, 작은 한 걸음으로 다시 시작하자는 희망을 메시지", yt:"w95DzLkQxXI", source:"@luoyunxi-fansSriLanka 난징 콘서트 전체 곡 영상 · 3:22 · 2026.09.08 확인"},
   {n:30, cn:"星星之火", hanja:"성성지화", py:"Xīngxīng Zhī Huǒ", kr:"싱싱 즈 훠", mean:"작은 불씨", info:"2020년 앨범 《X》 수록곡이자 팬들에게 보내는 헌정곡. 난징 마지막 곡을 장식했다.", lyrics:"한 사람의 작은 빛들이 모이면 넓은 밤을 밝힐 수 있다는 이미지로, 가수와 팬의 동행과 응원을 노래", tag:"피날레", yt:"9LpgVmsGq0A", source:"66 Tầng Mây 난징 콘서트 영상 · 7:41 · 조회수 2.3천회"},
@@ -744,7 +780,7 @@ const GUANGZHOU = [
   gzSong("一往", 14, "Part 3", "OST / Original"),
   {n:15, cn:"要不然我们就这样一万年", hanja:"요불연아문취저양일만년", py:"Yàoburán Wǒmen Jiù Zhèyàng Yīwànnián", kr:"야오부란 워먼 지우 저양 이완녠", mean:"아니면 우리 이대로 만년을", info:"드라마 《长月烬明》의 대표 OST. 광저우에서 관객 합창으로 이어진 곡이다.", lyrics:"운명과 시간이 두 사람을 갈라놓아도, 차라리 지금의 마음 그대로 만 년을 함께하자고 붙드는 절절한 약속", part:"Part 3", kind:"OST", notNanjing:true, yt:"PaaUiP9NbQY", source:"@Divya_jk 광저우 콘서트 직캠 · 6:42 · 조회수 252회 · 2026.09.10 확인"},
   {n:16, cn:"相思赋予谁", hanja:"상사부여수", py:"Xiāngsī Fùyǔ Shéi", kr:"샹쓰 푸위 쉐이", mean:"그리움은 누구에게 주나", info:"호메이메이(好妹妹)의 앨범 《春生》 수록 원곡을 희곡 창법(戏腔)으로 편곡했다.", lyrics:"꽃과 계절 같은 고전적 이미지 속에서 갈 곳 없는 그리움을 누구에게 맡길지 묻는, 전통미 짙은 사랑 노래", part:"Part 3", kind:"Cover", notNanjing:true},
-  {n:17, cn:"心上悬", hanja:"심상현", py:"Xīnshàng Xuán", kr:"신상 쉬안", mean:"마음이 매달리다", info:"라운희 주연 드라마 《颜心记》 OST. 광저우 원자료에서 난징 미공연곡으로 표시된 오리지널 곡.", lyrics:"마음이 허공에 매달린 듯 상대를 걱정하고 그리워하며, 사랑의 답을 기다리는 불안과 간절함을 담은 노래", part:"Part 3", kind:"OST / Original", notNanjing:true, yt:"UYoEuuzGBk0", source:"《颜心记》 공식 배급 OST"},
+  {n:17, cn:"心上悬", hanja:"심상현", py:"Xīnshàng Xuán", kr:"신상 쉬안", mean:"마음이 매달리다", info:"라운희 주연 드라마 《颜心记》 OST. 광저우 원자료에서 난징 미공연곡으로 표시된 오리지널 곡.", lyrics:"마음이 허공에 매달린 듯 상대를 걱정하고 그리워하며, 사랑의 답을 기다리는 불안과 간절함을 담은 노래", part:"Part 3", kind:"OST / Original", notNanjing:true, yt:"wU1xlbMaGvg", source:"광저우 콘서트 《心上悬》 공연 영상 · 사용자 제공", alternates:[{yt:"UYoEuuzGBk0", label:"공식 OST 영상", source:"《颜心记》 공식 배급 OST · 기존 링크 유지"}]},
   {n:18, cn:"天下", hanja:"천하", py:"Tiānxià", kr:"톈샤", mean:"천하, 온 세상", info:"장제(张杰)의 대표 고풍(古风) 곡을 커버했다. 작곡 류지닝(刘吉宁)의 웅장한 록 발라드다.", lyrics:"천하와 영웅의 명예보다 사랑하는 한 사람을 택하겠다는 결단을 강호 서사로 표현", part:"Part 3", kind:"Cover", notNanjing:true, yt:"Z5k4tyBjSk8", source:"장제 공식 아티스트 음원 · 라운희 영상 아님"},
   {n:19, cn:"男女关系科", hanja:"남녀관계과", py:"Nánnǚ Guānxì Kē", kr:"난뉘 관시 커", mean:"남녀관계과", info:"양첸화(杨千嬅)의 영화 《新扎师妹》 수록곡을 광둥어로 커버했다.", lyrics:"연애를 하나의 수업과 직무에 빗대어, 실수와 이별을 겪으며 사랑을 배우는 화자를 유쾌하게 묘사", part:"Part 3", kind:"Cover", cantonese:true, notNanjing:true},
   gzSong("宇宙第一响", 20, "Part 3", "Original"),
@@ -780,7 +816,7 @@ const CHENGDU = [
   cdSong("旅人", 4, "Act 1", "Original"),
   cdSong("不渝梦", 5, "Act 1", "Original", {yt:"fOJSydkn8Pg", videoLabel:"다른 공연 영상", source:"2024 《此刻 X 以光》 공연 영상 · 청두 공연 아님 · 4:00"}),
   cdSong("与你", 6, "Act 1", "OST / Original"),
-  cdSong("夜梦春游", 7, "Act 1", "Original", {tag:"청두 구성", yt:"gUkFdPIm-M4", videoLabel:"투어 참고 영상", source:"YouTube 투어 공연 영상 · 촬영 도시 미표기 · 청두 공연 확인 아님 · 3:23"}),
+  cdSong("夜梦春游", 7, "Act 1", "Original", {tag:"청두 구성", yt:"Z2tpUEvPdaE", videoLabel:"청두 공연 영상", source:"2026.09.05 청두 콘서트 《夜梦春游》 공연 영상 · 사용자 제공", alternates:[{yt:"gUkFdPIm-M4", label:"기존 투어 참고 영상", source:"YouTube 투어 공연 영상 · 촬영 도시 미표기 · 3:23"}]}),
 
   {n:8, cn:"百年孤寂", hanja:"백년고적", py:"Bǎinián Gūjì", kr:"바이녠 구지", mean:"백 년의 고독", info:"왕페이(王菲)의 1999년 앨범 《只爱陌生人》 수록곡. 감정의 소유와 영원한 고독을 건조하게 바라보는 얼터너티브 팝 커버.", lyrics:"사랑을 붙잡으려 할수록 더 깊어지는 외로움과, 관계가 사라진 뒤에도 남는 긴 고독을 노래", part:"Act 2", kind:"Cover", tag:"청두 신규", yt:"xgAt2SZDteI", videoLabel:"음악제 합동 영상", source:"2026.05.02 상하이 슈퍼망고 음악제 · 《天后》《百年孤寂》《开到荼靡》 합동 영상 · 청두 공연 아님 · 15:01", alternates:[{url:"https://x.com/_mxxnlit/status/2096624348924985346", label:"X · 청두 추가 영상", source:"X 팬 촬영 영상"}], searchQuery:"罗云熙 成都 2026.09.05 百年孤寂"},
   cdSong("最好", 9, "Act 2", "Original", {yt:"ceoKzTq9-CE", source:"@luoyunxi-fansSriLanka 청두·난징·광저우 3도시 《最好》 비교 영상 · 15:00 · 청두 무대 포함"}),
@@ -791,9 +827,9 @@ const CHENGDU = [
   cdSong("相思赋予谁", 14, "Act 2", "Duet Cover", {tag:"秦昊 합창", info:"원가창자이자 《等风停》 제작자인 친하오(秦昊)와 함께 부른 청두 한정 합창. 두 사람은 이어 《等风停》 일부도 무반주로 들려줬다."}),
   cdSong("一往", 15, "Act 2", "OST / Original", {yt:"VF1TvQUByPg", source:"@Divya_jk 청두 콘서트 《一往》 직캠 · 4:04"}),
 
-  {n:16, cn:"不染", hanja:"불염", py:"Bùrǎn", kr:"부란", mean:"물들지 않다", info:"마오부이(毛不易)가 부른 《香蜜沉沉烬如霜》 OST. 라운희의 윤옥(润玉) 캐릭터와도 깊이 연결되는 고풍 발라드 커버.", lyrics:"세상의 상처와 집착을 겪고도 처음의 맑은 마음만은 잃지 않으려는 간절함을 노래", part:"Act 3", kind:"OST Cover", tag:"청두 신규", yt:"3U5jv0apwUM", source:"청두 콘서트 현장 영상 · 2026.09.05 · 조회수 18회 · 2026.09.08 확인", alternates:[{yt:"QU2av8HMIMs", label:"YouTube · 청두 추가 영상", source:"@Divya_jk 청두 콘서트 직캠 · 5:33"},{url:"https://x.com/_mxxnlit/status/2097624659751784537", label:"X · 청두 추가 영상", source:"X 팬 촬영 영상"}], searchQuery:"罗云熙 成都 2026.09.05 不染"},
+  {n:16, cn:"不染", hanja:"불염", py:"Bùrǎn", kr:"부란", mean:"물들지 않다", info:"마오부이(毛不易)가 부른 《香蜜沉沉烬如霜》 OST. 라운희의 윤옥(润玉) 캐릭터와도 깊이 연결되는 고풍 발라드 커버.", lyrics:"세상의 상처와 집착을 겪고도 처음의 맑은 마음만은 잃지 않으려는 간절함을 노래", part:"Act 3", kind:"OST Cover", tag:"청두 신규", yt:"3U5jv0apwUM", source:"청두 콘서트 현장 영상 · 2026.09.05 · 조회수 18회 · 2026.09.08 확인", alternates:[{yt:"Bvf-lWfWCGo", label:"YouTube · 청두 공연 추가 영상", source:"2026.09.05 청두 콘서트 《不染》 공연 영상 · 사용자 제공"},{yt:"_qLgGEtNXOI", label:"YouTube · 《不染》 추가 영상 02", source:"사용자 제공 공연 영상"},{yt:"QU2av8HMIMs", label:"YouTube · 청두 추가 영상", source:"@Divya_jk 청두 콘서트 직캠 · 5:33"},{url:"https://x.com/_mxxnlit/status/2097624659751784537", label:"X · 청두 추가 영상", source:"X 팬 촬영 영상"}], searchQuery:"罗云熙 成都 2026.09.05 不染"},
   {n:17, cn:"LOVE U U", hanja:"—", py:"LOVE U U", kr:"러브 유 유", mean:"너를 사랑해", info:"린쥔제(林俊杰)의 2011년 앨범 《学不会》 수록곡을 청두에서 커버. 가벼운 리듬과 솔직한 고백이 중심인 팝 넘버.", lyrics:"복잡한 설명보다 사랑한다는 마음을 있는 그대로 전하며 가까워지고 싶은 설렘을 노래", part:"Act 3", kind:"Cover", tag:"청두 신규", source:"2026.09.05 청두 세트리스트 확인 · 청두 개별 영상 미확인", searchQuery:"罗云熙 成都 2026.09.05 LOVE U U"},
-  {n:18, cn:"三生三世", hanja:"삼생삼세", py:"Sānshēng Sānshì", kr:"산셩 산스", mean:"세 번의 삶, 세 번의 세상", info:"장제(张杰)가 부른 드라마 《三生三世十里桃花》 OST를 커버. 여러 생을 건너 이어지는 인연을 웅장한 선율로 표현.", lyrics:"몇 번의 생과 이별을 지나도 한 사람을 향한 마음은 사라지지 않는다는 운명적 사랑을 노래", part:"Act 3", kind:"OST Cover", tag:"청두 신규", localVideo:"chengdu-sanshengsanshi-fancam.mp4", localPoster:"chengdu-sanshengsanshi-fancam.jpg", localVideoLabel:"직접 촬영 풀버전 · 3:04", source:"2026.09.05 청두 콘서트 직접 촬영본 · 세로형 전체곡 · 3:04", alternates:[{url:"https://x.com/_mxxnlit/status/2097168637157404833", label:"X 팬 촬영 클립 · 2:19", source:"X 팬 촬영 라이브 클립"}], searchQuery:"罗云熙 成都 2026.09.05 三生三世"},
+  {n:18, cn:"三生三世", hanja:"삼생삼세", py:"Sānshēng Sānshì", kr:"산셩 산스", mean:"세 번의 삶, 세 번의 세상", info:"장제(张杰)가 부른 드라마 《三生三世十里桃花》 OST를 커버. 여러 생을 건너 이어지는 인연을 웅장한 선율로 표현.", lyrics:"몇 번의 생과 이별을 지나도 한 사람을 향한 마음은 사라지지 않는다는 운명적 사랑을 노래", part:"Act 3", kind:"OST Cover", tag:"청두 신규", localVideo:"assets/videos/chengdu-sanshengsanshi-fancam.mp4", localPoster:"assets/videos/chengdu-sanshengsanshi-fancam.jpg", localVideoLabel:"직접 촬영 풀버전 · 3:04", source:"2026.09.05 청두 콘서트 직접 촬영본 · 세로형 전체곡 · 3:04", alternates:[{url:"https://x.com/_mxxnlit/status/2097168637157404833", label:"X 팬 촬영 클립 · 2:19", source:"X 팬 촬영 라이브 클립"}], searchQuery:"罗云熙 成都 2026.09.05 三生三世"},
   {n:19, cn:"1234567", hanja:"—", py:"Yī Èr Sān Sì Wǔ Liù Qī", kr:"이 얼 산 쓰 우 리우 치", mean:"하나 둘 셋 넷 다섯 여섯 일곱", info:"F.I.R. 페이얼악단의 곡을 커버. 숫자를 세듯 마음을 정리하며 다시 출발하는 밝은 록 사운드.", lyrics:"망설임을 숫자와 함께 내려놓고 새로운 순간을 향해 힘차게 뛰어드는 청춘의 에너지를 노래", part:"Act 3", kind:"Cover", tag:"청두 신규", source:"2026.09.05 청두 세트리스트 확인 · 청두 개별 영상 미확인", searchQuery:"罗云熙 成都 2026.09.05 1234567"},
   {n:20, cn:"给未来的自己", hanja:"급미래적자기", py:"Gěi Wèilái de Zìjǐ", kr:"게이 웨이라이 더 쯔지", mean:"미래의 나에게", info:"량징루(梁静茹)의 2007년 곡을 커버. 지금의 자신이 미래의 자신에게 보내는 위로와 약속의 편지.", lyrics:"오늘의 흔들림도 언젠가 지나갈 테니 포기하지 말고 자신의 속도로 살아가자고 미래에 약속", part:"Act 3", kind:"Cover", tag:"청두 신규", source:"2026.09.05 청두 세트리스트 확인 · 청두 개별 영상 미확인", searchQuery:"罗云熙 成都 2026.09.05 给未来的自己"},
   {n:21, cn:"跳楼机", hanja:"도루기", py:"Tiàolóujī", kr:"탸오러우지", mean:"드롭 타워", info:"LBI리비(LBI利比)의 인기곡을 커버. 급상승과 추락을 반복하는 놀이기구에 불안정한 사랑의 감정을 겹친 노래.", lyrics:"가까워졌다 멀어지는 관계를 급격히 오르내리는 드롭 타워에 빗대어 두려움과 미련을 표현", part:"Act 3", kind:"Cover", tag:"청두 신규", source:"2026.09.05 청두 세트리스트 확인 · 청두 개별 영상 미확인", searchQuery:"罗云熙 成都 2026.09.05 跳楼机"},
@@ -1006,6 +1042,7 @@ const LYRIC_HIGHLIGHTS = {
   "逆流而上":"세상의 흐름을 거슬러 나아가는 의지",
   "遇见":"예고 없이 찾아와 삶을 바꾼 만남",
   "钢铁人":"단단한 겉모습 안에 숨겨 둔 상처",
+  "过山车":"급상승과 추락을 지나 마주하는 자유",
   "陀飞轮":"흐르는 시간보다 소중한 삶의 순간",
   "静思所有事物的伟大":"작은 생명에서 발견하는 존재의 위대함",
   "骊龙吟":"잠든 힘을 깨우며 자신의 길로",
@@ -1015,7 +1052,7 @@ const LYRIC_HIGHLIGHTS = {
 };
 
 function lyricHighlightFor(track){
-  return LYRIC_HIGHLIGHTS[track.cn] || "곡의 핵심 정서 한줄 정리 준비 중";
+  return LYRIC_HIGHLIGHTS[track.cn] || "제목의 이미지로 읽는 감정과 이야기";
 }
 
 function lyricInsightFor(track){
@@ -1044,7 +1081,8 @@ function lyricEchoFor(track){
     "黑月光":"놓을수록 깊어지고 미워할수록 선명해지는 사랑",
     "桃花诺":"꽃이 지고 다시 피어도 변하지 않을 오래된 기억",
     "成都":"골목 끝 작은 가게에도 아직 남아 있는 우리의 시간",
-    "相思赋予谁":"갈 곳 잃은 그리움이 꽃잎처럼 머무는 봄밤"
+    "相思赋予谁":"갈 곳 잃은 그리움이 꽃잎처럼 머무는 봄밤",
+    "过山车":"가장 높은 곳과 깊은 낙차까지 삶의 리듬으로 끌어안는 순간"
   };
   if(special[track.cn]) return special[track.cn];
   const text = `${track.mean || ""} ${track.lyrics || ""}`;
@@ -1107,7 +1145,9 @@ const LYRICS_PAGES = {
   "最浪漫的事":"lyrics-zui-langman",
   "游熙时间":"lyrics-youxi-shijian",
   "旅人":"lyrics-wayfarer",
-  "Wayfarer":"lyrics-wayfarer"
+  "Wayfarer":"lyrics-wayfarer",
+  "夜梦春游":"lyrics-yemeng-chunyou",
+  "三生三世":"lyrics-sansheng-sanshi"
 };
 
 function lyricsPageFor(track){
