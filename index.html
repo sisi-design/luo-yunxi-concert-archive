@@ -256,6 +256,12 @@
   .full-meta{ color:var(--mute); font-size:12px; }
   .full-play{ width:46px; height:46px; flex:0 0 auto; border-radius:50%; display:grid; place-items:center; background:var(--red); box-shadow:0 0 24px rgba(230,75,75,.28); }
   .full-play svg{ width:22px; height:22px; margin-left:2px; }
+  .concert-video-set{ margin:10px 0 8px; padding:13px 15px; border:1px solid var(--line); border-radius:11px; background:rgba(255,255,255,.018); }
+  .concert-video-set strong{ display:block; margin-bottom:9px; color:var(--gold); font-size:11px; letter-spacing:.06em; }
+  .concert-video-links{ display:flex; flex-wrap:wrap; gap:7px; }
+  .concert-video-links a{ padding:7px 10px; border:1px solid rgba(183,156,255,.24); border-radius:999px; color:var(--mute); font-size:11.5px; line-height:1.25; text-decoration:none; transition:border-color .16s ease,color .16s ease,background .16s ease; }
+  .concert-video-links a:hover,.concert-video-links a:focus-visible{ color:var(--ivory); border-color:var(--purple-glow); background:rgba(139,111,217,.12); }
+  .concert-video-links a:focus-visible{ outline:2px solid var(--purple-glow); outline-offset:2px; }
 
   .toolbar{ display:flex; gap:10px; margin:28px 0 18px; }
   .search-input{
@@ -545,14 +551,24 @@
     <div class="notice">
       첨부된 광저우 공연 세트리스트 기준 · <b>‘광둥어’</b>는 원자료의 ★ · <b>‘난징 미공연’</b>은 원자료의 ☆ 표시
     </div>
-    <a class="full-concert" href="https://www.youtube.com/watch?v=lzJS857jT8g" target="_blank" rel="noopener noreferrer">
+    <a class="full-concert" href="https://www.youtube.com/watch?v=jjJRqEUTx38" target="_blank" rel="noopener noreferrer">
       <span class="full-copy">
-        <span class="full-kicker">GUANGZHOU CONCERT HIGHLIGHTS · YOUTUBE</span>
-        <span class="full-title">罗云熙《熙界无限剧场》광저우 공연 하이라이트</span>
-        <span class="full-meta">2026.08.08 · 3분 28초 · @luoyunxi-fansSriLanka · 2026.09.08 확인</span>
+        <span class="full-kicker">GUANGZHOU FULL CONCERT · YOUTUBE</span>
+        <span class="full-title">罗云熙《熙界无限剧场》광저우 전체 공연</span>
+        <span class="full-meta">2026.08.08 · 2시간 38분 53초 · Kuan Tsoi · 2026.09.10 확인</span>
       </span>
       <span class="full-play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></span>
     </a>
+    <div class="concert-video-set">
+      <strong>Kuan Tsoi 채널 · 광저우 공연 영상 5편</strong>
+      <div class="concert-video-links">
+        <a href="https://www.youtube.com/watch?v=jjJRqEUTx38" target="_blank" rel="noopener noreferrer">Genegene2 · 2시간 38분</a>
+        <a href="https://www.youtube.com/watch?v=BmEpCEkUPuE" target="_blank" rel="noopener noreferrer">Genegene4 · 2시간 2분</a>
+        <a href="https://www.youtube.com/watch?v=DSYRp7Pkbog" target="_blank" rel="noopener noreferrer">Genegene3 · 52분</a>
+        <a href="https://www.youtube.com/watch?v=K4LGsRlTakc" target="_blank" rel="noopener noreferrer">Genegene1 · 16분</a>
+        <a href="https://www.youtube.com/watch?v=dyC3yQNDj4M" target="_blank" rel="noopener noreferrer">Genegene · 8분 7초</a>
+      </div>
+    </div>
     <div class="toolbar">
       <input type="text" class="search-input" id="search-gz" placeholder="곡명·발음·가사 주제로 검색…" aria-label="광저우 세트리스트 검색">
       <div class="count-pill" id="count-gz"></div>
