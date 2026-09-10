@@ -160,7 +160,7 @@
   }
 
   .tabs{
-    width:100%; max-width:100%; min-width:0; display:grid; grid-template-columns:repeat(7,minmax(0,1fr)); gap:4px;
+    width:100%; max-width:100%; min-width:0; display:grid; grid-template-columns:repeat(8,minmax(0,1fr)); gap:4px;
     margin:44px 0 6px; border-bottom:1px solid var(--line);
   }
   .tab{
@@ -483,6 +483,7 @@
     <button class="tab" role="tab" id="tab-festival" aria-selected="false" aria-controls="panel-festival" tabindex="-1"><span class="num">05 · 2024.09</span>음악제</button>
     <button class="tab" role="tab" id="tab-tv" aria-selected="false" aria-controls="panel-tv" tabindex="-1"><span class="num">06 · 2019–</span>TV 무대</button>
     <a class="tab" role="tab" id="tab-lyrics" aria-selected="false" aria-controls="panel-lyrics" tabindex="-1" href="lyrics.html"><span class="num">07 · LYRICS</span>가사집</a>
+    <a class="tab" role="tab" id="tab-music" aria-selected="false" tabindex="-1" href="music.html"><span class="num">08 · MUSIC</span>음악실</a>
   </div>
 
   <section id="panel-lyrics" role="tabpanel" aria-labelledby="tab-lyrics" hidden>
@@ -534,6 +535,13 @@
       </span>
       <span class="full-play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></span>
     </a>
+    <div class="concert-video-set">
+      <strong>첫 솔로 콘서트 · 비하인드</strong>
+      <div class="concert-video-links">
+        <a href="https://www.youtube.com/watch?v=tRqvEC6MvgI" target="_blank" rel="noopener noreferrer">《此刻 X 以光》 기념 패키지 彩蛋 프리뷰 · 3분 1초 · @왕차이旺财</a>
+        <a href="https://www.youtube.com/@%EC%99%95%EC%B0%A8%EC%9D%B4%E6%97%BA%E8%B4%A2/videos" target="_blank" rel="noopener noreferrer">왕차이旺财 채널 영상 전체 보기</a>
+      </div>
+    </div>
     <div class="toolbar">
       <input type="text" class="search-input" id="search-x" placeholder="곡명·발음·가사 주제로 검색…" aria-label="이전 콘서트 X 세트리스트 검색">
       <div class="count-pill" id="count-x"></div>
@@ -1090,7 +1098,15 @@ const LYRICS_PAGES = {
   "要不然我们就这样一万年":"lyrics-yaoburan-yiwannian",
   "一往":"lyrics-yiwang",
   "骊龙吟":"lyrics-lilong-yin",
-  "等风停":"lyrics-dengfeng-ting"
+  "等风停":"lyrics-dengfeng-ting",
+  "不染":"lyrics-buran",
+  "云知道":"lyrics-yun-zhidao",
+  "不沐春风不遇你":"lyrics-bumu-chunfeng",
+  "与你":"lyrics-yuni",
+  "最浪漫的事":"lyrics-zui-langman",
+  "游熙时间":"lyrics-youxi-shijian",
+  "旅人":"lyrics-wayfarer",
+  "Wayfarer":"lyrics-wayfarer"
 };
 
 function lyricsPageFor(track){
@@ -1288,8 +1304,8 @@ function selectTab(selected){
 }
 tabs.forEach((tab, index) => {
   tab.addEventListener("click", () => {
-    if(tab.id === "tab-lyrics"){
-      location.href = "lyrics.html";
+    if(tab.id === "tab-lyrics" || tab.id === "tab-music"){
+      location.href = tab.getAttribute("href");
       return;
     }
     selectTab(tab);
