@@ -865,7 +865,7 @@ const X_CONCERT = [
   xSong("逆流而上", 7, "Original", {yt:"4_ITngfqLko", source:"《此刻 X 以光》 콘서트 직캠 · 5:38"}),
   xSong("白色舞鞋", 8, "Original", {yt:"PKjMtupDp8U", source:"《此刻 X 以光》 콘서트 직캠 · 4:48"}),
   xSong("电影人生", 9, "Original", {info:"초기 앨범 《12人生》의 자전적 곡. 콘서트에서는 데뷔 이후의 장면들을 한 편의 영화처럼 잇는 무대로 펼쳐졌다.", yt:"M_AfNDpWAjc", source:"《此刻 X 以光》 콘서트 직캠 · 3:35", alternates:[{yt:"0IBW7HoLyF8", label:"15초 공연 클립", source:"弋如往熙 · 2024.06.01 《此刻 X 以光》"}]}),
-  {n:10, cn:"会呼吸的痛", hanja:"회호흡적통", py:"Huì Hūxī de Tòng", kr:"후이 후시 더 퉁", mean:"숨 쉴 때마다 느껴지는 아픔", info:"량징루(梁静茹)의 2007년 대표 발라드를 커버했다. 이별 뒤에도 사라지지 않는 후회를 섬세하게 표현한 곡이다.", lyrics:"떠난 사람을 잊으려 해도 숨 쉬는 매 순간 기억이 되살아나고, 곁에 있을 때 잘하지 못한 후회를 토로", role:"Cover", yt:"-VAtU-HGhQ4", source:"《此刻 X 以光》 콘서트 직캠 · 4:58"},
+  {n:10, cn:"会呼吸的痛", hanja:"회호흡적통", py:"Huì Hūxī de Tòng", kr:"후이 후시 더 퉁", mean:"숨 쉴 때마다 느껴지는 아픔", info:"량징루(梁静茹)의 2007년 대표 발라드를 커버했다. 이별 뒤에도 사라지지 않는 후회를 섬세하게 표현한 곡이다.", lyrics:"떠난 사람을 잊으려 해도 숨 쉬는 매 순간 기억이 되살아나고, 곁에 있을 때 잘하지 못한 후회를 토로", role:"Cover", yt:"-VAtU-HGhQ4", source:"《此刻 X 以光》 콘서트 직캠 · 4:58", alternates:[{yt:"LgtkSSE93P8", label:"첫 솔로 콘서트 추가 영상", source:"《此刻 X 以光》 관련 영상 · 사용자 제공"}]},
   {n:11, cn:"恋爱的常态", hanja:"연애적상태", py:"Liàn'ài de Chángtài", kr:"롄아이 더 창타이", mean:"연애의 보통 모습", info:"2020년 앨범 《X》 수록곡. 설렘만이 아니라 익숙함과 오해까지 포함한 관계의 여러 얼굴을 바라본다.", lyrics:"가까워졌다 멀어지는 감정의 변화 속에서, 사랑의 평범한 순간들을 받아들이고 서로에게 솔직해지려는 마음", role:"Original", yt:"-VFzBSIPdAE", source:"@irene79709 《此刻 X 以光》 콘서트 무대 · 4:21"},
   {n:12, cn:"冷苹果", hanja:"냉빈과", py:"Lěng Píngguǒ", kr:"렁 핑궈", mean:"차가운 사과", info:"2020년 앨범 《X》 수록곡. 차갑게 굳힌 마음을 사과에 빗댄 세련된 팝 넘버다.", lyrics:"상처받지 않으려 감정을 감추던 화자가 누군가를 만나 단단한 겉면 안의 진심을 조금씩 표현", role:"Original", yt:"CMEQLjaT6Jc", source:"《此刻 X 以光》 콘서트 직캠 · 4:13"},
   xSong("最好", 13, "Original", {yt:"Vry9k82O_4A", source:"@irene79709 《此刻 X 以光》 콘서트 무대 · 5:49"}),
@@ -1104,8 +1104,13 @@ function cleanerVideoFor(track){
   return video && video.yt !== track.yt ? video : null;
 }
 
+function localMediaURL(path){
+  const localPreview = location.protocol === "file:" || location.hostname === "127.0.0.1" || location.hostname === "localhost";
+  return localPreview ? "assets/videos/" + path.split("/").pop() : path;
+}
+
 function thumbnailVideoFor(track){
-  if(track.localVideo) return {src:track.localPoster, label:"직접 촬영", href:track.localVideo};
+  if(track.localVideo) return {src:localMediaURL(track.localPoster), label:"직접 촬영", href:localMediaURL(track.localVideo)};
   if(track.yt) return {yt:track.yt, label:"", href:ytWatchURL(track.yt)};
   const cleaner = cleanerVideoFor(track);
   if(cleaner) return {yt:cleaner.yt, label:"방송·공식 참고", href:ytWatchURL(cleaner.yt)};
@@ -1147,7 +1152,8 @@ const LYRICS_PAGES = {
   "旅人":"lyrics-wayfarer",
   "Wayfarer":"lyrics-wayfarer",
   "夜梦春游":"lyrics-yemeng-chunyou",
-  "三生三世":"lyrics-sansheng-sanshi"
+  "三生三世":"lyrics-sansheng-sanshi",
+  "会呼吸的痛":"lyrics-huixide-tong"
 };
 
 function lyricsPageFor(track){
@@ -1254,7 +1260,7 @@ function renderList(container, data){
     const thumbHTML = `<a class="thumb${hasVideo || hasLocalVideo ? "" : " fallback"}" href="${thumb.href}" target="_blank" rel="noopener noreferrer" aria-label="${t.cn} ${hasVideo || hasLocalVideo ? "영상 재생" : "참고 영상 또는 검색"}"><img src="${thumb.src || ytThumbURL(thumb.yt)}" alt="${t.cn} 영상 썸네일" loading="lazy"><div class="play-badge"><svg viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></div>${thumb.label ? `<span class="thumb-note">${thumb.label}</span>` : ""}</a>`;
 
     const listenHTML = hasLocalVideo
-      ? `<a class="listen-label primary" href="${t.localVideo}" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 5v14l11-7z"/></svg>${t.localVideoLabel || "직접 촬영 영상"}</a>`
+      ? `<a class="listen-label primary" href="${localMediaURL(t.localVideo)}" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 5v14l11-7z"/></svg>${t.localVideoLabel || "직접 촬영 영상"}</a>`
       : hasVideo
         ? `<a class="listen-label primary" href="${ytWatchURL(t.yt)}" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 5v14l11-7z"/></svg>${primaryVideoLabel(t)}</a>`
       : t.externalUrl
