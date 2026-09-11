@@ -1,0 +1,10 @@
+{
+  "name": "小聊 · 베이징 중국어",
+  "short_name": "小聊",
+  "description": "베이징 팬 대화와 식당 회화를 위한 하루 15분 중국어",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f7f1e8",
+  "theme_color": "#c94d3d",
+  "lang": "ko-KR"
+}

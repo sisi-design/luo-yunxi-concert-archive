@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f7f1e8">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="小聊">
+  <link rel="manifest" href="manifest.webmanifest">
+  <title>小聊 · 베이징 중국어</title>
+  <link rel="stylesheet" href="styles-v14.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#today" aria-label="오늘 학습으로 이동">
+        <span class="brand-mark">聊</span>
+        <span><b>小聊</b><small>베이징에서 한마디</small></span>
+      </a>
+      <button class="streak" id="streakBtn" aria-label="연속 학습일 보기">🔥 <b id="streakCount">0</b>일</button>
+    </header>
+
+    <main>
+      <section class="view active" id="todayView" data-view="today">
+        <div class="hero">
+          <div>
+            <p class="eyebrow" id="dayLabel">DAY 1 · 첫 인사</p>
+            <h1 id="greeting">你好，오늘은<br><em>입을 여는 날</em>이에요.</h1>
+          </div>
+          <div class="trip-chip"><span id="dDay">D−143</span><small>베이징</small></div>
+        </div>
+
+        <div class="progress-wrap" aria-label="오늘 학습 진행률">
+          <div class="progress-copy"><span>오늘의 15분</span><b id="progressText">0 / 4</b></div>
+          <div class="progress"><i id="progressBar"></i></div>
+        </div>
+
+        <article class="phrase-card" id="mainPhraseCard">
+          <div class="card-meta"><span class="tag" id="sceneTag">팬 인사</span><button class="ghost-icon favorite-btn" aria-label="즐겨찾기">♡</button></div>
+          <p class="listen-first">먼저 듣고, 세 번 따라 해보세요</p>
+          <button class="speak-main" id="speakMain" aria-label="중국어 문장 듣기">
+            <span class="sound-ring">▶</span>
+            <span><strong id="hanzi">你好！很高兴认识你。</strong><small id="pinyin">Nǐ hǎo! Hěn gāoxìng rènshi nǐ.</small></span>
+          </button>
+          <button class="meaning-toggle" id="meaningToggle">뜻 보기</button>
+          <div class="meaning" id="meaning" hidden>
+            <b id="korean">안녕하세요! 만나서 정말 반가워요.</b>
+            <span id="tip">‘런스’의 sh는 혀끝을 살짝 말아주세요.</span>
+          </div>
+        </article>
+
+        <section class="routine" aria-labelledby="routineTitle">
+          <div class="section-head"><div><p class="eyebrow">TODAY'S ROUTINE</p><h2 id="routineTitle">오늘 딱 네 가지만</h2></div><span>약 15분</span></div>
+          <div id="taskList" class="task-list"></div>
+        </section>
+
+        <article class="coach-note">
+          <span>小贴士</span>
+          <p id="coachText">성조를 완벽히 하려 멈추지 마세요. 오늘 목표는 상대가 알아듣게 끝까지 말하는 것입니다.</p>
+        </article>
+      </section>
+
+      <section class="view" id="practiceView" data-view="practice">
+        <div class="page-title"><p class="eyebrow">SPEAK OUT LOUD</p><h1>상황 연습</h1><p>상대의 말을 듣고, 큰 소리로 답해보세요.</p></div>
+        <div class="scenario-tabs" id="scenarioTabs"></div>
+        <article class="roleplay-card">
+          <div class="roleplay-top"><span id="roleStep">1 / 3</span><button id="replayPrompt" class="ghost-icon" aria-label="상대방 말 다시 듣기">↻</button></div>
+          <div class="bubble partner"><small id="partnerRole">중국 팬</small><strong id="promptHanzi"></strong><span id="promptPinyin"></span></div>
+          <p class="reply-label">이렇게 답해보세요</p>
+          <button class="bubble me" id="revealReply"><small>나</small><strong>눌러서 답 보기</strong><span>먼저 혼자 말해보세요</span></button>
+          <div class="practice-actions">
+            <button class="secondary" id="speakReply">▶ 모범 답안 듣기</button>
+            <button class="primary" id="nextRole">다음 대화 →</button>
+          </div>
+          <p class="speech-note" id="speechNote">🎙️ 답을 말한 뒤 모범 답안과 비교해보세요.</p>
+        </article>
+        <section class="mc-training" aria-labelledby="mcTitle">
+          <div class="section-head"><div><p class="eyebrow">CONCERT LISTENING</p><h2 id="mcTitle">콘서트 멘트 듣기</h2></div><span>A2 → B1 도전</span></div>
+          <p class="mc-intro">실제 발언 인용이 아닌, 공연에서 자주 나오는 상황을 바탕으로 만든 예상 연습문장입니다.</p>
+          <article class="mc-card">
+            <div class="mc-top"><span id="mcNumber">예상 MC 01</span><b id="mcProgress">0 / 8 이해</b></div>
+            <p class="mc-situation" id="mcSituation">오프닝 인사와 관객 호응</p>
+            <div class="mc-listen-actions">
+              <button id="mcSlow">▶ 천천히 듣기</button>
+              <button id="mcNormal">▶ 무대 속도</button>
+            </div>
+            <div class="mc-script masked" id="mcScript">
+              <strong id="mcHanzi"></strong>
+              <span id="mcPinyin"></span>
+              <p id="mcKorean"></p>
+            </div>
+            <button class="mc-reveal" id="mcReveal">스크립트 보기</button>
+            <div class="mc-keywords"><small>먼저 잡아낼 말</small><div id="mcKeywords"></div></div>
+            <div class="mc-footer">
+              <button id="mcPrev">← 이전</button>
+              <button id="mcDone">핵심이 들렸어요 ✓</button>
+              <button id="mcNext">다음 →</button>
+            </div>
+          </article>
+        </section>
+      </section>
+
+      <section class="view" id="phrasesView" data-view="phrases">
+        <div class="page-title"><p class="eyebrow">POCKET PHRASES</p><h1>한마디 노트</h1><p>베이징에서 꺼내 쓸 문장을 모았어요.</p></div>
+        <label class="search"><span>⌕</span><input id="phraseSearch" type="search" placeholder="한국어·중국어·병음 검색"></label>
+        <div class="filter-row" id="phraseFilters"></div>
+        <div class="phrase-list" id="phraseList"></div>
+      </section>
+
+      <section class="view" id="songsView" data-view="songs">
+        <div class="page-title"><p class="eyebrow">SING WITH LUO YUNXI</p><h1>노래 암기</h1><p>한 곡을 작게 나눠, 콘서트에서 함께 부를 수 있게.</p></div>
+        <article class="song-guide">
+          <span>매일 10분</span>
+          <p><b>① 듣기 3회</b> → <b>② 병음으로 3회</b> → <b>③ 반주에 맞춰 1회</b></p>
+        </article>
+        <section class="song-picker" aria-labelledby="songPickerTitle">
+          <div><p class="eyebrow">CHOOSE A SONG</p><h2 id="songPickerTitle">연습할 노래 선택</h2></div>
+          <label class="song-select-label" for="songSelect"><b>노래</b><span>곡을 고르면 아래 가사가 바로 바뀝니다.</span></label>
+          <select id="songSelect" class="song-select" aria-label="연습할 노래 선택"></select>
+        </section>
+        <div class="song-list" id="songList"></div>
+      </section>
+
+      <section class="view" id="roadmapView" data-view="roadmap">
+        <div class="page-title"><p class="eyebrow">20 WEEKS TO BEIJING</p><h1>나의 여정</h1><p>2027년 2월, 짧아도 자연스럽게 대화하는 나.</p></div>
+        <div class="goal-card">
+          <div><small>출발 예정일</small><label><input type="date" id="departureDate" value="2027-02-01"></label></div>
+          <div class="goal-stat"><b id="completedDays">0</b><small>학습일</small></div>
+        </div>
+        <article class="level-goal">
+          <div><span>핵심 목표</span><b>A2 실전 회화</b><p>여행과 팬 활동의 익숙한 주제에서 질문하고 4~6문장을 이어 말하기</p></div>
+          <div><span>도전 목표</span><b>B1 초입 듣기</b><p>콘서트 멘트의 모든 단어보다 상황·핵심어·의도를 먼저 알아듣기</p></div>
+        </article>
+        <div class="roadmap" id="roadmap"></div>
+      </section>
+    </main>
+
+    <nav class="bottom-nav" aria-label="주 메뉴">
+      <button class="active" data-target="today"><span>今</span>오늘</button>
+      <button data-target="practice"><span>说</span>연습</button>
+      <button data-target="phrases"><span>句</span>한마디</button>
+      <button data-target="songs"><span>歌</span>노래</button>
+      <button data-target="roadmap"><span>路</span>여정</button>
+    </nav>
+  </div>
+  <div class="toast" id="toast" role="status"></div>
+  <script src="app-v14.js"></script>
+</body>
+</html>
