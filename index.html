@@ -29,6 +29,7 @@
   }
 
   *{box-sizing:border-box;}
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
   img, svg{ max-width:100%; }
   section, article, button, input{ min-width:0; }
   html{
@@ -239,6 +240,8 @@
   .stage-meta b{ color:var(--purple-glow); font-weight:600; }
   .program-intro{ margin:6px 0 2px; color:var(--mute); font-size:11.5px; line-height:1.55; }
   .program-intro b{ margin-right:7px; color:var(--gold); font-weight:600; }
+  .stage-award{ margin-top:8px; padding:9px 10px; border:1px solid rgba(227,182,85,.32); border-radius:8px; background:rgba(227,182,85,.08); color:var(--ivory); font-size:12px; line-height:1.55; }
+  .stage-award b{ color:var(--gold); margin-right:7px; }
   .stage-review{ margin-top:8px; padding:9px 10px; border-radius:8px; background:rgba(227,182,85,.055); color:var(--mute); font-size:12px; line-height:1.55; }
   .stage-review b{ color:var(--gold); margin-right:7px; }
 
@@ -712,10 +715,10 @@
       <span><b>29곡</b> 방송 무대</span>
     </div>
     <div class="notice">
-      방송사 공식 편성·TV 생방송 무대 기준 · 콘서트·음악제·온라인 전용 행사·출연 예고 제외 · <b>무대 평가는 아카이브 편집 평가</b> · 음색·편곡·협연·무대 연출을 함께 본 주관적 감상
+      방송사 공식 편성·TV 생방송 무대 기준 · 콘서트·음악제·온라인 전용 행사·출연 예고 제외 · <b>숫자 평점 없이 공식 영상·방송 영상·편성 자료에서 확인되는 사실만 기록</b> · 각 카드 하단에 근거 자료 유형 표시
     </div>
     <div class="toolbar">
-      <input type="text" class="search-input" id="search-tv" placeholder="곡명·연도·프로그램·협연자·평가로 검색…" aria-label="2019년 이후 TV 무대 검색">
+      <input type="text" class="search-input" id="search-tv" placeholder="곡명·연도·프로그램·협연자·무대 기록으로 검색…" aria-label="2019년 이후 TV 무대 검색">
       <div class="count-pill" id="count-tv"></div>
     </div>
     <div class="tracklist" id="list-tv"></div>
@@ -899,7 +902,7 @@ const MAANSHAN_FESTIVAL = [
 ];
 
 const TV_STAGES = [
-  {date:"2026.09.23", program:"《2026微博音乐盛典》", network:"微博音乐盛典 · 无锡", cn:"小小的我", hanja:"소소적아", py:"Xiǎoxiǎo de Wǒ", kr:"샤오샤오 더 워", mean:"작은 나", info:"2026 웨이보 뮤직 어워드에서 정규앨범 《小小的我》의 타이틀곡을 전체 무대로 선보였다. 작고 평범한 존재가 자기 안의 가능성을 발견하는 앨범의 중심 메시지를 담은 최신 시상식 솔로 무대.", lyrics:"세상의 크기 앞에서 작아 보이는 자신을 받아들이면서도, 내면의 빛과 끈기를 믿고 자기만의 길을 계속 걸어가겠다는 마음을 노래", role:"Awards Solo", with:"단독", rating:"4.5/5", review:"담백한 도입에서 후렴의 확신으로 자연스럽게 확장되는 무대. 새 앨범의 자전적인 메시지와 라운희의 차분한 음색이 잘 맞으며, 안무보다 가사와 보컬에 집중한 구성이 인상적.", yt:"wE2MpsY1_Go", externalUrl:"https://x.com/summerscent728_/status/2102720533771284887", externalLabel:"X · 전체 무대 3:48", searchQuery:"罗云熙 2026 微博音乐盛典 小小的我", source:"YouTube 대표영상 · X 전체 무대 · 3:48 · 2026.09.23"},
+  {date:"2026.09.23", program:"《2026微博音乐盛典》", network:"微博音乐盛典 · 无锡", cn:"小小的我", hanja:"소소적아", py:"Xiǎoxiǎo de Wǒ", kr:"샤오샤오 더 워", mean:"작은 나", award:"年度最受欢迎歌手 · 올해의 가장 사랑받은 가수", info:"2026 웨이보 뮤직 어워드에서 정규앨범 《小小的我》의 타이틀곡을 전체 무대로 선보이고 ‘年度最受欢迎歌手’ 영예를 받았다. 수상 소감에서는 가수 라운희로도 기억되기를 바란다는 마음과 최근 여러 곡을 쓰고 있어 앞으로 창작가수 부문의 상에도 도전하고 싶다는 뜻을 전했다.", lyrics:"세상의 크기 앞에서 작아 보이는 자신을 받아들이면서도, 내면의 빛과 끈기를 믿고 자기만의 길을 계속 걸어가겠다는 마음을 노래", role:"Awards Solo", with:"단독", rating:"4.5/5", review:"담백한 도입에서 후렴의 확신으로 자연스럽게 확장되는 무대. 새 앨범의 자전적인 메시지와 라운희의 차분한 음색이 잘 맞으며, 안무보다 가사와 보컬에 집중한 구성이 인상적.", yt:"wE2MpsY1_Go", externalUrl:"https://x.com/summerscent728_/status/2102720533771284887", externalLabel:"X · 전체 무대 3:48", alternates:[{url:"https://weibo.com/2/detail/5346382015630185",label:"🏆 공식 수상 발표",source:"2026 WMA · 年度最受欢迎歌手"}], searchQuery:"罗云熙 2026 微博音乐盛典 小小的我", source:"WMA 공식 수상 발표 · YouTube 대표영상 · X 전체 무대 · 3:48 · 2026.09.23"},
   {n:1, date:"2025.12.31", program:"《启航2026—中央广播电视总台跨年晚会》", network:"CCTV 종합 채널", cn:"冬雪至", hanja:"동설지", py:"Dōngxuě Zhì", kr:"둥쉐 즈", mean:"겨울눈이 이르다", info:"새해로 넘어가는 계절을 겨울눈 이미지로 그린 서정적인 솔로 무대. CCTV의 지역 연결형 송년 갈라에서 방송됐다.", lyrics:"차가운 계절 끝에도 사람과 사람의 온기가 남고, 흰 눈 뒤에 올 새로운 시작을 기다리는 마음을 메시지", role:"TV Solo", with:"단독", rating:"4.0/5", review:"맑고 가벼운 음색이 겨울 풍경과 잘 맞는다. 큰 기교보다 안정적인 호흡과 잔잔한 여운에 강점이 있는 무대.", yt:"mBAf0huiL_8", source:"CCTV 공식 YouTube · 2025.12.31"},
   {n:2, date:"2025.12.31", program:"《更好2026 江苏卫视跨年演唱会》", network:"江苏卫视", cn:"最后一页", hanja:"최후일엽", py:"Zuìhòu Yī Yè", kr:"쭈이허우 이 예", mean:"마지막 페이지", info:"장위천(江语晨)의 2010년 발라드를 야오샤오탕과 듀엣했다. 끝난 사랑을 책의 마지막 장에 비유하는 곡이다.", lyrics:"관계가 끝났다는 사실을 알면서도 마지막 페이지를 넘기지 못한 채 추억과 미련을 붙드는 마음을 노래", role:"TV Duet", with:"姚晓棠(야오샤오탕)", rating:"4.5/5", review:"라운희의 차분한 중저음과 야오샤오탕의 선명한 고음이 대비되며, 서로 밀어내지 않는 균형 좋은 감성 듀엣.", yt:"E4WC9yPqkvw", source:"江苏卫视 송년 무대 팬클럽 아카이브 · 4:06"},
   {n:3, date:"2026.01.01", program:"《花开天下·国韵新年演唱会》", network:"四川卫视", cn:"今年勇", hanja:"금년용", py:"Jīnnián Yǒng", kr:"진녠 융", mean:"올해의 용기", info:"쉬쑹(许嵩)의 곡을 새해 응원가로 재해석했다. 고향 쓰촨의 신년 특집에서 무대에 올랐다.", lyrics:"지난해의 망설임을 뒤로하고 새해에는 두려움보다 먼저 움직이자고 자신과 듣는 이를 격려", role:"TV Solo", with:"단독", rating:"4.0/5", review:"밴드 사운드 위에서 밝고 곧은 발성이 살아난다. 새해 특집의 메시지와 곡의 추진력이 자연스럽게 맞물린다.", yt:"C30HJVQ3iUk", source:"四川卫视 신년 무대 아카이브"},
@@ -930,10 +933,46 @@ const TV_STAGES = [
   {date:"2019.02.19", program:"《2019喜气洋洋闹元宵》", network:"CCTV-1", cn:"团圆年", hanja:"단원년", py:"Tuányuán Nián", kr:"투안위안 녠", mean:"함께 모이는 해", info:"2019 CCTV 원소절 갈라를 위해 마련된 명절 합동곡이다. 라운희의 초기 대표 TV 가창 기록이자 싱글로도 분류된다.", lyrics:"등불이 켜진 정월대보름에 멀리 있던 가족과 친구가 한자리에 모여 새해의 평안과 재회를 기원", role:"Lantern Gala", with:"魏允熙·李沁·张彬彬", rating:"4.0/5", review:"네 사람의 밝은 음색과 축제 군무가 중심인 전형적인 명절 무대. 라운희 방송 가창 아카이브의 출발점이라는 의미가 크다.", source:"CCTV 공식 프로그램 영상 · 2019.02.19"},
 ].sort((a, b) => b.date.localeCompare(a.date));
 
-TV_STAGES.forEach((stage, index) => { stage.n = index + 1; });
+const MATERIAL_BASED_STAGE_NOTES = {
+  "2026.09.23|小小的我":"WMA 공식 수상 발표와 연결된 전체 무대 영상 기준. 곡 전체를 단독 가창했으며, 좌석에 앉아 시작해 대형 별빛·장미 영상과 함께 진행된 보컬 중심 구성.",
+  "2026.07.10|无人之岛":"《天赐的声音》 공식 순수 무대 영상 기준. 라운희와 야오샤오탕이 파트를 교차한 뒤 후렴에서 화음을 함께 쌓는 남녀 듀엣 편곡.",
+  "2026.07.03|桃花诺":"《天赐的声音》 공식 순수 무대 영상 기준. 라운희가 중저음 구간, 황샤오윈이 고음 구간을 주로 맡고 후반 합창으로 연결된 듀엣 구성.",
+  "2026.06.13|天后":"저장위성TV 음악 채널 공식 순수 무대 영상 기준. 광둥어 가창과 국악 음색이 포함된 편곡으로, 약한 도입에서 후반 고음 구간으로 확장.",
+  "2026.04.19|与你":"Star Awards 2026 방송 무대 영상 기준. 드라마 《水龙吟》 삽입곡을 별도 협연자 없이 전곡 솔로로 가창한 시상식 초청 무대.",
+  "2026.03.03|壁上观":"후난위성TV 원소절 무대 영상 기준. 디지털 벽화 영상, 전통 의상, 춤 동작과 솔로 가창을 한 장면 안에 결합한 국풍 무대.",
+  "2026.02.16|立上游":"CCTV 춘완 공식 영상 기준. 이빈 분회장의 지역 풍경과 대형 군무 속에서 여러 출연자가 파트를 나누는 합동 무대이며 라운희의 개인 파트가 포함.",
+  "2026.01.01|一往":"쓰촨위성TV 신년 무대와 인터뷰 자료 기준. 라운희가 작사한 《水龙吟》 캐릭터곡을 고풍 의상과 국풍 편곡으로 단독 가창.",
+  "2026.01.01|今年勇":"쓰촨위성TV 신년 무대 영상 기준. 밴드 반주와 새해 응원 메시지를 중심으로 구성된 솔로 커버 무대.",
+  "2025.12.31|最后一页":"장쑤위성TV 송년 방송 아카이브 영상 기준. 라운희와 야오샤오탕이 독창 파트를 번갈아 부르고 후렴에서 함께 노래한 듀엣 무대.",
+  "2025.12.31|冬雪至":"CCTV 공식 영상 기준. 겨울 풍경 영상과 함께 별도 협연자 없이 진행된 솔로 무대로, 큰 군무보다 가창 장면을 중심으로 편집.",
+  "2025.02.01|祝福你":"CCTV 공식 영상 기준. 라운희의 노래 사이에 톈진 콰이반과 국가급 무형유산 전승자들의 전통 기예 장면이 교차하는 명절 합동 무대.",
+  "2025.01.27|初心":"방송 아카이브 영상과 2025 쓰촨·충칭 춘완 편성 자료 기준. 라운희의 공익 싱글을 별도 협연자 없이 부른 고향권 첫 춘완 솔로 무대.",
+  "2024.09.08|黑月光":"후난국제채널 공식 OST 메들리 영상 기준. 드라마 《长月烬明》 엔딩곡을 라운희가 단독 가창한 뒤 다음 OST 무대로 연결되는 구성.",
+  "2024.09.08|不染":"후난국제채널 공식 OST 메들리 영상 기준. 원가창자 위커웨이와 라운희가 파트를 나눠 부르고 함께 후렴을 마무리한 듀엣 피날레.",
+  "2024.06.18|化作孤岛的鲸":"후난위성TV 《618开心夜》 편성 및 방송 자료 기준. 넓은 무대의 여백과 최소한의 동작을 활용해 솔로 가창을 전면에 둔 커버 무대.",
+  "2024.06.18|起风了":"후난국제채널 공식 영상 기준. 라운희와 MARiA가 중국어 파트를 교차하고 후렴을 함께 부르는 한·일 원곡 계보의 국제 듀엣 무대.",
+  "2024.02.03|不到潇湘岂有诗":"2024 후난 춘완 현장 영상 기준. 라운희의 발레 기반 동작과 노래·낭송·전통극 요소를 함께 배치한 시화형 종합 무대.",
+  "2023.11.11|要不然我们就这样一万年":"후난위성TV 《双11惊喜夜》 편성 및 방송 자료 기준. 드라마 《长月烬明》 주제곡을 주연 배우 라운희가 단독 가창한 OST 무대.",
+  "2023.11.10|旅人":"공식 포커스캠 방송 아카이브 영상 기준. 2023년 생일 싱글을 별도 협연자 없이 부르며 카메라가 솔로 가창 장면을 지속적으로 따라가는 구성.",
+  "2023.10.15|桃花诺":"베이징방송 공식 영상 기준. 고전 의상, 검무형 동작, 국풍 편곡을 결합해 라운희가 단독 가창한 커버 무대.",
+  "2022.06.03|玉粽袭香":"CCTV 프로그램 영상 기준. 양훙지·리이퉁·라운희가 세대별 파트를 나누고, 단오 음식·풍습 장면을 함께 보여주는 3인 합동 무대.",
+  "2021.06.15|小雀":"장쑤·저장위성TV 《616真心夜》 편성 및 방송 자료 기준. 앨범 《X》 수록곡을 빠른 리듬과 군무가 포함된 솔로 방송 무대로 구성.",
+  "2021.06.12|一霎":"저장위성TV 공식 HD 영상 기준. 장발 고전 의상, 밴드 반주, 무용 동작을 결합한 《X》 수록곡의 국풍 솔로 무대.",
+  "2021.05.04|神奇中医":"CCTV 5·4 청년절 특별 프로그램 자료 기준. 중의학 관련 가사와 대학생의 팔단금·제약 시연을 가창 장면 사이에 배치한 기획 합동 무대.",
+  "2019.11.10|大鱼":"방송 아카이브 영상 기준. 저우선의 영화 인상곡을 라운희가 별도 협연자 없이 부른 초기 TV 솔로 커버.",
+  "2019.10.19|琵琶行":"방송 아카이브 영상 기준. 일반 가창과 희곡풍 창법을 오가며 백거이의 장시를 압축한 국풍 솔로 커버.",
+  "2019.05.04|我们都是追梦人":"CCTV 5·4 청년절 갈라 자료 기준. 선웨·대학생 대표와 파트를 나누고 다인 합창으로 마무리하는 청년절 합동 무대.",
+  "2019.02.19|团圆年":"CCTV 원소절 프로그램 자료 기준. 네 명의 출연자가 파트를 나누고 명절 군무와 합창을 함께 구성한 라운희의 초기 방송 가창 기록."
+};
+
+TV_STAGES.forEach((stage, index) => {
+  stage.n = index + 1;
+  stage.review = MATERIAL_BASED_STAGE_NOTES[`${stage.date}|${stage.cn}`] || "";
+  delete stage.rating;
+});
 
 const PROGRAM_INTROS = {
-  "《2026微博音乐盛典》":"웨이보의 연례 음악 시상식 · 《小小的我》 정규앨범 타이틀곡 솔로 무대",
+  "《2026微博音乐盛典》":"웨이보의 연례 음악 시상식 · 《小小的我》 솔로 무대 · ‘年度最受欢迎歌手’ 수상",
   "《2019喜气洋洋闹元宵》":"CCTV 정월대보름 특집 갈라 · 배우·가수 합동 명절 무대",
   "《2023美好奇妙夜》":"베이징위성TV 문화·엔터테인먼트 갈라 · 국풍 솔로 무대",
   "《2024湖南卫视芒果TV春节联欢晚会》":"후난위성TV 설맞이 갈라 · 시·노래·무용을 결합한 지역 문화 무대",
@@ -1315,8 +1354,9 @@ function renderList(container, data){
         ${t.program ? `<div class="program-intro"><b>프로그램·무대</b>${programIntroFor(t)}</div>` : ""}
         ${t.info ? `<div class="track-info">${conciseText(t.info)}</div>` : ""}
         ${t.lyrics ? `<div class="track-lyrics"><span class="lyric-line">${conciseText(t.lyrics)} · ${lyricInsightFor(t)}</span><span class="lyric-line highlight">${lyricHighlightFor(t)}, ${lyricEchoFor(t)}</span></div>` : ""}
-        ${t.review ? `<div class="stage-review"><b>무대 평가 ${t.rating}</b>${conciseText(t.review)}</div>` : ""}
-        ${t.source ? `<div class="track-source">출처: ${t.source}</div>` : ""}
+        ${t.award ? `<div class="stage-award"><b>🏆 수상</b>${t.award}</div>` : ""}
+        ${t.review ? `<div class="stage-review"><b>자료 기반 무대 기록</b>${conciseText(t.review)}</div>` : ""}
+        ${t.source ? `<div class="track-source">${t.program ? "근거 자료" : "출처"}: ${t.source}</div>` : ""}
       </div>
       <div class="track-listen">${listenHTML}${searchHTML}${alternateHTML}${cleanerHTML}${lyricsHTML}</div>
     `;
