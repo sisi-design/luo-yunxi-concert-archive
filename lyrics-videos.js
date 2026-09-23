@@ -14,7 +14,8 @@
     "youxi-shijian":{id:"XpEeYkjyCLc",kind:"콘서트 대표영상",note:"2024 《此刻 X 以光》 무대"},
     "wayfarer":{id:"xvRoujeGUgw",kind:"콘서트 대표영상",note:"난징 공연 직캠"},
     "yemeng-chunyou":{id:"Z2tpUEvPdaE",kind:"콘서트 대표영상",note:"2026.09.05 청두 공연"},
-    "huixide-tong":{id:"LgtkSSE93P8",kind:"첫 솔로 콘서트 영상",note:"2024 《此刻 X 以光》 무대"}
+    "huixide-tong":{id:"LgtkSSE93P8",kind:"첫 솔로 콘서트 영상",note:"2024 《此刻 X 以光》 무대"},
+    "xiaoxiaode-wo":{id:"wE2MpsY1_Go",kind:"대표영상",note:"2026 웨이보 뮤직 어워드 무대"}
   };
 
   function makeVideo(song,video){
