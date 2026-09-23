@@ -1352,7 +1352,7 @@ function renderList(container, data){
         <div class="track-meaning">뜻 · ${t.mean}</div>
         ${t.program ? `<div class="stage-meta"><span><b>방송</b> ${t.date} · ${t.program}</span><span><b>채널</b> ${t.network}</span><span><b>함께 부른 사람</b> ${t.with}</span></div>` : ""}
         ${t.program ? `<div class="program-intro"><b>프로그램·무대</b>${programIntroFor(t)}</div>` : ""}
-        ${t.info ? `<div class="track-info">${conciseText(t.info)}</div>` : ""}
+        ${t.info ? `<div class="track-info">${t.award ? escapeHTML(t.info) : conciseText(t.info)}</div>` : ""}
         ${t.lyrics ? `<div class="track-lyrics"><span class="lyric-line">${conciseText(t.lyrics)} · ${lyricInsightFor(t)}</span><span class="lyric-line highlight">${lyricHighlightFor(t)}, ${lyricEchoFor(t)}</span></div>` : ""}
         ${t.award ? `<div class="stage-award"><b>🏆 수상</b>${t.award}</div>` : ""}
         ${t.review ? `<div class="stage-review"><b>자료 기반 무대 기록</b>${conciseText(t.review)}</div>` : ""}
